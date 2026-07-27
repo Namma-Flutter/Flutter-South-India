@@ -1,26 +1,164 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* ─── Dark theme (default) ─── */
+:root,
+:root[data-theme="dark"] {
+  --background: #050810;
+  --foreground: #e8edf5;
+  --flutter-blue: #027DFD;
+  --flutter-cyan: #13B9FD;
+  --flutter-light: #54C5F8;
+  --flutter-dark: #0553B1;
+  --glass-bg: rgba(255, 255, 255, 0.035);
+  --glass-border: rgba(255, 255, 255, 0.07);
+  --surface: #0c1120;
+  --surface-alt: #030710;
+  --muted: rgba(255, 255, 255, 0.55);
+  --muted-low: rgba(255, 255, 255, 0.35);
+  --card-border: rgba(255, 255, 255, 0.08);
+  --mesh-a: rgba(2,125,253,0.10);
+  --mesh-b: rgba(19,185,253,0.07);
+}
+
+/* ─── Light theme ─── */
+:root[data-theme="light"] {
+  --background: #f4f7ff;
+  --foreground: #0a0f1e;
+  --flutter-blue: #0264d6;
+  --flutter-cyan: #0699d9;
+  --flutter-light: #2aa8e0;
+  --flutter-dark: #0453a8;
+  --glass-bg: rgba(255, 255, 255, 0.75);
+  --glass-border: rgba(0, 0, 0, 0.08);
+  --surface: #e8edf8;
+  --surface-alt: #dde4f5;
+  --muted: rgba(10, 15, 30, 0.60);
+  --muted-low: rgba(10, 15, 30, 0.40);
+  --card-border: rgba(0, 0, 0, 0.07);
+  --mesh-a: rgba(2,125,253,0.06);
+  --mesh-b: rgba(19,185,253,0.04);
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-flutter-blue: var(--flutter-blue);
+  --color-flutter-cyan: var(--flutter-cyan);
+  --color-flutter-light: var(--flutter-light);
+  --color-flutter-dark: var(--flutter-dark);
   --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  scroll-behavior: smooth;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-geist-sans), system-ui, -apple-system, sans-serif;
+  overflow-x: hidden;
+  line-height: 1.6;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: var(--background); }
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(to bottom, var(--flutter-blue), var(--flutter-cyan));
+  border-radius: 4px;
+}
+
+/* ─── Utilities ─── */
+
+.glass {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+
+.gradient-text {
+  background: linear-gradient(135deg, var(--flutter-blue) 0%, var(--flutter-cyan) 50%, var(--flutter-light) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.btn-glow {
+  position: relative;
+  background: linear-gradient(135deg, var(--flutter-blue), var(--flutter-cyan));
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  overflow: hidden;
+  transition: transform 0.2s ease, box-shadow 0.25s ease;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.btn-glow:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 28px rgba(2, 125, 253, 0.55), 0 0 60px rgba(19, 185, 253, 0.18);
+}
+.btn-glow::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255,255,255,0.18) 0%, transparent 60%);
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+.btn-glow:hover::after { opacity: 1; }
+
+.section-pad {
+  padding: 5rem 1rem;
+}
+@media (min-width: 640px) {
+  .section-pad { padding: 6rem 1.5rem; }
+}
+@media (min-width: 768px) {
+  .section-pad { padding: 7rem 2rem; }
+}
+@media (min-width: 1280px) {
+  .section-pad { padding: 8rem 2rem; }
+}
+
+.mesh-bg {
+  background:
+    radial-gradient(ellipse 70% 40% at 15% 10%, var(--mesh-a) 0%, transparent 65%),
+    radial-gradient(ellipse 50% 35% at 85% 80%, var(--mesh-b) 0%, transparent 65%),
+    var(--background);
+}
+
+.section-label {
+  font-size: 0.7rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--flutter-cyan);
+  font-weight: 700;
+  display: block;
+}
+
+.divider {
+  width: 48px;
+  height: 2px;
+  background: linear-gradient(to right, var(--flutter-blue), var(--flutter-cyan));
+  border-radius: 2px;
+}
+
+/* ─── Light mode glass overrides ─── */
+:root[data-theme="light"] .glass {
+  box-shadow: 0 2px 20px rgba(0,0,0,0.06);
 }
