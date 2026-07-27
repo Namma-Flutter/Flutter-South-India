@@ -60,8 +60,8 @@ const trackLabels = ["Track 1 · Beginner", "Track 2 · Intermediate", "Track 3 
 export default function Agenda() {
   return (
     <section id="agenda" className="section-pad bg-[var(--background)] relative">
-      <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#027DFD]/30 to-transparent" />
-      <div className="max-w-5xl mx-auto px-4">
+      <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[var(--flutter-blue)]/30 to-transparent" />
+      <div className="max-w-5xl mx-auto px-4 sm:px-6">
         {/* Header */}
         <div className="text-center mb-14">
           <motion.p className="section-label mb-4"
@@ -80,12 +80,12 @@ export default function Agenda() {
           <motion.p className="text-[color:var(--foreground)]/60 text-sm max-w-lg mx-auto"
             initial={{ opacity: 0 }} whileInView={{ opacity: 1 }}
             viewport={{ once: true, amount: 0.3 }} transition={{ duration: 0.5, delay: 0.16 }}>
-            Flutter South India 2026 · <strong className="text-[#13B9FD]">October 10, 2026</strong> · 09:30 AM – 5:30 PM · Loyola College, Chennai
+            Flutter South India 2026 · <strong className="text-[var(--flutter-cyan)]">October 10, 2026</strong> · 09:30 AM – 5:30 PM · Loyola College, Chennai
           </motion.p>
         </div>
 
         {/* Track legend */}
-        <motion.div className="flex flex-wrap justify-center gap-4 mb-10"
+        <motion.div className="flex flex-wrap justify-center gap-3 sm:gap-4 mb-10"
           initial={{ opacity: 0 }} whileInView={{ opacity: 1 }}
           viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.2 }}>
           {trackLabels.map((label, i) => (
@@ -108,13 +108,13 @@ export default function Agenda() {
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true, amount: 0.1 }}
                 transition={{ duration: 0.45, delay: i * 0.05, ease: [0.22, 1, 0.36, 1] }}
-                className="glass rounded-2xl border overflow-hidden transition-all duration-300 hover:scale-[1.01]"
+                className="glass rounded-2xl border overflow-hidden transition-all duration-300 hover:scale-[1.005]"
                 style={{ borderColor: `${cfg.color}22` }}
               >
                 <div className="flex flex-col sm:flex-row">
                   {/* Time strip */}
                   <div
-                    className="flex items-center gap-2 px-5 py-4 sm:w-48 flex-shrink-0 sm:border-r"
+                    className="flex items-center gap-2 px-4 sm:px-5 py-3 sm:py-4 sm:w-48 flex-shrink-0 sm:border-r border-b sm:border-b-0"
                     style={{ background: cfg.bg, borderColor: `${cfg.color}18` }}
                   >
                     <Icon size={14} style={{ color: cfg.color }} className="flex-shrink-0" />
@@ -122,7 +122,7 @@ export default function Agenda() {
                   </div>
 
                   {/* Content */}
-                  <div className="flex-1 px-5 py-4">
+                  <div className="flex-1 px-4 sm:px-5 py-3 sm:py-4">
                     {slot.type === "track" && slot.tracks ? (
                       <div>
                         <p className="text-[color:var(--foreground)]/50 text-[10px] uppercase tracking-widest font-semibold mb-2">Parallel Sessions</p>
@@ -138,7 +138,7 @@ export default function Agenda() {
                       </div>
                     ) : (
                       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1">
-                        <p className="text-[color:var(--foreground)] font-semibold text-sm">{slot.title}</p>
+                        <p className="text-[var(--foreground)] font-semibold text-sm">{slot.title}</p>
                         {slot.person && (
                           <p className="text-[color:var(--foreground)]/45 text-xs italic">{slot.person}</p>
                         )}

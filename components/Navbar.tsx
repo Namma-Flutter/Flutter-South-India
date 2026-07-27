@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, Sun, Moon } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -39,17 +39,48 @@ function FlutterMark({ size = 32 }: { size?: number }) {
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState<string>("");
   const { theme, toggle } = useTheme();
+  const indicatorRef = useRef<HTMLSpanElement | null>(null);
 
+  /* Scroll detection */
   useEffect(() => {
     const handler = () => setScrolled(window.scrollY > 40);
     window.addEventListener("scroll", handler, { passive: true });
     return () => window.removeEventListener("scroll", handler);
   }, []);
 
+  /* Active section via IntersectionObserver */
+  useEffect(() => {
+    const sectionIds = navLinks.map(l => l.href.replace("#", ""));
+    const observers: IntersectionObserver[] = [];
+
+    sectionIds.forEach(id => {
+      const el = document.getElementById(id);
+      if (!el) return;
+      const obs = new IntersectionObserver(
+        ([entry]) => {
+          if (entry.isIntersecting) setActiveSection(id);
+        },
+        { rootMargin: "-40% 0px -55% 0px", threshold: 0 }
+      );
+      obs.observe(el);
+      observers.push(obs);
+    });
+
+    return () => observers.forEach(o => o.disconnect());
+  }, []);
+
+  /* Lock body scroll when mobile menu open */
+  useEffect(() => {
+    document.body.style.overflow = open ? "hidden" : "";
+    return () => { document.body.style.overflow = ""; };
+  }, [open]);
+
   const handleNav = (href: string) => {
     setOpen(false);
-    const el = document.querySelector(href);
+    const id = href.replace("#", "");
+    const el = document.getElementById(id);
     el?.scrollIntoView({ behavior: "smooth" });
   };
 
@@ -68,7 +99,7 @@ export default function Navbar() {
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 flex items-center justify-between gap-4">
           {/* Logo */}
-          <a href="#" className="flex items-center gap-2.5 group flex-shrink-0">
+          <a href="#" className="flex items-center gap-2.5 group flex-shrink-0" onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}>
             <div className="group-hover:scale-105 transition-transform duration-200">
               <FlutterMark size={32} />
             </div>
@@ -79,25 +110,47 @@ export default function Navbar() {
           </a>
 
           {/* Desktop links */}
-          <div className="hidden lg:flex items-center gap-6 xl:gap-7">
-            {navLinks.map((link) => (
-              <button
-                key={link.label}
-                onClick={() => handleNav(link.href)}
-                className="text-sm text-[color:var(--foreground)]/65 hover:text-[var(--foreground)] transition-colors duration-200 font-medium whitespace-nowrap"
-              >
-                {link.label}
-              </button>
-            ))}
+          <div className="hidden lg:flex items-center gap-5 xl:gap-6">
+            {navLinks.map((link) => {
+              const id = link.href.replace("#", "");
+              const isActive = activeSection === id;
+              return (
+                <button
+                  key={link.label}
+                  onClick={() => handleNav(link.href)}
+                  className="relative text-sm font-medium whitespace-nowrap transition-colors duration-200 group"
+                  style={{
+                    color: isActive
+                      ? "var(--foreground)"
+                      : "color-mix(in srgb, var(--foreground) 55%, transparent)",
+                  }}
+                >
+                  {link.label}
+                  {/* Active indicator */}
+                  {isActive && (
+                    <motion.span
+                      layoutId="nav-indicator"
+                      className="absolute -bottom-1 left-0 right-0 h-0.5 rounded-full"
+                      style={{ background: "linear-gradient(to right, var(--flutter-blue), var(--flutter-cyan))" }}
+                      transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                    />
+                  )}
+                  {/* Hover indicator (when not active) */}
+                  {!isActive && (
+                    <span className="absolute -bottom-1 left-0 right-0 h-0.5 rounded-full bg-[var(--flutter-cyan)]/0 group-hover:bg-[var(--flutter-cyan)]/40 transition-colors duration-200" />
+                  )}
+                </button>
+              );
+            })}
           </div>
 
           {/* Right controls */}
-          <div className="flex items-center gap-3 flex-shrink-0">
+          <div className="flex items-center gap-2 sm:gap-3 flex-shrink-0">
             {/* Theme toggle */}
             <button
               onClick={toggle}
               aria-label="Toggle theme"
-              className="w-8 h-8 rounded-full flex items-center justify-center border border-[var(--glass-border)] hover:border-[var(--flutter-blue)]/50 transition-all duration-200 text-[color:var(--foreground)]/60 hover:text-[var(--foreground)]"
+              className="w-10 h-10 rounded-full flex items-center justify-center border border-[var(--glass-border)] hover:border-[var(--flutter-blue)]/50 transition-all duration-200 text-[color:var(--foreground)]/60 hover:text-[var(--foreground)] hover:bg-[var(--flutter-blue)]/5"
             >
               <AnimatePresence mode="wait" initial={false}>
                 <motion.span key={theme}
@@ -105,7 +158,7 @@ export default function Navbar() {
                   animate={{ scale: 1, opacity: 1, rotate: 0 }}
                   exit={{ scale: 0.5, opacity: 0, rotate: 90 }}
                   transition={{ duration: 0.2 }}>
-                  {theme === "dark" ? <Sun size={15} /> : <Moon size={15} />}
+                  {theme === "dark" ? <Sun size={16} /> : <Moon size={16} />}
                 </motion.span>
               </AnimatePresence>
             </button>
@@ -122,11 +175,19 @@ export default function Navbar() {
 
             {/* Hamburger */}
             <button
-              className="lg:hidden text-[color:var(--foreground)]/80 hover:text-[var(--foreground)] transition-colors"
+              className="lg:hidden w-10 h-10 flex items-center justify-center rounded-full border border-[var(--glass-border)] text-[color:var(--foreground)]/80 hover:text-[var(--foreground)] hover:border-[var(--flutter-blue)]/40 transition-all"
               onClick={() => setOpen(!open)}
               aria-label="Toggle menu"
             >
-              {open ? <X size={22} /> : <Menu size={22} />}
+              <AnimatePresence mode="wait" initial={false}>
+                <motion.span key={open ? "x" : "menu"}
+                  initial={{ scale: 0.7, opacity: 0 }}
+                  animate={{ scale: 1, opacity: 1 }}
+                  exit={{ scale: 0.7, opacity: 0 }}
+                  transition={{ duration: 0.15 }}>
+                  {open ? <X size={20} /> : <Menu size={20} />}
+                </motion.span>
+              </AnimatePresence>
             </button>
           </div>
         </div>
@@ -135,34 +196,92 @@ export default function Navbar() {
       {/* Mobile menu */}
       <AnimatePresence>
         {open && (
-          <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.25 }}
-            className="fixed inset-0 z-40 pt-20 glass overflow-y-auto"
-          >
-            <div className="flex flex-col items-center gap-5 py-10 px-6">
-              {navLinks.map((link) => (
+          <>
+            {/* Backdrop */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.2 }}
+              className="fixed inset-0 z-40 bg-[var(--background)]/60 backdrop-blur-sm"
+              onClick={() => setOpen(false)}
+            />
+            {/* Slide-in panel */}
+            <motion.div
+              initial={{ opacity: 0, x: "100%" }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: "100%" }}
+              transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+              className="fixed top-0 right-0 bottom-0 z-50 w-[min(320px,90vw)] glass border-l border-[var(--glass-border)] flex flex-col"
+            >
+              {/* Panel header */}
+              <div className="flex items-center justify-between px-6 py-5 border-b border-[var(--glass-border)]">
+                <div className="flex items-center gap-2.5">
+                  <FlutterMark size={28} />
+                  <div className="leading-tight">
+                    <div className="text-[var(--foreground)] font-bold text-sm">Namma Flutter</div>
+                    <div className="text-[10px] text-[var(--flutter-cyan)] font-semibold tracking-wider">SOUTH INDIA 2026</div>
+                  </div>
+                </div>
                 <button
-                  key={link.label}
-                  onClick={() => handleNav(link.href)}
-                  className="text-xl text-[color:var(--foreground)]/80 hover:text-[var(--foreground)] font-medium transition-colors"
+                  onClick={() => setOpen(false)}
+                  className="w-9 h-9 rounded-full flex items-center justify-center border border-[var(--glass-border)] text-[color:var(--foreground)]/60 hover:text-[var(--foreground)] transition-colors"
                 >
-                  {link.label}
+                  <X size={18} />
                 </button>
-              ))}
-              <a
-                href="https://lu.ma"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn-glow mt-4 px-8 py-3 rounded-full text-base font-semibold"
-                onClick={() => setOpen(false)}
-              >
-                Get Tickets
-              </a>
-            </div>
-          </motion.div>
+              </div>
+
+              {/* Nav links */}
+              <nav className="flex-1 overflow-y-auto px-6 py-8">
+                <div className="flex flex-col gap-2">
+                  {navLinks.map((link, i) => {
+                    const id = link.href.replace("#", "");
+                    const isActive = activeSection === id;
+                    return (
+                      <motion.button
+                        key={link.label}
+                        initial={{ opacity: 0, x: 24 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ delay: i * 0.04, duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+                        onClick={() => handleNav(link.href)}
+                        className={cn(
+                          "w-full flex items-center gap-3 px-4 py-3.5 rounded-xl text-left font-medium text-sm transition-all duration-200",
+                          isActive
+                            ? "bg-[var(--flutter-blue)]/10 text-[var(--flutter-cyan)] border border-[var(--flutter-blue)]/25"
+                            : "text-[color:var(--foreground)]/70 hover:bg-[var(--glass-bg)] hover:text-[var(--foreground)] border border-transparent"
+                        )}
+                      >
+                        {isActive && (
+                          <span className="w-1.5 h-1.5 rounded-full bg-[var(--flutter-cyan)] flex-shrink-0" />
+                        )}
+                        {link.label}
+                      </motion.button>
+                    );
+                  })}
+                </div>
+              </nav>
+
+              {/* Panel footer */}
+              <div className="px-6 py-6 border-t border-[var(--glass-border)] space-y-3">
+                <a
+                  href="https://lu.ma"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn-glow w-full py-3.5 rounded-xl text-sm font-semibold"
+                  onClick={() => setOpen(false)}
+                >
+                  Get Tickets
+                </a>
+                <button
+                  onClick={() => { toggle(); }}
+                  className="w-full py-3 rounded-xl border border-[var(--glass-border)] text-sm text-[color:var(--foreground)]/60 hover:text-[var(--foreground)] flex items-center justify-center gap-2 transition-colors"
+                >
+                  {theme === "dark" ? <Sun size={15} /> : <Moon size={15} />}
+                  Switch to {theme === "dark" ? "Light" : "Dark"} Mode
+                </button>
+              </div>
+            </motion.div>
+          </>
         )}
       </AnimatePresence>
     </>

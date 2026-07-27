@@ -52,7 +52,7 @@ const trackColor: Record<string, string> = {
 export default function Speakers() {
   return (
     <section id="speakers" className="section-pad mesh-bg">
-      <div className="max-w-5xl mx-auto px-4">
+      <div className="max-w-5xl mx-auto px-4 sm:px-6">
         <div className="text-center mb-14">
           <motion.p className="section-label mb-4"
             initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
@@ -84,7 +84,7 @@ export default function Speakers() {
               transition={{ duration: 0.55, delay: i * 0.1, ease: [0.22, 1, 0.36, 1] }}
               className="glass rounded-2xl p-7 border border-[var(--card-border)] group hover:border-[var(--flutter-blue)]/30 hover:-translate-y-1.5 transition-all duration-300 flex flex-col items-center text-center"
             >
-              {/* Avatar */}
+              {/* Avatar — white initials on colored gradient bg is intentional & correct */}
               <div
                 className="w-20 h-20 rounded-2xl flex items-center justify-center text-white font-black text-2xl mb-5 shadow-lg relative"
                 style={{
@@ -93,7 +93,6 @@ export default function Speakers() {
                 }}
               >
                 {speaker.initials}
-                {/* Glow on hover */}
                 <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"
                   style={{ boxShadow: `0 0 24px ${speaker.color}40` }} />
               </div>

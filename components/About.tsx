@@ -20,13 +20,13 @@ const fadeUp = (delay = 0) => ({
 export default function About() {
   return (
     <section id="about" className="section-pad mesh-bg">
-      <div className="max-w-7xl mx-auto">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6">
         <div className="text-center mb-16">
           <motion.p className="section-label mb-4" {...fadeUp()}>
             About the Conference
           </motion.p>
           <motion.h2
-            className="text-4xl md:text-5xl font-black text-white mb-6 leading-tight"
+            className="text-4xl md:text-5xl font-black text-[var(--foreground)] mb-6 leading-tight"
             {...fadeUp(0.08)}
           >
             Where Flutter Developers<br />
@@ -34,7 +34,7 @@ export default function About() {
           </motion.h2>
           <motion.div className="divider mx-auto mb-6" {...fadeUp(0.12)} />
           <motion.p
-            className="text-white/60 text-lg max-w-2xl mx-auto leading-relaxed"
+            className="text-[color:var(--foreground)]/60 text-lg max-w-2xl mx-auto leading-relaxed"
             {...fadeUp(0.16)}
           >
             Flutter South India 2026 is the largest Flutter conference in South India — a full-day
@@ -48,13 +48,13 @@ export default function About() {
             <motion.div
               key={item.title}
               {...fadeUp(i * 0.1)}
-              className="glass rounded-2xl p-6 border border-white/8 group hover:border-[#027DFD]/40 hover:-translate-y-1 transition-all duration-300"
+              className="glass rounded-2xl p-6 border border-[var(--card-border)] group hover:border-[var(--flutter-blue)]/40 hover:-translate-y-1 transition-all duration-300"
             >
-              <div className="w-12 h-12 rounded-xl bg-[#027DFD]/15 flex items-center justify-center mb-4 group-hover:bg-[#027DFD]/25 transition-colors">
-                <item.icon size={22} className="text-[#13B9FD]" />
+              <div className="w-12 h-12 rounded-xl bg-[var(--flutter-blue)]/15 flex items-center justify-center mb-4 group-hover:bg-[var(--flutter-blue)]/25 transition-colors">
+                <item.icon size={22} className="text-[var(--flutter-cyan)]" />
               </div>
-              <h3 className="text-white font-bold text-lg mb-2">{item.title}</h3>
-              <p className="text-white/55 text-sm leading-relaxed">{item.desc}</p>
+              <h3 className="text-[var(--foreground)] font-bold text-lg mb-2">{item.title}</h3>
+              <p className="text-[color:var(--foreground)]/55 text-sm leading-relaxed">{item.desc}</p>
             </motion.div>
           ))}
         </div>

@@ -11,10 +11,10 @@ const tiers = [
 
 export default function Sponsors() {
   return (
-    <section id="sponsors" className="section-pad bg-[#030710] relative">
-      <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#027DFD]/30 to-transparent" />
+    <section id="sponsors" className="section-pad bg-[var(--surface-alt)] relative">
+      <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[var(--flutter-blue)]/30 to-transparent" />
 
-      <div className="max-w-5xl mx-auto">
+      <div className="max-w-5xl mx-auto px-4 sm:px-6">
         <div className="text-center mb-16">
           <motion.p
             className="section-label mb-4"
@@ -26,7 +26,7 @@ export default function Sponsors() {
             Our Partners
           </motion.p>
           <motion.h2
-            className="text-4xl md:text-5xl font-black text-white mb-4"
+            className="text-4xl md:text-5xl font-black text-[var(--foreground)] mb-4"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.3 }}
@@ -42,14 +42,14 @@ export default function Sponsors() {
             transition={{ duration: 0.4, delay: 0.12 }}
           />
           <motion.p
-            className="text-white/55 text-sm max-w-lg mx-auto"
+            className="text-[color:var(--foreground)]/55 text-sm max-w-lg mx-auto"
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true, amount: 0.3 }}
             transition={{ duration: 0.5, delay: 0.16 }}
           >
             Interested in sponsoring?{" "}
-            <a href="mailto:nammaflutter@gmail.com" className="text-[#13B9FD] hover:underline">Contact us</a>{" "}
+            <a href="mailto:nammaflutter@gmail.com" className="text-[var(--flutter-cyan)] hover:underline">Contact us</a>{" "}
             for sponsorship packages.
           </motion.p>
         </div>
@@ -68,16 +68,19 @@ export default function Sponsors() {
                   style={{ color: tier.color, background: `${tier.color}15` }}>
                   {tier.tier}
                 </p>
-                <div className="flex-1 h-px bg-white/5" />
+                <div className="flex-1 h-px bg-[var(--separator)]" />
               </div>
-              <div className="flex flex-wrap justify-center gap-4">
+              <div className="flex flex-wrap justify-center gap-3 sm:gap-4">
                 {tier.sponsors.map((sp) => (
                   <div
                     key={sp.name}
-                    className="glass rounded-2xl border border-white/8 hover:border-white/20 transition-all duration-300 flex items-center justify-center gap-3 px-8 py-5 cursor-pointer group"
+                    className="glass rounded-2xl border border-[var(--card-border)] hover:border-[color:var(--foreground)]/20 transition-all duration-300 flex items-center justify-center gap-3 px-5 sm:px-8 py-4 sm:py-5 cursor-pointer group w-full sm:w-auto"
                     style={{
-                      minWidth: tier.tier === "Title Sponsor" ? 260
-                        : tier.tier === "Gold Sponsors" ? 200 : 160,
+                      minWidth: "min(100%, " + (
+                        tier.tier === "Title Sponsor" ? "260px"
+                        : tier.tier === "Gold Sponsors" ? "190px"
+                        : "150px"
+                      ) + ")",
                     }}
                   >
                     <div
@@ -86,7 +89,7 @@ export default function Sponsors() {
                     >
                       {sp.abbr}
                     </div>
-                    <span className="text-white/70 group-hover:text-white font-semibold text-sm transition-colors">
+                    <span className="text-[color:var(--foreground)]/70 group-hover:text-[var(--foreground)] font-semibold text-sm transition-colors">
                       {sp.name}
                     </span>
                   </div>
@@ -97,14 +100,14 @@ export default function Sponsors() {
         </div>
 
         <motion.div
-          className="mt-14 glass rounded-2xl p-8 border border-[#027DFD]/20 text-center"
+          className="mt-14 glass rounded-2xl p-8 border border-[var(--flutter-blue)]/20 text-center"
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.5, delay: 0.2 }}
         >
-          <h3 className="text-white font-bold text-xl mb-2">Become a Sponsor</h3>
-          <p className="text-white/55 text-sm mb-6 max-w-md mx-auto">
+          <h3 className="text-[var(--foreground)] font-bold text-xl mb-2">Become a Sponsor</h3>
+          <p className="text-[color:var(--foreground)]/55 text-sm mb-6 max-w-md mx-auto">
             Reach 500+ Flutter developers from South India. Get brand visibility, hiring access, and community goodwill.
           </p>
           <a href="mailto:nammaflutter@gmail.com" className="btn-glow px-6 py-3 rounded-full text-sm font-semibold inline-block">

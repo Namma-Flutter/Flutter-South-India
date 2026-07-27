@@ -13,11 +13,14 @@
   --glass-border: rgba(255, 255, 255, 0.07);
   --surface: #0c1120;
   --surface-alt: #030710;
+  --surface-darkest: #020510;
   --muted: rgba(255, 255, 255, 0.55);
   --muted-low: rgba(255, 255, 255, 0.35);
   --card-border: rgba(255, 255, 255, 0.08);
   --mesh-a: rgba(2,125,253,0.10);
   --mesh-b: rgba(19,185,253,0.07);
+  --separator: rgba(255, 255, 255, 0.05);
+  --nav-shadow: rgba(5, 8, 16, 0.9);
 }
 
 /* ─── Light theme ─── */
@@ -32,11 +35,14 @@
   --glass-border: rgba(0, 0, 0, 0.08);
   --surface: #e8edf8;
   --surface-alt: #dde4f5;
+  --surface-darkest: #d0d9f0;
   --muted: rgba(10, 15, 30, 0.60);
   --muted-low: rgba(10, 15, 30, 0.40);
   --card-border: rgba(0, 0, 0, 0.07);
   --mesh-a: rgba(2,125,253,0.06);
   --mesh-b: rgba(19,185,253,0.04);
+  --separator: rgba(0, 0, 0, 0.06);
+  --nav-shadow: rgba(244, 247, 255, 0.9);
 }
 
 @theme inline {
@@ -60,6 +66,8 @@ html {
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
   scroll-behavior: smooth;
+  /* Offset for fixed navbar when using anchor links */
+  scroll-padding-top: 80px;
 }
 
 body {
@@ -68,7 +76,12 @@ body {
   font-family: var(--font-geist-sans), system-ui, -apple-system, sans-serif;
   overflow-x: hidden;
   line-height: 1.6;
-  transition: background 0.3s ease, color 0.3s ease;
+  transition: background 0.35s ease, color 0.35s ease;
+}
+
+/* Prevent layout shift on theme transition */
+.theme-transitioning * {
+  transition: background-color 0.35s ease, color 0.35s ease, border-color 0.35s ease !important;
 }
 
 /* Scrollbar */
@@ -142,6 +155,11 @@ body {
     var(--background);
 }
 
+/* Section with slightly darker/alternate background */
+.section-surface {
+  background: var(--surface-alt);
+}
+
 .section-label {
   font-size: 0.7rem;
   letter-spacing: 0.22em;
@@ -161,4 +179,27 @@ body {
 /* ─── Light mode glass overrides ─── */
 :root[data-theme="light"] .glass {
   box-shadow: 0 2px 20px rgba(0,0,0,0.06);
+}
+
+/* ─── Section separator line ─── */
+.section-top-line {
+  position: absolute;
+  inset-inline: 0;
+  top: 0;
+  height: 1px;
+  background: linear-gradient(to right, transparent, rgba(2,125,253,0.30), transparent);
+}
+
+/* ─── Flip animation for countdown ─── */
+@keyframes flipIn {
+  from { transform: rotateX(-90deg); opacity: 0; }
+  to   { transform: rotateX(0deg);   opacity: 1; }
+}
+.flip-in {
+  animation: flipIn 0.3s ease forwards;
+}
+
+/* ─── Nav active link indicator ─── */
+.nav-link-active {
+  color: var(--foreground) !important;
 }

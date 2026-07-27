@@ -25,8 +25,8 @@ const stalls: Stall[] = [
 export default function Stalls() {
   return (
     <section id="stalls" className="section-pad bg-[var(--background)] relative">
-      <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#027DFD]/30 to-transparent" />
-      <div className="max-w-7xl mx-auto px-4">
+      <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[var(--flutter-blue)]/30 to-transparent" />
+      <div className="max-w-7xl mx-auto px-4 sm:px-6">
         <div className="text-center mb-14">
           <motion.p className="section-label mb-4"
             initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
@@ -59,14 +59,14 @@ export default function Stalls() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.1 }}
               transition={{ duration: 0.5, delay: i * 0.07, ease: [0.22, 1, 0.36, 1] }}
-              className="glass rounded-2xl p-5 border border-white/8 flex flex-col gap-3 group hover:border-[#027DFD]/30 hover:-translate-y-1 transition-all duration-300 cursor-pointer"
+              className="glass rounded-2xl p-5 border border-[var(--card-border)] flex flex-col gap-3 group hover:border-[var(--flutter-blue)]/30 hover:-translate-y-1 transition-all duration-300 cursor-pointer"
             >
               <div className="flex items-start justify-between">
                 <div className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0"
                   style={{ background: `${stall.color}18`, border: `1px solid ${stall.color}30` }}>
                   <Store size={18} style={{ color: stall.color }} />
                 </div>
-                <ExternalLink size={13} className="text-[color:var(--foreground)]/20 group-hover:text-[#13B9FD] transition-colors mt-1" />
+                <ExternalLink size={13} className="text-[color:var(--foreground)]/20 group-hover:text-[var(--flutter-cyan)] transition-colors mt-1" />
               </div>
 
               <div>
@@ -77,12 +77,13 @@ export default function Stalls() {
               </div>
 
               <div>
-                <h3 className="text-[var(--foreground)] font-bold text-sm mb-1 group-hover:text-white transition-colors">{stall.name}</h3>
+                {/* Use flutter-blue on hover (works in both modes), not text-white */}
+                <h3 className="text-[var(--foreground)] font-bold text-sm mb-1 group-hover:text-[var(--flutter-cyan)] transition-colors">{stall.name}</h3>
                 <p className="text-[color:var(--foreground)]/45 text-xs leading-relaxed">{stall.desc}</p>
               </div>
 
-              <div className="mt-auto pt-2 border-t border-white/5 flex items-center gap-1.5">
-                <span className="text-[10px] text-[#13B9FD] font-medium truncate">{stall.url.replace("https://", "")}</span>
+              <div className="mt-auto pt-2 border-t border-[var(--card-border)] flex items-center gap-1.5">
+                <span className="text-[10px] text-[var(--flutter-cyan)] font-medium truncate">{stall.url.replace("https://", "")}</span>
               </div>
             </motion.a>
           ))}
@@ -93,7 +94,7 @@ export default function Stalls() {
           viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.3 }}>
           <p className="text-[color:var(--foreground)]/40 text-sm">
             Want an exhibition stall?{" "}
-            <a href="mailto:nammaflutter@gmail.com" className="text-[#13B9FD] hover:underline">Contact us to apply</a>
+            <a href="mailto:nammaflutter@gmail.com" className="text-[var(--flutter-cyan)] hover:underline">Contact us to apply</a>
           </p>
         </motion.div>
       </div>

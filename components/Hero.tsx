@@ -20,7 +20,6 @@ function DartLogo() {
         transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
         style={{ transformOrigin: "60px 60px" }}
       />
-      {/* Dart bird shape - the stylized Dart logo */}
       {/* Left wing (dark blue) */}
       <motion.polygon
         points="14,106 52,68 38,54 14,106"
@@ -49,7 +48,6 @@ function DartLogo() {
         animate={{ opacity: [0.7, 1, 0.7] }}
         transition={{ duration: 3, repeat: Infinity, ease: "easeInOut", delay: 0.9 }}
       />
-      {/* Dart label */}
       <text x="60" y="115" textAnchor="middle" fontSize="9" fill="#13B9FD" fontFamily="system-ui" fontWeight="700" letterSpacing="3" opacity="0.6">DART</text>
     </motion.svg>
   );
@@ -63,7 +61,8 @@ function HeroFlutterMark() {
       transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
       className="relative"
     >
-      <motion.svg width="72" height="72" viewBox="0 0 72 72" fill="none"
+      <motion.svg width="64" height="64" viewBox="0 0 72 72" fill="none"
+        className="sm:w-[72px] sm:h-[72px]"
         animate={{ rotate: [0, 4, -4, 0] }}
         transition={{ duration: 8, repeat: Infinity, ease: "easeInOut", delay: 1 }}>
         <defs>
@@ -94,7 +93,7 @@ function HeroFlutterMark() {
 
 export default function Hero() {
   return (
-    <section className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden mesh-bg pt-20 px-4">
+    <section className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden mesh-bg pt-20 px-4 sm:px-6">
       {/* Animated rings */}
       <div className="absolute inset-0 flex items-center justify-center pointer-events-none overflow-hidden">
         {[300, 500, 700, 900].map((size, i) => (
@@ -109,16 +108,16 @@ export default function Hero() {
             transition={{ duration: 4 + i * 1.2, repeat: Infinity, ease: "easeInOut", delay: i * 0.6 }}
           />
         ))}
-        <div className="absolute w-80 h-80 rounded-full bg-[#027DFD]/8 blur-3xl" />
+        <div className="absolute w-80 h-80 rounded-full bg-[var(--flutter-blue)]/8 blur-3xl" />
       </div>
 
-      {/* Dart logo — right side */}
+      {/* Dart logo — right side, large screens only */}
       <div className="absolute right-8 top-1/2 -translate-y-1/2 opacity-20 pointer-events-none hidden xl:block">
         <DartLogo />
       </div>
 
-      {/* Large BG F */}
-      <div className="absolute left-0 top-1/2 -translate-y-1/2 opacity-[0.03] pointer-events-none select-none text-[28rem] font-black text-[#027DFD] leading-none hidden xl:block">
+      {/* Large BG F — decorative */}
+      <div className="absolute left-0 top-1/2 -translate-y-1/2 opacity-[0.03] pointer-events-none select-none text-[28rem] font-black text-[var(--flutter-blue)] leading-none hidden xl:block">
         F
       </div>
 
@@ -128,7 +127,7 @@ export default function Hero() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7 }}
-          className="flex flex-col items-center gap-5 mb-8"
+          className="flex flex-col items-center gap-4 sm:gap-5 mb-6 sm:mb-8"
         >
           <HeroFlutterMark />
           <div className="inline-flex items-center gap-2 glass rounded-full px-4 py-1.5 text-sm text-[var(--flutter-cyan)] font-medium border border-[var(--flutter-blue)]/30">
@@ -142,7 +141,7 @@ export default function Hero() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.15 }}
-          className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black tracking-tight mb-6 leading-[1.05]"
+          className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black tracking-tight mb-5 sm:mb-6 leading-[1.05]"
         >
           <span className="text-[var(--foreground)]">Flutter</span>
           <br />
@@ -156,7 +155,7 @@ export default function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.28 }}
-          className="text-base sm:text-lg md:text-xl text-[color:var(--foreground)]/60 max-w-2xl mx-auto mb-5 leading-relaxed"
+          className="text-base sm:text-lg md:text-xl text-[color:var(--foreground)]/60 max-w-2xl mx-auto mb-5 leading-relaxed px-4 sm:px-0"
         >
           South India's premier Flutter developer conference — bringing together
           the brightest minds in Flutter, Dart, and cross-platform development.
@@ -167,13 +166,13 @@ export default function Hero() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.6, delay: 0.38 }}
-          className="flex flex-wrap items-center justify-center gap-4 sm:gap-6 text-sm text-[color:var(--foreground)]/50 mb-12"
+          className="flex flex-wrap items-center justify-center gap-3 sm:gap-4 md:gap-6 text-sm text-[color:var(--foreground)]/50 mb-10 sm:mb-12"
         >
           <span className="flex items-center gap-1.5">
             <Calendar size={14} className="text-[var(--flutter-cyan)]" />
             October 10, 2026
           </span>
-          <span className="w-1 h-1 rounded-full bg-[color:var(--foreground)]/20" />
+          <span className="w-1 h-1 rounded-full bg-[color:var(--foreground)]/20 hidden sm:block" />
           <span className="flex items-center gap-1.5">
             <MapPin size={14} className="text-[var(--flutter-cyan)]" />
             Loyola College, Chennai
@@ -185,7 +184,7 @@ export default function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.44 }}
-          className="mb-12"
+          className="mb-10 sm:mb-12"
         >
           <Countdown targetDate="2026-10-10T09:30:00" />
         </motion.div>
@@ -195,20 +194,20 @@ export default function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.54 }}
-          className="flex flex-wrap items-center justify-center gap-4"
+          className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4"
         >
           <a
             href="https://lu.ma"
             target="_blank"
             rel="noopener noreferrer"
-            className="btn-glow px-8 py-4 rounded-full text-base font-semibold flex items-center gap-2 group"
+            className="btn-glow w-full sm:w-auto px-8 py-4 rounded-full text-base font-semibold flex items-center justify-center gap-2 group"
           >
             Register Now
             <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
           </a>
           <button
-            onClick={() => document.querySelector("#about")?.scrollIntoView({ behavior: "smooth" })}
-            className="px-8 py-4 rounded-full text-base font-semibold border border-[color:var(--foreground)]/15 text-[color:var(--foreground)]/80 hover:text-[var(--foreground)] hover:border-[color:var(--foreground)]/30 transition-all duration-200"
+            onClick={() => document.getElementById("about")?.scrollIntoView({ behavior: "smooth" })}
+            className="w-full sm:w-auto px-8 py-4 rounded-full text-base font-semibold border border-[color:var(--foreground)]/15 text-[color:var(--foreground)]/80 hover:text-[var(--foreground)] hover:border-[color:var(--foreground)]/30 transition-all duration-200"
           >
             Learn More
           </button>

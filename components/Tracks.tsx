@@ -47,10 +47,10 @@ const tracks = [
 
 export default function Tracks() {
   return (
-    <section id="tracks" className="section-pad bg-[#030710] relative overflow-hidden">
-      <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#027DFD]/30 to-transparent" />
+    <section id="tracks" className="section-pad bg-[var(--surface-alt)] relative overflow-hidden">
+      <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[var(--flutter-blue)]/30 to-transparent" />
 
-      <div className="max-w-7xl mx-auto">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6">
         <div className="text-center mb-16">
           <motion.p
             className="section-label mb-4"
@@ -62,7 +62,7 @@ export default function Tracks() {
             Conference Program
           </motion.p>
           <motion.h2
-            className="text-4xl md:text-5xl font-black text-white mb-4"
+            className="text-4xl md:text-5xl font-black text-[var(--foreground)] mb-4"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.3 }}
@@ -78,7 +78,7 @@ export default function Tracks() {
             transition={{ duration: 0.4, delay: 0.12 }}
           />
           <motion.p
-            className="text-white/55 max-w-xl mx-auto"
+            className="text-[color:var(--foreground)]/55 max-w-xl mx-auto"
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true, amount: 0.3 }}
@@ -100,7 +100,7 @@ export default function Tracks() {
               style={{ borderColor: `${track.color}30` }}
             >
               {/* Track header */}
-              <div className="p-6 border-b border-white/6">
+              <div className="p-6 border-b border-[var(--card-border)]">
                 <div className="flex items-center justify-between mb-4">
                   <span
                     className="text-xs font-bold px-3 py-1 rounded-full"
@@ -110,8 +110,8 @@ export default function Tracks() {
                   </span>
                   <track.icon size={18} style={{ color: track.color }} />
                 </div>
-                <h3 className="text-white font-black text-2xl mb-2">{track.level}</h3>
-                <p className="text-white/55 text-sm leading-relaxed">{track.desc}</p>
+                <h3 className="text-[var(--foreground)] font-black text-2xl mb-2">{track.level}</h3>
+                <p className="text-[color:var(--foreground)]/55 text-sm leading-relaxed">{track.desc}</p>
               </div>
 
               {/* Sessions */}
@@ -119,10 +119,10 @@ export default function Tracks() {
                 {track.sessions.map((session, j) => (
                   <div
                     key={j}
-                    className="rounded-xl p-3 bg-white/3 border border-white/5 hover:border-white/12 transition-all duration-200"
+                    className="rounded-xl p-3 bg-[var(--glass-bg)] border border-[var(--card-border)] hover:border-[var(--flutter-blue)]/25 transition-all duration-200"
                   >
-                    <p className="text-white/90 text-sm font-semibold leading-snug mb-0.5">{session.title}</p>
-                    <p className="text-white/40 text-xs">
+                    <p className="text-[color:var(--foreground)]/90 text-sm font-semibold leading-snug mb-0.5">{session.title}</p>
+                    <p className="text-[color:var(--foreground)]/40 text-xs">
                       {session.speaker} · <span style={{ color: track.color }}>{session.role}</span>
                     </p>
                   </div>

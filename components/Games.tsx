@@ -12,15 +12,15 @@ const activities = [
 
 export default function Games() {
   return (
-    <section className="section-pad mesh-bg">
-      <div className="max-w-7xl mx-auto">
+    <section id="games" className="section-pad mesh-bg">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6">
         <div className="text-center mb-16">
           <motion.p className="section-label mb-4"
             initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.3 }} transition={{ duration: 0.5 }}>
             Fun & Learning
           </motion.p>
-          <motion.h2 className="text-4xl md:text-5xl font-black text-white mb-4"
+          <motion.h2 className="text-4xl md:text-5xl font-black text-[var(--foreground)] mb-4"
             initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.3 }} transition={{ duration: 0.5, delay: 0.08 }}>
             Games & <span className="gradient-text">Activities</span>
@@ -28,7 +28,7 @@ export default function Games() {
           <motion.div className="divider mx-auto mb-6"
             initial={{ opacity: 0, scaleX: 0 }} whileInView={{ opacity: 1, scaleX: 1 }}
             viewport={{ once: true, amount: 0.3 }} transition={{ duration: 0.4, delay: 0.12 }} />
-          <motion.p className="text-white/55 text-sm max-w-lg mx-auto"
+          <motion.p className="text-[color:var(--foreground)]/55 text-sm max-w-lg mx-auto"
             initial={{ opacity: 0 }} whileInView={{ opacity: 1 }}
             viewport={{ once: true, amount: 0.3 }} transition={{ duration: 0.5, delay: 0.16 }}>
             Because great conferences aren't just talks — they're experiences.
@@ -43,13 +43,13 @@ export default function Games() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.1 }}
               transition={{ duration: 0.5, delay: i * 0.09, ease: [0.22, 1, 0.36, 1] }}
-              className="glass rounded-2xl p-6 border border-white/8 hover:border-[#027DFD]/30 hover:-translate-y-1 transition-all duration-300 text-center group"
+              className="glass rounded-2xl p-6 border border-[var(--card-border)] hover:border-[var(--flutter-blue)]/30 hover:-translate-y-1 transition-all duration-300 text-center group"
             >
-              <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-[#027DFD]/20 to-[#13B9FD]/10 flex items-center justify-center mx-auto mb-4 border border-[#027DFD]/20 group-hover:scale-110 transition-transform duration-300">
-                <activity.icon size={24} className="text-[#13B9FD]" />
+              <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-[var(--flutter-blue)]/20 to-[var(--flutter-cyan)]/10 flex items-center justify-center mx-auto mb-4 border border-[var(--flutter-blue)]/20 group-hover:scale-110 transition-transform duration-300">
+                <activity.icon size={24} className="text-[var(--flutter-cyan)]" />
               </div>
-              <h3 className="text-white font-bold text-lg mb-2">{activity.title}</h3>
-              <p className="text-white/50 text-sm leading-relaxed">{activity.desc}</p>
+              <h3 className="text-[var(--foreground)] font-bold text-lg mb-2">{activity.title}</h3>
+              <p className="text-[color:var(--foreground)]/50 text-sm leading-relaxed">{activity.desc}</p>
             </motion.div>
           ))}
         </div>

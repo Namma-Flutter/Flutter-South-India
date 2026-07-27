@@ -16,7 +16,7 @@ const events = [
 export default function Timeline() {
   return (
     <section className="section-pad">
-      <div className="max-w-4xl mx-auto">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6">
         <div className="text-center mb-16">
           <motion.p
             className="section-label mb-4"
@@ -28,7 +28,7 @@ export default function Timeline() {
             Event Journey
           </motion.p>
           <motion.h2
-            className="text-4xl md:text-5xl font-black text-white mb-4"
+            className="text-4xl md:text-5xl font-black text-[var(--foreground)] mb-4"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.3 }}
@@ -46,10 +46,10 @@ export default function Timeline() {
         </div>
 
         <div className="relative">
-          {/* Vertical spine */}
-          <div className="absolute left-[11px] md:left-1/2 md:-translate-x-px top-2 bottom-2 w-0.5 bg-gradient-to-b from-[#027DFD] via-[#13B9FD]/40 to-transparent" />
+          {/* Vertical spine — left on mobile, centre on desktop */}
+          <div className="absolute left-4 md:left-1/2 md:-translate-x-px top-2 bottom-2 w-0.5 bg-gradient-to-b from-[var(--flutter-blue)] via-[var(--flutter-cyan)]/40 to-transparent" />
 
-          <div className="space-y-8">
+          <div className="space-y-6 md:space-y-8">
             {events.map((event, i) => {
               const isLeft = i % 2 === 0;
               return (
@@ -59,23 +59,23 @@ export default function Timeline() {
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true, amount: 0.2 }}
                   transition={{ duration: 0.5, delay: i * 0.06, ease: [0.22, 1, 0.36, 1] }}
-                  className="relative flex items-start md:items-center gap-6 md:gap-0"
+                  className="relative pl-12 md:pl-0 flex md:items-center"
                 >
-                  {/* Dot */}
-                  <div className="relative z-10 flex-shrink-0 md:absolute md:left-1/2 md:-translate-x-1/2 w-5 h-5 rounded-full bg-[#050810] border-2 border-[#027DFD] shadow-[0_0_14px_rgba(2,125,253,0.7)]" />
+                  {/* Dot — anchored to spine */}
+                  <div className="absolute left-[9px] md:left-1/2 md:-translate-x-1/2 top-5 md:top-1/2 md:-translate-y-1/2 z-10 flex-shrink-0 w-5 h-5 rounded-full bg-[var(--background)] border-2 border-[var(--flutter-blue)] shadow-[0_0_14px_rgba(2,125,253,0.7)]" />
 
-                  {/* Card — mobile: always right of dot; desktop: alternating */}
+                  {/* Card — right of dot on mobile; alternating on desktop */}
                   <div className={`w-full md:w-[calc(50%-2.5rem)] ${
                     isLeft
                       ? "md:mr-auto md:pr-6 md:text-right"
                       : "md:ml-auto md:pl-6 md:text-left"
                   }`}>
-                    <div className="glass rounded-2xl p-5 border border-white/8 hover:border-[#027DFD]/35 transition-all duration-300">
-                      <span className="text-[11px] font-bold text-[#13B9FD] tracking-widest uppercase mb-1 block">
+                    <div className="glass rounded-2xl p-5 border border-[var(--card-border)] hover:border-[var(--flutter-blue)]/35 transition-all duration-300">
+                      <span className="text-[11px] font-bold text-[var(--flutter-cyan)] tracking-widest uppercase mb-1 block">
                         {event.time}
                       </span>
-                      <h3 className="text-white font-bold text-base mb-1">{event.title}</h3>
-                      <p className="text-white/50 text-sm leading-relaxed">{event.desc}</p>
+                      <h3 className="text-[var(--foreground)] font-bold text-base mb-1">{event.title}</h3>
+                      <p className="text-[color:var(--foreground)]/50 text-sm leading-relaxed">{event.desc}</p>
                     </div>
                   </div>
                 </motion.div>

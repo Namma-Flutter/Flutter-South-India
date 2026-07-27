@@ -14,14 +14,14 @@ const facilities = ["Main Auditorium (800 seats)", "3 Seminar Halls", "High-spee
 export default function Venue() {
   return (
     <section id="venue" className="section-pad mesh-bg">
-      <div className="max-w-7xl mx-auto">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6">
         <div className="text-center mb-16">
           <motion.p className="section-label mb-4"
             initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.3 }} transition={{ duration: 0.5 }}>
             Event Venue
           </motion.p>
-          <motion.h2 className="text-4xl md:text-5xl font-black text-white mb-4"
+          <motion.h2 className="text-4xl md:text-5xl font-black text-[var(--foreground)] mb-4"
             initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.3 }} transition={{ duration: 0.5, delay: 0.08 }}>
             Loyola College, <span className="gradient-text">Chennai</span>
@@ -29,7 +29,7 @@ export default function Venue() {
           <motion.div className="divider mx-auto mb-6"
             initial={{ opacity: 0, scaleX: 0 }} whileInView={{ opacity: 1, scaleX: 1 }}
             viewport={{ once: true, amount: 0.3 }} transition={{ duration: 0.4, delay: 0.12 }} />
-          <motion.p className="text-white/55 max-w-xl mx-auto text-sm leading-relaxed"
+          <motion.p className="text-[color:var(--foreground)]/55 max-w-xl mx-auto text-sm leading-relaxed"
             initial={{ opacity: 0 }} whileInView={{ opacity: 1 }}
             viewport={{ once: true, amount: 0.3 }} transition={{ duration: 0.5, delay: 0.16 }}>
             One of India's most prestigious institutions — Loyola College hosts our grand conference
@@ -37,14 +37,14 @@ export default function Venue() {
           </motion.p>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-10 items-start">
+        <div className="grid md:grid-cols-2 gap-8 lg:gap-10 items-start">
           <motion.div
             initial={{ opacity: 0, x: -36 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, amount: 0.15 }}
             transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
           >
-            <div className="glass rounded-2xl border border-white/8 overflow-hidden aspect-video relative">
+            <div className="glass rounded-2xl border border-[var(--card-border)] overflow-hidden aspect-video relative">
               <iframe
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3886.5!2d80.2255!3d13.0607!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a5267da6a7bde33%3A0x7a5debb8b0b8b7e3!2sLoyola+College%2C+Chennai!5e0!3m2!1sen!2sin!4v1699000000000!5m2!1sen!2sin"
                 width="100%"
@@ -56,10 +56,12 @@ export default function Venue() {
                 referrerPolicy="no-referrer-when-downgrade"
                 title="Loyola College Chennai"
               />
-              <div className="absolute inset-0 pointer-events-none bg-gradient-to-t from-[#050810]/60 via-transparent to-transparent" />
+              {/* Overlay gradient — dark regardless of theme (on map) */}
+              <div className="absolute inset-0 pointer-events-none bg-gradient-to-t from-black/60 via-transparent to-transparent" />
               <div className="absolute bottom-4 left-4 right-4 flex items-center gap-2">
-                <MapPin size={13} className="text-[#13B9FD] flex-shrink-0" />
-                <span className="text-white text-sm font-medium">Loyola College, Nungambakkam, Chennai</span>
+                <MapPin size={13} className="text-[var(--flutter-cyan)] flex-shrink-0" />
+                {/* White text on dark map overlay — intentional */}
+                <span className="text-white text-sm font-medium drop-shadow-sm">Loyola College, Nungambakkam, Chennai</span>
               </div>
             </div>
           </motion.div>
@@ -74,27 +76,27 @@ export default function Venue() {
             {logistics.map((item) => (
               <div
                 key={item.title}
-                className="glass rounded-2xl p-5 border border-white/8 flex items-start gap-4 hover:border-[#027DFD]/30 transition-all duration-300"
+                className="glass rounded-2xl p-5 border border-[var(--card-border)] flex items-start gap-4 hover:border-[var(--flutter-blue)]/30 transition-all duration-300"
               >
-                <div className="w-10 h-10 rounded-xl bg-[#027DFD]/15 flex items-center justify-center flex-shrink-0">
-                  <item.icon size={18} className="text-[#13B9FD]" />
+                <div className="w-10 h-10 rounded-xl bg-[var(--flutter-blue)]/15 flex items-center justify-center flex-shrink-0">
+                  <item.icon size={18} className="text-[var(--flutter-cyan)]" />
                 </div>
                 <div>
-                  <h3 className="text-white font-bold text-sm mb-1">{item.title}</h3>
-                  <p className="text-white/55 text-sm leading-relaxed">{item.desc}</p>
+                  <h3 className="text-[var(--foreground)] font-bold text-sm mb-1">{item.title}</h3>
+                  <p className="text-[color:var(--foreground)]/55 text-sm leading-relaxed">{item.desc}</p>
                 </div>
               </div>
             ))}
 
-            <div className="glass rounded-2xl p-5 border border-[#027DFD]/20">
-              <h3 className="text-white font-bold text-sm mb-3 flex items-center gap-2">
-                <span className="w-2 h-2 rounded-full bg-[#13B9FD]" />
+            <div className="glass rounded-2xl p-5 border border-[var(--flutter-blue)]/20">
+              <h3 className="text-[var(--foreground)] font-bold text-sm mb-3 flex items-center gap-2">
+                <span className="w-2 h-2 rounded-full bg-[var(--flutter-cyan)]" />
                 Venue Facilities
               </h3>
               <div className="grid grid-cols-2 gap-y-2 gap-x-4">
                 {facilities.map((f) => (
-                  <div key={f} className="flex items-center gap-2 text-white/50 text-xs">
-                    <div className="w-1 h-1 rounded-full bg-[#027DFD] flex-shrink-0" />
+                  <div key={f} className="flex items-center gap-2 text-[color:var(--foreground)]/50 text-xs">
+                    <div className="w-1 h-1 rounded-full bg-[var(--flutter-blue)] flex-shrink-0" />
                     {f}
                   </div>
                 ))}
