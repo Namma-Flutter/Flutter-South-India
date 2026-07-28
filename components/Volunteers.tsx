@@ -19,7 +19,7 @@ export default function Volunteers() {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         <div className="grid md:grid-cols-2 gap-12 lg:gap-16 items-center">
-          <div className="grid grid-cols-2 gap-4 order-2 md:order-1">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 order-2 md:order-1">
             {roles.map((role, i) => (
               <motion.div
                 key={role.title}

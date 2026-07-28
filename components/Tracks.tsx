@@ -88,7 +88,7 @@ export default function Tracks() {
           </motion.p>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-6">
+        <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-6">
           {tracks.map((track, i) => (
             <motion.div
               key={track.level}

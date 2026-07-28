@@ -155,7 +155,7 @@ export default function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.28 }}
-          className="text-base sm:text-lg md:text-xl text-[color:var(--foreground)]/60 max-w-2xl mx-auto mb-5 leading-relaxed px-4 sm:px-0"
+          className="text-base sm:text-lg md:text-xl text-[color:var(--foreground)]/60 max-w-2xl mx-auto mb-5 leading-relaxed"
         >
           South India's premier Flutter developer conference — bringing together
           the brightest minds in Flutter, Dart, and cross-platform development.
