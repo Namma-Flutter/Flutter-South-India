@@ -206,7 +206,20 @@ export default function Hero() {
             <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
           </a>
           <button
-            onClick={() => document.getElementById("about")?.scrollIntoView({ behavior: "smooth" })}
+            onClick={() => {
+              const el = document.getElementById("about");
+              if (!el) return;
+              const start = window.scrollY;
+              const target = el.getBoundingClientRect().top + start - 72;
+              const startTime = performance.now();
+              const ease = (t: number) => t < 0.5 ? 2*t*t : -1+(4-2*t)*t;
+              const step = (now: number) => {
+                const p = Math.min((now - startTime) / 600, 1);
+                window.scrollTo(0, start + (target - start) * ease(p));
+                if (p < 1) requestAnimationFrame(step);
+              };
+              requestAnimationFrame(step);
+            }}
             className="w-full sm:w-auto px-8 py-4 rounded-full text-base font-semibold border border-[color:var(--foreground)]/15 text-[color:var(--foreground)]/80 hover:text-[var(--foreground)] hover:border-[color:var(--foreground)]/30 transition-all duration-200"
           >
             Learn More

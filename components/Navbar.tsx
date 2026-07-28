@@ -43,9 +43,17 @@ export default function Navbar() {
   const { theme, toggle } = useTheme();
   const indicatorRef = useRef<HTMLSpanElement | null>(null);
 
-  /* Scroll detection */
+  /* Scroll detection — rAF-throttled so it never blocks the main thread */
   useEffect(() => {
-    const handler = () => setScrolled(window.scrollY > 40);
+    let ticking = false;
+    const handler = () => {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        setScrolled(window.scrollY > 40);
+        ticking = false;
+      });
+    };
     window.addEventListener("scroll", handler, { passive: true });
     return () => window.removeEventListener("scroll", handler);
   }, []);
@@ -81,7 +89,18 @@ export default function Navbar() {
     setOpen(false);
     const id = href.replace("#", "");
     const el = document.getElementById(id);
-    el?.scrollIntoView({ behavior: "smooth" });
+    if (!el) return;
+    const start = window.scrollY;
+    const target = el.getBoundingClientRect().top + start - 72; // 72px navbar offset
+    const duration = 600;
+    const startTime = performance.now();
+    const ease = (t: number) => t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t;
+    const step = (now: number) => {
+      const elapsed = Math.min((now - startTime) / duration, 1);
+      window.scrollTo(0, start + (target - start) * ease(elapsed));
+      if (elapsed < 1) requestAnimationFrame(step);
+    };
+    requestAnimationFrame(step);
   };
 
   return (
