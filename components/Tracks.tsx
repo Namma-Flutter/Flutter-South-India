@@ -51,9 +51,9 @@ export default function Tracks() {
       <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[var(--flutter-blue)]/30 to-transparent" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
-        <div className="text-center mb-16">
+        <div className="text-center mb-12 sm:mb-14">
           <motion.p
-            className="section-label mb-4"
+            className="section-label mb-3"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.3 }}
@@ -62,7 +62,7 @@ export default function Tracks() {
             Conference Program
           </motion.p>
           <motion.h2
-            className="text-4xl md:text-5xl font-black text-[var(--foreground)] mb-4"
+            className="text-3xl sm:text-4xl md:text-5xl font-black text-[var(--foreground)] mb-5 sm:mb-6"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.3 }}
@@ -71,14 +71,14 @@ export default function Tracks() {
             3 Technical <span className="gradient-text">Tracks</span>
           </motion.h2>
           <motion.div
-            className="divider mx-auto mb-6"
+            className="divider mx-auto mb-5 sm:mb-6"
             initial={{ opacity: 0, scaleX: 0 }}
             whileInView={{ opacity: 1, scaleX: 1 }}
             viewport={{ once: true, amount: 0.3 }}
             transition={{ duration: 0.4, delay: 0.12 }}
           />
           <motion.p
-            className="text-[color:var(--foreground)]/55 max-w-xl mx-auto"
+            className="text-[color:var(--foreground)]/55 text-sm sm:text-base max-w-2xl mx-auto"
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true, amount: 0.3 }}

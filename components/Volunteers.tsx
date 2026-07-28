@@ -45,11 +45,11 @@ export default function Volunteers() {
             transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
             className="order-1 md:order-2"
           >
-            <p className="section-label mb-4">Volunteer with Us</p>
-            <h2 className="text-4xl md:text-5xl font-black text-[var(--foreground)] mb-6">
+            <p className="section-label mb-3">Volunteer with Us</p>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-[var(--foreground)] mb-5 sm:mb-6">
               Be Part of the<br /><span className="gradient-text">Organizing Team</span>
             </h2>
-            <div className="divider mb-6" />
+            <div className="divider mb-5 sm:mb-6" />
             <p className="text-[color:var(--foreground)]/60 text-base leading-relaxed mb-6">
               Volunteers are the heartbeat of Flutter South India. You get exclusive access, conference swag,
               a volunteer certificate, and the satisfaction of making it all happen.

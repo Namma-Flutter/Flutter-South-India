@@ -50,24 +50,24 @@ export default function Stats() {
       <div className="absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-[var(--flutter-blue)]/20 to-transparent" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
-        <div className="text-center mb-14">
-          <motion.p className="section-label mb-4" {...fadeUp()}>By the Numbers</motion.p>
-          <motion.h2 className="text-4xl md:text-5xl font-black text-[var(--foreground)]" {...fadeUp(0.08)}>
+        <div className="text-center mb-12 sm:mb-14">
+          <motion.p className="section-label mb-3" {...fadeUp()}>By the Numbers</motion.p>
+          <motion.h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-[var(--foreground)] mb-5 sm:mb-6" {...fadeUp(0.08)}>
             Our <span className="gradient-text">Community</span>
           </motion.h2>
         </div>
 
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4 sm:gap-5">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 sm:gap-4">
           {stats.map((stat, i) => (
             <motion.div
               key={stat.label}
               {...fadeUp(i * 0.07)}
-              className="glass rounded-2xl p-5 sm:p-6 text-center border border-[var(--card-border)] hover:border-[var(--flutter-blue)]/30 transition-all duration-300 group"
+              className="glass rounded-xl sm:rounded-2xl p-4 sm:p-5 text-center border border-[var(--card-border)] hover:border-[var(--flutter-blue)]/30 transition-all duration-300 group"
             >
-              <div className="text-2xl sm:text-3xl md:text-4xl font-black gradient-text mb-2">
+              <div className="text-xl sm:text-2xl md:text-3xl font-black gradient-text mb-2">
                 <Counter target={stat.value} suffix={stat.suffix} />
               </div>
-              <p className="text-[color:var(--foreground)]/50 text-xs leading-tight">{stat.label}</p>
+              <p className="text-[color:var(--foreground)]/50 text-[10px] sm:text-xs leading-tight">{stat.label}</p>
             </motion.div>
           ))}
         </div>

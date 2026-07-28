@@ -4,26 +4,26 @@ import { motion } from "framer-motion";
 import Countdown from "@/components/Countdown";
 import { ArrowRight, MapPin, Calendar } from "lucide-react";
 
-/* Namma Flutter mascot — hero centre focal point */
+/* Centre focal mascot */
 function HeroMascot() {
   return (
     <motion.div
-      className="relative"
-      animate={{ y: [0, -10, 0] }}
+      className="relative flex items-center justify-center"
+      animate={{ y: [0, -6, 0] }}
       transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
     >
-      {/* Glow behind mascot */}
+      {/* Radial glow behind */}
       <motion.div
-        className="absolute inset-0 rounded-full blur-2xl"
-        style={{ background: "radial-gradient(circle, rgba(2,125,253,0.45) 0%, rgba(19,185,253,0.2) 50%, transparent 70%)" }}
-        animate={{ scale: [1, 1.35, 1], opacity: [0.6, 0.15, 0.6] }}
+        className="absolute w-36 h-36 sm:w-44 sm:h-44 rounded-full blur-3xl"
+        style={{ background: "radial-gradient(circle, rgba(2,125,253,0.40) 0%, rgba(19,185,253,0.15) 55%, transparent 75%)" }}
+        animate={{ scale: [1, 1.3, 1], opacity: [0.55, 0.12, 0.55] }}
         transition={{ duration: 3.5, repeat: Infinity, ease: "easeInOut" }}
       />
       <motion.div
         className="relative rounded-2xl overflow-hidden w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28"
-        animate={{ rotate: [0, 2, -2, 0] }}
+        animate={{ rotate: [0, 1.5, -1.5, 0] }}
         transition={{ duration: 7, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
-        style={{ filter: "drop-shadow(0 0 18px rgba(2,125,253,0.55))" }}
+        style={{ filter: "drop-shadow(0 4px 20px rgba(2,125,253,0.50))" }}
       >
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
@@ -36,14 +36,30 @@ function HeroMascot() {
   );
 }
 
-/* Background mascot — large decorative floating instance */
-function BgMascot({ className, size, delay = 0, duration = 10, rotateRange = 6, opacityClass }: {
-  className: string; size: number; delay?: number; duration?: number; rotateRange?: number; opacityClass: string;
+/* Decorative background mascot — symmetric pair */
+function BgMascot({
+  side,
+  size = 148,
+  opacity = 0.09,
+  delay = 0,
+  duration = 11,
+}: {
+  side: "left" | "right";
+  size?: number;
+  opacity?: number;
+  delay?: number;
+  duration?: number;
 }) {
+  const pos = side === "left"
+    ? "left-6 xl:left-14 hidden xl:block"
+    : "right-6 xl:right-14 hidden lg:block";
+
   return (
     <motion.div
-      className={`absolute pointer-events-none select-none ${className} ${opacityClass}`}
-      animate={{ y: [0, -18, 0], rotate: [0, rotateRange, -rotateRange, 0] }}
+      className={`absolute pointer-events-none select-none top-[58%] -translate-y-1/2 ${pos}`}
+      style={{ opacity }}
+      /* Only float downward so it never drifts into the navbar zone */
+      animate={{ y: [0, 14, 0], rotate: side === "left" ? [0, -3, 3, 0] : [0, 3, -3, 0] }}
       transition={{ duration, repeat: Infinity, ease: "easeInOut", delay }}
     >
       <div className="rounded-3xl overflow-hidden" style={{ width: size, height: size }}>
@@ -61,162 +77,161 @@ function BgMascot({ className, size, delay = 0, duration = 10, rotateRange = 6, 
 
 export default function Hero() {
   return (
-    <section className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden mesh-bg pt-20 px-4 sm:px-6">
-      {/* Animated rings */}
+    <section className="relative min-h-screen flex flex-col overflow-hidden mesh-bg">
+
+      {/* ── Animated rings – centred in section ── */}
       <div className="absolute inset-0 flex items-center justify-center pointer-events-none overflow-hidden">
-        {[300, 500, 700, 900].map((size, i) => (
+        {[280, 480, 660, 860].map((size, i) => (
           <motion.div
             key={size}
             className="absolute rounded-full"
             style={{
-              width: size, height: size,
-              border: `1px solid rgba(2,125,253,${0.12 - i * 0.02})`,
+              width: size,
+              height: size,
+              border: `1px solid rgba(2,125,253,${0.11 - i * 0.02})`,
             }}
-            animate={{ scale: [1, 1.04, 1], opacity: [0.4, 0.7, 0.4] }}
+            animate={{ scale: [1, 1.04, 1], opacity: [0.35, 0.65, 0.35] }}
             transition={{ duration: 4 + i * 1.2, repeat: Infinity, ease: "easeInOut", delay: i * 0.6 }}
           />
         ))}
-        <div className="absolute w-80 h-80 rounded-full bg-[var(--flutter-blue)]/8 blur-3xl" />
+        <div className="absolute w-72 h-72 rounded-full bg-[var(--flutter-blue)]/[0.07] blur-3xl" />
       </div>
 
-      {/* Background mascot — right side, large screens */}
-      <BgMascot
-        className="right-6 xl:right-16 top-1/2 -translate-y-1/2 hidden lg:block"
-        size={140}
-        opacityClass="opacity-[0.13]"
-        delay={0}
-        duration={8}
-        rotateRange={5}
-      />
+      {/* ── Symmetric background mascots ── */}
+      <BgMascot side="left"  delay={2} duration={13} opacity={0.08} />
+      <BgMascot side="right" delay={0} duration={10} opacity={0.11} />
 
-      {/* Background mascot — left side, extra large screens */}
-      <BgMascot
-        className="left-4 xl:left-10 top-1/2 -translate-y-1/2 hidden xl:block"
-        size={200}
-        opacityClass="opacity-[0.06]"
-        delay={2.5}
-        duration={12}
-        rotateRange={4}
-      />
+      {/* ── Hero content — starts below fixed navbar ── */}
+      <div className="flex-1 flex flex-col items-center justify-center px-4 sm:px-6 pt-20 pb-12 sm:pb-16">
+        <div className="relative z-10 text-center w-full max-w-4xl mx-auto">
 
-      <div className="relative z-10 text-center w-full max-w-5xl mx-auto">
-        {/* Flutter mark + badge row */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7 }}
-          className="flex flex-col items-center gap-4 sm:gap-5 mb-6 sm:mb-8"
-        >
-          <HeroMascot />
-          <div className="inline-flex items-center gap-2 glass rounded-full px-4 py-1.5 text-sm text-[var(--flutter-cyan)] font-medium border border-[var(--flutter-blue)]/30">
-            <span className="w-1.5 h-1.5 rounded-full bg-[var(--flutter-cyan)] animate-pulse" />
-            Namma Flutter · South India 2026
-          </div>
-        </motion.div>
-
-        {/* Headline */}
-        <motion.h1
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.15 }}
-          className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black tracking-tight mb-5 sm:mb-6 leading-[1.05]"
-        >
-          <span className="text-[var(--foreground)]">Flutter</span>
-          <br />
-          <span className="gradient-text">South India</span>
-          <br />
-          <span className="text-[var(--foreground)]">2026</span>
-        </motion.h1>
-
-        {/* Subline */}
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.28 }}
-          className="text-base sm:text-lg md:text-xl text-[color:var(--foreground)]/60 max-w-2xl mx-auto mb-5 leading-relaxed"
-        >
-          South India's premier Flutter developer conference — bringing together
-          the brightest minds in Flutter, Dart, and cross-platform development.
-        </motion.p>
-
-        {/* Meta info */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.6, delay: 0.38 }}
-          className="flex flex-wrap items-center justify-center gap-3 sm:gap-4 md:gap-6 text-sm text-[color:var(--foreground)]/50 mb-10 sm:mb-12"
-        >
-          <span className="flex items-center gap-1.5">
-            <Calendar size={14} className="text-[var(--flutter-cyan)]" />
-            October 10, 2026
-          </span>
-          <span className="w-1 h-1 rounded-full bg-[color:var(--foreground)]/20 hidden sm:block" />
-          <span className="flex items-center gap-1.5">
-            <MapPin size={14} className="text-[var(--flutter-cyan)]" />
-            Loyola College, Chennai
-          </span>
-        </motion.div>
-
-        {/* Countdown */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.44 }}
-          className="mb-10 sm:mb-12"
-        >
-          <Countdown targetDate="2026-10-10T09:30:00" />
-        </motion.div>
-
-        {/* CTAs */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.54 }}
-          className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4"
-        >
-          <a
-            href="https://lu.ma"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="btn-glow w-full sm:w-auto px-8 py-4 rounded-full text-base font-semibold flex items-center justify-center gap-2 group"
+          {/* Mascot + badge */}
+          <motion.div
+            initial={{ opacity: 0, y: 28 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7 }}
+            className="flex flex-col items-center gap-3 sm:gap-4 mb-6 sm:mb-8"
           >
-            Register Now
-            <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
-          </a>
-          <button
-            onClick={() => {
-              const el = document.getElementById("about");
-              if (!el) return;
-              const start = window.scrollY;
-              const target = el.getBoundingClientRect().top + start - 72;
-              const startTime = performance.now();
-              const ease = (t: number) => t < 0.5 ? 2*t*t : -1+(4-2*t)*t;
-              const step = (now: number) => {
-                const p = Math.min((now - startTime) / 600, 1);
-                window.scrollTo(0, start + (target - start) * ease(p));
-                if (p < 1) requestAnimationFrame(step);
-              };
-              requestAnimationFrame(step);
-            }}
-            className="w-full sm:w-auto px-8 py-4 rounded-full text-base font-semibold border border-[color:var(--foreground)]/15 text-[color:var(--foreground)]/80 hover:text-[var(--foreground)] hover:border-[color:var(--foreground)]/30 transition-all duration-200"
+            <HeroMascot />
+            <div className="inline-flex items-center gap-2 glass rounded-full px-4 py-1.5 border border-[var(--flutter-blue)]/30">
+              <span className="w-1.5 h-1.5 rounded-full bg-[var(--flutter-cyan)] animate-pulse flex-shrink-0" />
+              <span className="text-sm text-[var(--flutter-cyan)] font-medium whitespace-nowrap">
+                Namma Flutter · South India 2026
+              </span>
+            </div>
+          </motion.div>
+
+          {/* Headline */}
+          <motion.h1
+            initial={{ opacity: 0, y: 28 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.14 }}
+            className="font-black tracking-tight leading-[1.08] mb-5 sm:mb-6
+              text-4xl sm:text-5xl md:text-6xl lg:text-[4.5rem]"
           >
-            Learn More
-          </button>
-        </motion.div>
+            <span className="block text-[var(--foreground)]">Flutter</span>
+            <span className="block gradient-text">South India</span>
+            <span className="block text-[var(--foreground)]">2026</span>
+          </motion.h1>
+
+          {/* Description */}
+          <motion.p
+            initial={{ opacity: 0, y: 18 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.27 }}
+            className="text-sm sm:text-base md:text-lg text-[color:var(--foreground)]/60
+              max-w-2xl mx-auto mb-8 sm:mb-9 leading-relaxed"
+          >
+            South India's premier Flutter developer conference — bringing together
+            the brightest minds in Flutter, Dart, and cross-platform development.
+          </motion.p>
+
+          {/* Date & Venue */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.6, delay: 0.37 }}
+            className="flex flex-wrap items-center justify-center gap-3 sm:gap-5
+              text-xs sm:text-sm text-[color:var(--foreground)]/55 mb-7 sm:mb-9"
+          >
+            <span className="flex items-center gap-2">
+              <Calendar size={14} className="text-[var(--flutter-cyan)] flex-shrink-0" />
+              October 10, 2026
+            </span>
+            <span className="hidden sm:block w-px h-4 bg-[color:var(--foreground)]/15" />
+            <span className="flex items-center gap-2">
+              <MapPin size={14} className="text-[var(--flutter-cyan)] flex-shrink-0" />
+              Loyola College, Chennai
+            </span>
+          </motion.div>
+
+          {/* Countdown */}
+          <motion.div
+            initial={{ opacity: 0, y: 18 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.44 }}
+            className="mb-10 sm:mb-12"
+          >
+            <Countdown targetDate="2026-10-10T09:30:00" />
+          </motion.div>
+
+          {/* CTAs */}
+          <motion.div
+            initial={{ opacity: 0, y: 18 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.54 }}
+            className="flex flex-col sm:flex-row items-center justify-center gap-2.5 sm:gap-3"
+          >
+            <a
+              href="https://lu.ma"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-glow w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-3.5 rounded-full text-sm sm:text-base
+                font-semibold flex items-center justify-center gap-2 group"
+            >
+              Register Now
+              <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
+            </a>
+            <button
+              onClick={() => {
+                const el = document.getElementById("about");
+                if (!el) return;
+                const start = window.scrollY;
+                const target = el.getBoundingClientRect().top + start - 80;
+                const t0 = performance.now();
+                const ease = (t: number) => t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t;
+                const step = (now: number) => {
+                  const p = Math.min((now - t0) / 600, 1);
+                  window.scrollTo(0, start + (target - start) * ease(p));
+                  if (p < 1) requestAnimationFrame(step);
+                };
+                requestAnimationFrame(step);
+              }}
+              className="w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-3.5 rounded-full text-sm sm:text-base font-semibold
+                border border-[color:var(--foreground)]/20
+                text-[color:var(--foreground)]/70
+                hover:text-[var(--foreground)] hover:border-[color:var(--foreground)]/40
+                transition-all duration-200"
+            >
+              Learn More
+            </button>
+          </motion.div>
+        </div>
       </div>
 
-      {/* Scroll indicator */}
+      {/* ── Scroll indicator ── */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.4, duration: 0.6 }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-[color:var(--foreground)]/30 text-xs"
+        className="absolute bottom-7 left-1/2 -translate-x-1/2
+          flex flex-col items-center gap-2 text-[color:var(--foreground)]/30 text-[11px] tracking-widest uppercase"
       >
         <span>Scroll</span>
         <motion.div
           animate={{ y: [0, 6, 0] }}
           transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
-          className="w-px h-8 bg-gradient-to-b from-[color:var(--foreground)]/30 to-transparent"
+          className="w-px h-7 bg-gradient-to-b from-[color:var(--foreground)]/30 to-transparent"
         />
       </motion.div>
     </section>

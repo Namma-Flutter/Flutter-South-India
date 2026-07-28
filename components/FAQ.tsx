@@ -90,8 +90,8 @@ export default function FAQ() {
           transition={{ duration: 0.6 }}
           className="text-center mb-14"
         >
-          <p className="section-label mb-4">Got Questions?</p>
-          <h2 className="text-4xl md:text-5xl font-black text-[var(--foreground)] mb-4">
+          <p className="section-label mb-3">Got Questions?</p>
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-[var(--foreground)] mb-5 sm:mb-6">
             Frequently Asked<br />
             <span className="gradient-text">Questions</span>
           </h2>

@@ -27,28 +27,28 @@ export default function Stalls() {
     <section id="stalls" className="section-pad bg-[var(--background)] relative">
       <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[var(--flutter-blue)]/30 to-transparent" />
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
-        <div className="text-center mb-14">
-          <motion.p className="section-label mb-4"
+        <div className="text-center mb-12 sm:mb-14">
+          <motion.p className="section-label mb-3"
             initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.3 }} transition={{ duration: 0.5 }}>
             Exhibition Floor
           </motion.p>
-          <motion.h2 className="text-4xl md:text-5xl font-black text-[var(--foreground)] mb-4"
+          <motion.h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-[var(--foreground)] mb-5 sm:mb-6"
             initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.3 }} transition={{ duration: 0.5, delay: 0.08 }}>
             Conference <span className="gradient-text">Stalls</span>
           </motion.h2>
-          <motion.div className="divider mx-auto mb-6"
+          <motion.div className="divider mx-auto mb-5 sm:mb-6"
             initial={{ opacity: 0, scaleX: 0 }} whileInView={{ opacity: 1, scaleX: 1 }}
             viewport={{ once: true, amount: 0.3 }} transition={{ duration: 0.4, delay: 0.12 }} />
-          <motion.p className="text-[color:var(--foreground)]/55 text-sm max-w-lg mx-auto"
+          <motion.p className="text-[color:var(--foreground)]/55 text-xs sm:text-sm max-w-2xl mx-auto"
             initial={{ opacity: 0 }} whileInView={{ opacity: 1 }}
             viewport={{ once: true, amount: 0.3 }} transition={{ duration: 0.5, delay: 0.16 }}>
             Explore exhibitors, talk to teams, and discover tools that will level up your Flutter development.
           </motion.p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
           {stalls.map((stall, i) => (
             <motion.a
               key={stall.name}

@@ -139,16 +139,16 @@ body {
 .btn-glow:hover::after { opacity: 1; }
 
 .section-pad {
-  padding: 5rem 1rem;
+  padding: 4rem 1rem;
 }
 @media (min-width: 640px) {
-  .section-pad { padding: 6rem 1.5rem; }
+  .section-pad { padding: 5rem 1.5rem; }
 }
 @media (min-width: 768px) {
-  .section-pad { padding: 7rem 2rem; }
+  .section-pad { padding: 6rem 2rem; }
 }
 @media (min-width: 1280px) {
-  .section-pad { padding: 8rem 2rem; }
+  .section-pad { padding: 7rem 3rem; }
 }
 
 .mesh-bg {

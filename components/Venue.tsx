@@ -15,21 +15,21 @@ export default function Venue() {
   return (
     <section id="venue" className="section-pad mesh-bg">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
-        <div className="text-center mb-16">
-          <motion.p className="section-label mb-4"
+        <div className="text-center mb-12 sm:mb-14">
+          <motion.p className="section-label mb-3"
             initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.3 }} transition={{ duration: 0.5 }}>
             Event Venue
           </motion.p>
-          <motion.h2 className="text-4xl md:text-5xl font-black text-[var(--foreground)] mb-4"
+          <motion.h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-[var(--foreground)] mb-5 sm:mb-6"
             initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.3 }} transition={{ duration: 0.5, delay: 0.08 }}>
             Loyola College, <span className="gradient-text">Chennai</span>
           </motion.h2>
-          <motion.div className="divider mx-auto mb-6"
+          <motion.div className="divider mx-auto mb-5 sm:mb-6"
             initial={{ opacity: 0, scaleX: 0 }} whileInView={{ opacity: 1, scaleX: 1 }}
             viewport={{ once: true, amount: 0.3 }} transition={{ duration: 0.4, delay: 0.12 }} />
-          <motion.p className="text-[color:var(--foreground)]/55 max-w-xl mx-auto text-sm leading-relaxed"
+          <motion.p className="text-[color:var(--foreground)]/55 max-w-2xl mx-auto text-xs sm:text-sm leading-relaxed"
             initial={{ opacity: 0 }} whileInView={{ opacity: 1 }}
             viewport={{ once: true, amount: 0.3 }} transition={{ duration: 0.5, delay: 0.16 }}>
             One of India's most prestigious institutions — Loyola College hosts our grand conference

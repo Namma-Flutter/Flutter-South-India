@@ -21,20 +21,20 @@ export default function About() {
   return (
     <section id="about" className="section-pad mesh-bg">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
-        <div className="text-center mb-16">
-          <motion.p className="section-label mb-4" {...fadeUp()}>
+        <div className="text-center mb-12 sm:mb-14">
+          <motion.p className="section-label mb-3" {...fadeUp()}>
             About the Conference
           </motion.p>
           <motion.h2
-            className="text-4xl md:text-5xl font-black text-[var(--foreground)] mb-6 leading-tight"
+            className="text-3xl sm:text-4xl md:text-5xl font-black text-[var(--foreground)] mb-5 sm:mb-6 leading-tight"
             {...fadeUp(0.08)}
           >
             Where Flutter Developers<br />
             <span className="gradient-text">Come Together</span>
           </motion.h2>
-          <motion.div className="divider mx-auto mb-6" {...fadeUp(0.12)} />
+          <motion.div className="divider mx-auto mb-5 sm:mb-6" {...fadeUp(0.12)} />
           <motion.p
-            className="text-[color:var(--foreground)]/60 text-lg max-w-2xl mx-auto leading-relaxed"
+            className="text-[color:var(--foreground)]/55 text-sm sm:text-base max-w-2xl mx-auto leading-relaxed"
             {...fadeUp(0.16)}
           >
             Flutter South India 2026 is the largest Flutter conference in South India — a full-day

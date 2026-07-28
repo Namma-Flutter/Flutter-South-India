@@ -28,21 +28,21 @@ export default function Footer() {
       <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[var(--flutter-blue)]/40 to-transparent" />
 
       {/* Final CTA */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 pt-20 pb-10">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 pt-16 sm:pt-20 pb-8 sm:pb-10">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.7 }}
-          className="glass rounded-3xl p-8 sm:p-10 md:p-14 border border-[var(--flutter-blue)]/20 text-center mb-16 relative overflow-hidden"
+          className="glass rounded-2xl sm:rounded-3xl p-6 sm:p-10 md:p-12 border border-[var(--flutter-blue)]/20 text-center mb-12 sm:mb-16 relative overflow-hidden"
         >
           <div className="absolute inset-0 bg-gradient-to-br from-[var(--flutter-blue)]/8 via-transparent to-[var(--flutter-cyan)]/5 pointer-events-none" />
-          <p className="section-label mb-4">Limited Seats Available</p>
-          <h2 className="text-3xl sm:text-4xl md:text-6xl font-black text-[var(--foreground)] mb-4">
+          <p className="section-label mb-3">Limited Seats Available</p>
+          <h2 className="text-2xl sm:text-3xl md:text-5xl lg:text-6xl font-black text-[var(--foreground)] mb-5 sm:mb-6">
             Ready to Join<br />
             <span className="gradient-text">Flutter South India?</span>
           </h2>
-          <p className="text-[color:var(--foreground)]/55 text-base sm:text-lg mb-8 max-w-xl mx-auto">
+          <p className="text-[color:var(--foreground)]/55 text-sm sm:text-base mb-7 sm:mb-8 max-w-2xl mx-auto leading-relaxed">
             Secure your spot at South India's largest Flutter conference.
             Early-bird tickets are selling fast.
           </p>
@@ -50,7 +50,7 @@ export default function Footer() {
             href="https://lu.ma"
             target="_blank"
             rel="noopener noreferrer"
-            className="btn-glow px-8 sm:px-10 py-4 rounded-full text-base font-bold inline-flex items-center gap-2 group"
+            className="btn-glow px-6 sm:px-8 py-3 sm:py-4 rounded-full text-sm sm:text-base font-bold inline-flex items-center gap-2 group"
           >
             Get Your Ticket Now
             <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
