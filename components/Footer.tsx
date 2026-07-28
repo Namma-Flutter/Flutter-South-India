@@ -62,8 +62,9 @@ export default function Footer() {
           {/* Brand */}
           <div className="col-span-2 md:col-span-1">
             <div className="flex items-center gap-2.5 mb-4">
-              <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-[var(--flutter-blue)] to-[var(--flutter-cyan)] flex items-center justify-center shadow-lg shadow-blue-500/25">
-                <span className="text-white font-black text-sm">F</span>
+              <div className="w-9 h-9 rounded-xl overflow-hidden flex-shrink-0">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src="https://nammaflutter.com/images/logo.png" alt="Namma Flutter" className="w-full h-full object-cover" />
               </div>
               <div className="leading-tight">
                 <div className="text-[var(--foreground)] font-bold text-sm">Namma Flutter</div>

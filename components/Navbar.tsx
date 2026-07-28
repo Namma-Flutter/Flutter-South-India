@@ -17,22 +17,22 @@ const navLinks = [
   { label: "FAQ",      href: "#faq"      },
 ];
 
-/* Flutter-F SVG logo mark */
-function FlutterMark({ size = 32 }: { size?: number }) {
+function NammaLogo({ size = 32 }: { size?: number }) {
   return (
-    <svg width={size} height={size} viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <defs>
-        <linearGradient id="fm-grad" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0%" stopColor="#027DFD" />
-          <stop offset="100%" stopColor="#13B9FD" />
-        </linearGradient>
-      </defs>
-      <rect width="32" height="32" rx="8" fill="url(#fm-grad)" />
-      {/* Flutter F diamond shapes */}
-      <polygon points="8,7 24,7 16,15" fill="rgba(255,255,255,0.95)" />
-      <polygon points="8,13 20,13 12,21" fill="rgba(255,255,255,0.75)" />
-      <polygon points="8,19 20,19 12,27" fill="rgba(255,255,255,0.95)" />
-    </svg>
+    <div
+      className="rounded-xl overflow-hidden flex-shrink-0"
+      style={{ width: size, height: size }}
+    >
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src="https://nammaflutter.com/images/logo.png"
+        alt="Namma Flutter"
+        width={size}
+        height={size}
+        className="w-full h-full object-cover"
+        loading="eager"
+      />
+    </div>
   );
 }
 
@@ -120,7 +120,7 @@ export default function Navbar() {
           {/* Logo */}
           <a href="#" className="flex items-center gap-2.5 group flex-shrink-0" onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}>
             <div className="group-hover:scale-105 transition-transform duration-200">
-              <FlutterMark size={32} />
+              <NammaLogo size={32} />
             </div>
             <div className="leading-tight">
               <div className="text-[var(--foreground)] font-bold text-sm">Namma Flutter</div>
@@ -236,7 +236,7 @@ export default function Navbar() {
               {/* Panel header */}
               <div className="flex items-center justify-between px-6 py-5 border-b border-[var(--glass-border)]">
                 <div className="flex items-center gap-2.5">
-                  <FlutterMark size={28} />
+                  <NammaLogo size={28} />
                   <div className="leading-tight">
                     <div className="text-[var(--foreground)] font-bold text-sm">Namma Flutter</div>
                     <div className="text-[10px] text-[var(--flutter-cyan)] font-semibold tracking-wider">SOUTH INDIA 2026</div>

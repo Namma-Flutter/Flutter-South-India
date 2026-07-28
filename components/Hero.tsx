@@ -4,89 +4,57 @@ import { motion } from "framer-motion";
 import Countdown from "@/components/Countdown";
 import { ArrowRight, MapPin, Calendar } from "lucide-react";
 
-/* Animated Dart logo mark */
-function DartLogo() {
+/* Namma Flutter mascot — hero centre focal point */
+function HeroMascot() {
   return (
-    <motion.svg
-      width="120" height="120" viewBox="0 0 120 120" fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      animate={{ rotate: [0, 6, -6, 0] }}
-      transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+    <motion.div
+      className="relative"
+      animate={{ y: [0, -10, 0] }}
+      transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
     >
-      {/* Outer glow ring */}
-      <motion.circle cx="60" cy="60" r="55" stroke="#027DFD" strokeWidth="1"
-        strokeDasharray="8 6" opacity={0.25}
-        animate={{ rotate: [0, 360] }}
-        transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-        style={{ transformOrigin: "60px 60px" }}
+      {/* Glow behind mascot */}
+      <motion.div
+        className="absolute inset-0 rounded-full blur-2xl"
+        style={{ background: "radial-gradient(circle, rgba(2,125,253,0.45) 0%, rgba(19,185,253,0.2) 50%, transparent 70%)" }}
+        animate={{ scale: [1, 1.35, 1], opacity: [0.6, 0.15, 0.6] }}
+        transition={{ duration: 3.5, repeat: Infinity, ease: "easeInOut" }}
       />
-      {/* Left wing (dark blue) */}
-      <motion.polygon
-        points="14,106 52,68 38,54 14,106"
-        fill="#0553B1"
-        animate={{ opacity: [0.85, 1, 0.85] }}
-        transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-      />
-      {/* Right body */}
-      <motion.polygon
-        points="52,68 106,14 106,58 70,82 52,68"
-        fill="#027DFD"
-        animate={{ opacity: [1, 0.85, 1] }}
-        transition={{ duration: 3, repeat: Infinity, ease: "easeInOut", delay: 0.3 }}
-      />
-      {/* Top triangle / head */}
-      <motion.polygon
-        points="64,14 106,14 84,36"
-        fill="#13B9FD"
-        animate={{ opacity: [0.9, 1, 0.9] }}
-        transition={{ duration: 3, repeat: Infinity, ease: "easeInOut", delay: 0.6 }}
-      />
-      {/* Bottom tail */}
-      <motion.polygon
-        points="38,54 52,68 14,106 38,106"
-        fill="#54C5F8"
-        animate={{ opacity: [0.7, 1, 0.7] }}
-        transition={{ duration: 3, repeat: Infinity, ease: "easeInOut", delay: 0.9 }}
-      />
-      <text x="60" y="115" textAnchor="middle" fontSize="9" fill="#13B9FD" fontFamily="system-ui" fontWeight="700" letterSpacing="3" opacity="0.6">DART</text>
-    </motion.svg>
+      <motion.div
+        className="relative rounded-2xl overflow-hidden w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28"
+        animate={{ rotate: [0, 2, -2, 0] }}
+        transition={{ duration: 7, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
+        style={{ filter: "drop-shadow(0 0 18px rgba(2,125,253,0.55))" }}
+      >
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="https://nammaflutter.com/images/logo.png"
+          alt="Namma Flutter Mascot"
+          className="w-full h-full object-cover"
+        />
+      </motion.div>
+    </motion.div>
   );
 }
 
-/* Flutter F mark for hero */
-function HeroFlutterMark() {
+/* Background mascot — large decorative floating instance */
+function BgMascot({ className, size, delay = 0, duration = 10, rotateRange = 6, opacityClass }: {
+  className: string; size: number; delay?: number; duration?: number; rotateRange?: number; opacityClass: string;
+}) {
   return (
     <motion.div
-      animate={{ y: [0, -8, 0] }}
-      transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-      className="relative"
+      className={`absolute pointer-events-none select-none ${className} ${opacityClass}`}
+      animate={{ y: [0, -18, 0], rotate: [0, rotateRange, -rotateRange, 0] }}
+      transition={{ duration, repeat: Infinity, ease: "easeInOut", delay }}
     >
-      <motion.svg width="64" height="64" viewBox="0 0 72 72" fill="none"
-        className="sm:w-[72px] sm:h-[72px]"
-        animate={{ rotate: [0, 4, -4, 0] }}
-        transition={{ duration: 8, repeat: Infinity, ease: "easeInOut", delay: 1 }}>
-        <defs>
-          <linearGradient id="hero-grad" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0%" stopColor="#027DFD" />
-            <stop offset="100%" stopColor="#13B9FD" />
-          </linearGradient>
-          <filter id="glow">
-            <feGaussianBlur stdDeviation="3" result="coloredBlur" />
-            <feMerge><feMergeNode in="coloredBlur" /><feMergeNode in="SourceGraphic" /></feMerge>
-          </filter>
-        </defs>
-        <rect width="72" height="72" rx="18" fill="url(#hero-grad)" filter="url(#glow)" opacity="0.9" />
-        <polygon points="18,15 54,15 36,33" fill="white" opacity="0.95" />
-        <polygon points="18,29 45,29 27,47" fill="white" opacity="0.75" />
-        <polygon points="18,43 45,43 27,61" fill="white" opacity="0.95" />
-      </motion.svg>
-      {/* Halo */}
-      <motion.div
-        className="absolute inset-0 rounded-[18px]"
-        style={{ background: "radial-gradient(circle, rgba(2,125,253,0.4) 0%, transparent 70%)" }}
-        animate={{ scale: [1, 1.3, 1], opacity: [0.5, 0, 0.5] }}
-        transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-      />
+      <div className="rounded-3xl overflow-hidden" style={{ width: size, height: size }}>
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="https://nammaflutter.com/images/logo.png"
+          alt=""
+          aria-hidden
+          className="w-full h-full object-cover"
+        />
+      </div>
     </motion.div>
   );
 }
@@ -111,15 +79,25 @@ export default function Hero() {
         <div className="absolute w-80 h-80 rounded-full bg-[var(--flutter-blue)]/8 blur-3xl" />
       </div>
 
-      {/* Dart logo — right side, large screens only */}
-      <div className="absolute right-8 top-1/2 -translate-y-1/2 opacity-20 pointer-events-none hidden xl:block">
-        <DartLogo />
-      </div>
+      {/* Background mascot — right side, large screens */}
+      <BgMascot
+        className="right-6 xl:right-16 top-1/2 -translate-y-1/2 hidden lg:block"
+        size={140}
+        opacityClass="opacity-[0.13]"
+        delay={0}
+        duration={8}
+        rotateRange={5}
+      />
 
-      {/* Large BG F — decorative */}
-      <div className="absolute left-0 top-1/2 -translate-y-1/2 opacity-[0.03] pointer-events-none select-none text-[28rem] font-black text-[var(--flutter-blue)] leading-none hidden xl:block">
-        F
-      </div>
+      {/* Background mascot — left side, extra large screens */}
+      <BgMascot
+        className="left-4 xl:left-10 top-1/2 -translate-y-1/2 hidden xl:block"
+        size={200}
+        opacityClass="opacity-[0.06]"
+        delay={2.5}
+        duration={12}
+        rotateRange={4}
+      />
 
       <div className="relative z-10 text-center w-full max-w-5xl mx-auto">
         {/* Flutter mark + badge row */}
@@ -129,7 +107,7 @@ export default function Hero() {
           transition={{ duration: 0.7 }}
           className="flex flex-col items-center gap-4 sm:gap-5 mb-6 sm:mb-8"
         >
-          <HeroFlutterMark />
+          <HeroMascot />
           <div className="inline-flex items-center gap-2 glass rounded-full px-4 py-1.5 text-sm text-[var(--flutter-cyan)] font-medium border border-[var(--flutter-blue)]/30">
             <span className="w-1.5 h-1.5 rounded-full bg-[var(--flutter-cyan)] animate-pulse" />
             Namma Flutter · South India 2026
