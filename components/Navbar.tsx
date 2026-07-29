@@ -7,14 +7,14 @@ import { cn } from "@/lib/utils";
 import { useTheme } from "@/components/ThemeProvider";
 
 const navLinks = [
-  { label: "About",    href: "#about"    },
-  { label: "Agenda",   href: "#agenda"   },
+  { label: "About", href: "#about" },
+  { label: "Agenda", href: "#agenda" },
   { label: "Speakers", href: "#speakers" },
-  { label: "Tracks",   href: "#tracks"   },
-  { label: "Stalls",   href: "#stalls"   },
+  { label: "Tracks", href: "#tracks" },
+  { label: "Stalls", href: "#stalls" },
   { label: "Sponsors", href: "#sponsors" },
-  { label: "Venue",    href: "#venue"    },
-  { label: "FAQ",      href: "#faq"      },
+  { label: "Venue", href: "#venue" },
+  { label: "FAQ", href: "#faq" },
 ];
 
 function NammaLogo({ size = 44 }: { size?: number }) {
@@ -103,7 +103,9 @@ export default function Navbar() {
             : "bg-gradient-to-b from-[var(--background)]/80 via-[var(--background)]/30 to-transparent backdrop-blur-[6px] py-3.5"
         )}
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-5 lg:px-8 flex items-center justify-between gap-4">
+        {/* //max-w-7xl mx-auto px-4 sm:px-5 lg:px-8 */}
+
+        <div className="mx-auto px-4 sm:px-5 lg:px-8 flex items-center justify-between gap-4">
 
           {/* ── Logo ── */}
           <a
@@ -115,13 +117,13 @@ export default function Navbar() {
               whileHover={{ scale: 1.08, rotate: -4 }}
               transition={{ type: "spring", stiffness: 380, damping: 14 }}
             >
-              <NammaLogo size={44} />
+              <NammaLogo size={70} />
             </motion.div>
             <div className="leading-snug min-w-0">
-              <div className="text-[var(--foreground)] font-black text-[17px] sm:text-lg tracking-tight group-hover:text-[var(--flutter-cyan)] transition-colors duration-300 truncate">
+              <div className="text-[var(--foreground)] font-black text-[20px] sm:text-lg tracking-tight group-hover:text-[var(--flutter-cyan)] transition-colors duration-300 truncate">
                 Namma Flutter
               </div>
-              <div className="text-[10px] text-[var(--flutter-cyan)] font-bold tracking-[0.2em] uppercase opacity-75 truncate">
+              <div className="text-[13px] text-[var(--flutter-cyan)] font-bold tracking-[0.2em] uppercase opacity-75 truncate">
                 South India 2026
               </div>
             </div>
@@ -210,20 +212,22 @@ export default function Navbar() {
                 whileHover={{ scale: 1.04 }}
                 whileTap={{ scale: 0.97 }}
                 transition={{ type: "spring", stiffness: 400, damping: 18 }}
-                className="relative flex items-center gap-1.5 px-4 sm:px-5 py-2 sm:py-2.5 rounded-lg sm:rounded-xl text-xs sm:text-sm font-black text-white overflow-hidden cursor-pointer select-none"
+                // className="relative flex items-center gap-1.5 px-4 sm:px-5 py-2 sm:py-2.5 rounded-lg sm:rounded-xl text-xs sm:text-sm font-black text-white overflow-hidden cursor-pointer select-none"
+                className="relative inline-flex items-center justify-center gap-2 px-5 sm:px-6 py-2.5 sm:py-3 rounded-xl text-sm font-bold text-white overflow-hidden cursor-pointer select-none whitespace-nowrap"
                 style={{
                   background: "linear-gradient(135deg, var(--flutter-blue) 0%, var(--flutter-cyan) 100%)",
                   boxShadow: "0 0 20px rgba(2,125,253,0.4), 0 2px 6px rgba(0,0,0,0.15), inset 0 1px 0 rgba(255,255,255,0.15)",
                   border: "1.5px solid rgba(19,185,253,0.4)",
                 }}
               >
-                <Ticket size={14} className="flex-shrink-0" />
+                <Ticket size={16} className="flex-shrink-0" />
                 <span>Get Tickets</span>
                 <motion.span
-                  animate={{ x: [0, 2, 0] }}
+
+                  animate={{ x: [0, 3, 0] }}
                   transition={{ duration: 1.6, repeat: Infinity, ease: "easeInOut" }}
                 >
-                  <ArrowRight size={13} />
+                  <ArrowRight size={15} />
                 </motion.span>
                 {/* Shimmer sweep on hover */}
                 <span
