@@ -1,0 +1,35 @@
+[
+  {
+    "tag": "Track 1",
+    "color": "#22c55e",
+    "desc": "Track details to be announced.",
+    "sessions": [
+      { "title": "Topic 1", "speaker": "Speaker 1", "role": "Role" },
+      { "title": "Topic 2", "speaker": "Speaker 2", "role": "Role" },
+      { "title": "Topic 3", "speaker": "Speaker 3", "role": "Role" },
+      { "title": "Topic 4", "speaker": "Speaker 4", "role": "Role" }
+    ]
+  },
+  {
+    "tag": "Track 2",
+    "color": "#027DFD",
+    "desc": "Track details to be announced.",
+    "sessions": [
+      { "title": "Topic 1", "speaker": "Speaker 1", "role": "Role" },
+      { "title": "Topic 2", "speaker": "Speaker 2", "role": "Role" },
+      { "title": "Topic 3", "speaker": "Speaker 3", "role": "Role" },
+      { "title": "Topic 4", "speaker": "Speaker 4", "role": "Role" }
+    ]
+  },
+  {
+    "tag": "Track 3",
+    "color": "#a855f7",
+    "desc": "Track details to be announced.",
+    "sessions": [
+      { "title": "Topic 1", "speaker": "Speaker 1", "role": "Role" },
+      { "title": "Topic 2", "speaker": "Speaker 2", "role": "Role" },
+      { "title": "Topic 3", "speaker": "Speaker 3", "role": "Role" },
+      { "title": "Topic 4", "speaker": "Speaker 4", "role": "Role" }
+    ]
+  }
+]

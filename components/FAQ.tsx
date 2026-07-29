@@ -18,10 +18,6 @@ const faqs = [
     a: "Yes. Flutter South India 2026 is a harassment-free conference. We follow the Namma Flutter Community Code of Conduct. All attendees, speakers, and volunteers are expected to uphold it.",
   },
   {
-    q: "Will sessions be recorded?",
-    a: "Yes! All track sessions will be recorded and uploaded to the Namma Flutter YouTube channel after the event. Speaker slides will also be published on this website post-conference.",
-  },
-  {
     q: "Can I apply to speak at the conference?",
     a: "Absolutely! We have a Call for Speakers open. Submit your proposal via the Apply to Speak link in the Speakers section. We welcome talks across all levels.",
   },

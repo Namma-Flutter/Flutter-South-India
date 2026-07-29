@@ -1,20 +1,20 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Zap, Users, Globe, Award } from "lucide-react";
+import { Zap, Users, Globe, Sparkles } from "lucide-react";
 
 const highlights = [
   { icon: Zap, title: "Expert Talks", desc: "Deep-dive sessions from Flutter engineers, GDEs, and industry leaders." },
   { icon: Users, title: "Community First", desc: "Built by the Namma Flutter community, for every Flutter developer." },
-  { icon: Globe, title: "3 Tracks", desc: "Beginner, Intermediate, and Advanced tracks running in parallel." },
-  { icon: Award, title: "Hands-On", desc: "Workshops, hackathons, hiring stalls, and a startup expo." },
+  { icon: Globe, title: "3 Tracks", desc: "Three parallel tracks running throughout the day." },
+  { icon: Sparkles, title: "Live Experiences", desc: "Hackathons, live demos, swag drops, and a startup expo — all in one day." },
 ];
 
 const fadeUp = (delay = 0) => ({
   initial: { opacity: 0, y: 32 },
   whileInView: { opacity: 1, y: 0 },
   viewport: { once: true, amount: 0.15 },
-  transition: { duration: 0.55, delay, ease: [0.22, 1, 0.36, 1] },
+  transition: { duration: 0.55, delay, ease: [0.22, 1, 0.36, 1] as const },
 });
 
 export default function About() {

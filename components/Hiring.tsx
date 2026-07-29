@@ -2,15 +2,12 @@
 
 import { motion } from "framer-motion";
 import { Briefcase, ArrowRight } from "lucide-react";
+import hiringData from "@/data/hiring.json";
 
-const companies = [
-  { name: "Zoho Corp", roles: ["Flutter Developer", "Mobile Lead", "Platform Engineer"], size: "10,000+" },
-  { name: "Freshworks", roles: ["Sr. Flutter Dev", "React Native Dev"], size: "5,000+" },
-  { name: "PhonePe", roles: ["Mobile Engineer", "Flutter Specialist"], size: "3,000+" },
-  { name: "Swiggy", roles: ["Android/Flutter Dev", "Tech Lead Mobile"], size: "6,000+" },
-  { name: "TCS Digital", roles: ["Flutter Developer", "Full-Stack Mobile"], size: "600,000+" },
-  { name: "Startup Hub", roles: ["Flutter Generalist", "Founding Engineer"], size: "Startup" },
-];
+interface Company { name: string; roles: string[]; size: string; }
+
+/* data/hiring.json holds placeholders until the confirmed hiring-partner list is available */
+const companies = hiringData as Company[];
 
 export default function Hiring() {
   return (
@@ -77,7 +74,7 @@ export default function Hiring() {
           viewport={{ once: true, amount: 0.5 }} transition={{ duration: 0.5, delay: 0.3 }}>
           <p className="text-[color:var(--foreground)]/40 text-sm">
             Are you a company looking to hire?{" "}
-            <a href="mailto:nammaflutter@gmail.com" className="text-[var(--flutter-cyan)] hover:underline">
+            <a href="#get-involved" className="text-[var(--flutter-cyan)] hover:underline">
               Reserve a hiring stall →
             </a>
           </p>

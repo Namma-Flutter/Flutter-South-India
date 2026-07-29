@@ -1,13 +1,12 @@
 "use client";
 
 import { motion } from "framer-motion";
+import sponsorsData from "@/data/sponsors.json";
 
-const tiers = [
-  { tier: "Title Sponsor", color: "#FFD700", sponsors: [{ name: "Innovate Corp", abbr: "IC" }] },
-  { tier: "Gold Sponsors", color: "#027DFD", sponsors: [{ name: "TechStream", abbr: "TS" }, { name: "DevHub India", abbr: "DH" }] },
-  { tier: "Silver Sponsors", color: "#94a3b8", sponsors: [{ name: "Flutter Labs", abbr: "FL" }, { name: "AppWorks", abbr: "AW" }, { name: "CloudStar", abbr: "CS" }] },
-  { tier: "Community Partners", color: "#13B9FD", sponsors: [{ name: "GDG Chennai", abbr: "GC" }, { name: "WTM Chennai", abbr: "WC" }, { name: "FOSS United", abbr: "FU" }, { name: "HasGeek", abbr: "HG" }] },
-];
+interface SponsorTier { tier: string; color: string; sponsors: { name: string; abbr: string }[]; }
+
+/* data/sponsors.json holds placeholders until the real sponsor list is confirmed */
+const tiers = sponsorsData as SponsorTier[];
 
 export default function Sponsors() {
   return (
@@ -49,8 +48,8 @@ export default function Sponsors() {
             transition={{ duration: 0.5, delay: 0.16 }}
           >
             Interested in sponsoring?{" "}
-            <a href="mailto:nammaflutter@gmail.com" className="text-[var(--flutter-cyan)] hover:underline">Contact us</a>{" "}
-            for sponsorship packages.
+            <a href="#get-involved" className="text-[var(--flutter-cyan)] hover:underline">See how to become a sponsor</a>{" "}
+            below.
           </motion.p>
         </div>
 
@@ -98,22 +97,6 @@ export default function Sponsors() {
             </motion.div>
           ))}
         </div>
-
-        <motion.div
-          className="mt-14 glass rounded-2xl p-8 border border-[var(--flutter-blue)]/20 text-center"
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 0.5, delay: 0.2 }}
-        >
-          <h3 className="text-[var(--foreground)] font-bold text-xl mb-2">Become a Sponsor</h3>
-          <p className="text-[color:var(--foreground)]/55 text-sm mb-6 max-w-md mx-auto">
-            Reach 500+ Flutter developers from South India. Get brand visibility, hiring access, and community goodwill.
-          </p>
-          <a href="mailto:nammaflutter@gmail.com" className="btn-glow px-6 py-3 rounded-full text-sm font-semibold inline-block">
-            Download Sponsorship Deck
-          </a>
-        </motion.div>
       </div>
     </section>
   );

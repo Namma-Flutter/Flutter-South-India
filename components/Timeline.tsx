@@ -1,17 +1,26 @@
 "use client";
 
 import { motion } from "framer-motion";
+import agendaData from "@/data/agenda.json";
 
-const events = [
-  { time: "8:00 AM", title: "Registration & Welcome Kit", desc: "Check-in, collect swag, and grab coffee. Get your badge and explore the venue." },
-  { time: "9:00 AM", title: "Opening Keynote", desc: "A grand welcome address and exciting announcements about the Flutter ecosystem." },
-  { time: "10:00 AM", title: "Track Sessions Begin", desc: "All three parallel tracks kick off — Beginner, Intermediate, and Advanced." },
-  { time: "1:00 PM", title: "Lunch & Networking", desc: "Connect with fellow developers over lunch. Visit hiring stalls and the startup expo." },
-  { time: "2:30 PM", title: "Workshops & Deep Dives", desc: "Hands-on workshops, live coding, and interactive sessions across all tracks." },
-  { time: "4:30 PM", title: "Lightning Talks", desc: "5-minute power talks from community members. Apply to present your side project!" },
-  { time: "5:30 PM", title: "Games & Activities", desc: "Flutter quiz, trivia, and fun activities with exciting prizes." },
-  { time: "6:30 PM", title: "Closing Ceremony", desc: "Awards, recognition, speaker gifts, and the big announcement for next year." },
-];
+type SlotType = "plenary" | "track" | "break" | "panel" | "closing";
+interface AgendaSlot {
+  time: string;
+  title: string;
+  type: SlotType;
+  person?: string;
+  tracks?: { t1: string; t2: string; t3: string };
+}
+
+/* Derived directly from data/agenda.json so the journey view and the detailed
+   agenda table can never drift out of sync with each other. */
+const events = (agendaData as AgendaSlot[]).map((slot) => ({
+  time: slot.time,
+  title: slot.type === "track" ? "Track Sessions" : slot.title,
+  desc: slot.type === "track"
+    ? "Parallel sessions across Track 1, Track 2, and Track 3."
+    : slot.person ?? "",
+}));
 
 export default function Timeline() {
   return (

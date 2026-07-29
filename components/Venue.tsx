@@ -32,7 +32,7 @@ export default function Venue() {
           <motion.p className="text-[color:var(--foreground)]/55 max-w-2xl mx-auto text-xs sm:text-sm leading-relaxed"
             initial={{ opacity: 0 }} whileInView={{ opacity: 1 }}
             viewport={{ once: true, amount: 0.3 }} transition={{ duration: 0.5, delay: 0.16 }}>
-            One of India's most prestigious institutions — Loyola College hosts our grand conference
+            One of India&rsquo;s most prestigious institutions — Loyola College hosts our grand conference
             in its state-of-the-art auditorium and seminar halls in the heart of Chennai.
           </motion.p>
         </div>

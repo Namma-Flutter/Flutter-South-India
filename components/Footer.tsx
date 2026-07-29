@@ -43,7 +43,7 @@ export default function Footer() {
             <span className="gradient-text">Flutter South India?</span>
           </h2>
           <p className="text-[color:var(--foreground)]/55 text-sm sm:text-base mb-7 sm:mb-8 max-w-2xl mx-auto leading-relaxed">
-            Secure your spot at South India's largest Flutter conference.
+            Secure your spot at South India&rsquo;s largest Flutter conference.
             Early-bird tickets are selling fast.
           </p>
           <a
@@ -72,7 +72,7 @@ export default function Footer() {
               </div>
             </div>
             <p className="text-[color:var(--foreground)]/40 text-xs leading-relaxed mb-4">
-              South India's premier Flutter developer conference. Organised by the Namma Flutter community, Chennai.
+              South India&rsquo;s premier Flutter developer conference. Organised by the Namma Flutter community, Chennai.
             </p>
             <a
               href="mailto:nammaflutter@gmail.com"
@@ -139,7 +139,7 @@ export default function Footer() {
         <div className="border-t border-[var(--card-border)] pt-8 flex flex-col md:flex-row items-center justify-between gap-4 text-[color:var(--foreground)]/25 text-xs">
           <p>© 2026 Namma Flutter. All rights reserved.</p>
           <p>
-            Built with ❤️ by the Flutter South India team ·{" "}
+            Built with ❤️ by the Namma Flutter team ·{" "}
             <span className="gradient-text font-semibold">Flutter South India 2026</span>
           </p>
         </div>

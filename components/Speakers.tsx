@@ -1,53 +1,23 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ExternalLink } from "lucide-react";
+import { ExternalLink, FileText } from "lucide-react";
+import speakersData from "@/data/speakers.json";
 
 interface Speaker {
   name: string;
   role: string;
+  topic: string;
   bio: string;
   initials: string;
   color: string;
   track: string;
   profileUrl: string;
+  pdfUrl: string;
 }
 
-const speakers: Speaker[] = [
-  {
-    name: "Speaker 1",
-    role: "Flutter GDE · Google",
-    track: "Beginner",
-    initials: "S1",
-    color: "#22c55e",
-    bio: "Google Developer Expert in Flutter. Expert in building production-grade Flutter applications and community education.",
-    profileUrl: "#",
-  },
-  {
-    name: "Speaker 2",
-    role: "Tech Lead · Industry",
-    track: "Intermediate",
-    initials: "S2",
-    color: "#027DFD",
-    bio: "Clean Architecture advocate. Building scalable Flutter solutions for millions of users. Speaker at multiple Flutter events.",
-    profileUrl: "#",
-  },
-  {
-    name: "Speaker 3",
-    role: "Flutter Team · Google",
-    track: "Advanced",
-    initials: "S3",
-    color: "#a855f7",
-    bio: "Core contributor to the Flutter engine. Speaker at Flutter Forward and Google I/O. Expert in rendering and performance.",
-    profileUrl: "#",
-  },
-];
-
-const trackColor: Record<string, string> = {
-  Beginner:     "#22c55e",
-  Intermediate: "#027DFD",
-  Advanced:     "#a855f7",
-};
+/* Speaker line-up is being confirmed — data/speakers.json holds placeholders until announced */
+const speakers = speakersData as Speaker[];
 
 export default function Speakers() {
   return (
@@ -100,20 +70,31 @@ export default function Speakers() {
               {/* Track badge */}
               <span
                 className="text-[9px] sm:text-[10px] font-bold px-2.5 sm:px-3 py-1 rounded-full mb-3 sm:mb-4"
-                style={{ background: `${trackColor[speaker.track]}18`, color: trackColor[speaker.track] }}
+                style={{ background: `${speaker.color}18`, color: speaker.color }}
               >
-                {speaker.track} Track
+                {speaker.track}
               </span>
 
               <h3 className="text-[var(--foreground)] font-black text-lg sm:text-xl mb-1">{speaker.name}</h3>
               <p className="text-[var(--flutter-cyan)] text-[10px] sm:text-xs mb-3 sm:mb-4 font-semibold">{speaker.role}</p>
+
+              <p className="text-[color:var(--foreground)]/70 text-xs sm:text-sm font-semibold leading-snug mb-2">
+                {speaker.topic}
+              </p>
               <p className="text-[color:var(--foreground)]/45 text-[10px] sm:text-xs leading-relaxed flex-1">{speaker.bio}</p>
 
-              <a href={speaker.profileUrl}
-                className="mt-5 pt-4 border-t border-[var(--card-border)] w-full flex items-center justify-center gap-1.5 text-[color:var(--foreground)]/35 hover:text-[var(--flutter-cyan)] text-xs transition-colors">
-                <ExternalLink size={11} />
-                View Profile
-              </a>
+              <div className="mt-5 pt-4 border-t border-[var(--card-border)] w-full flex items-center justify-center gap-4">
+                <a href={speaker.profileUrl}
+                  className="flex items-center gap-1.5 text-[color:var(--foreground)]/35 hover:text-[var(--flutter-cyan)] text-xs transition-colors">
+                  <ExternalLink size={11} />
+                  Profile
+                </a>
+                <a href={speaker.pdfUrl}
+                  className="flex items-center gap-1.5 text-[color:var(--foreground)]/35 hover:text-[var(--flutter-cyan)] text-xs transition-colors">
+                  <FileText size={11} />
+                  Details PDF
+                </a>
+              </div>
             </motion.div>
           ))}
         </div>
@@ -123,7 +104,7 @@ export default function Speakers() {
           viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.4 }}>
           <p className="text-[color:var(--foreground)]/40 text-sm">
             More speakers being announced soon —{" "}
-            <a href="mailto:nammaflutter@gmail.com" className="text-[var(--flutter-cyan)] hover:underline">apply to speak</a>
+            <a href="#get-involved" className="text-[var(--flutter-cyan)] hover:underline">apply to speak</a>
           </p>
         </motion.div>
       </div>

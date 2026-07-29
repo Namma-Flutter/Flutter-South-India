@@ -9,7 +9,7 @@ import Speakers from "@/components/Speakers";
 import Stalls from "@/components/Stalls";
 import Sponsors from "@/components/Sponsors";
 import Hiring from "@/components/Hiring";
-import Volunteers from "@/components/Volunteers";
+import GetInvolved from "@/components/GetInvolved";
 import Venue from "@/components/Venue";
 import FAQ from "@/components/FAQ";
 import Footer from "@/components/Footer";
@@ -30,7 +30,7 @@ export default function Home() {
       <Stalls />
       <Sponsors />
       <Hiring />
-      <Volunteers />
+      <GetInvolved />
       <Venue />
       <FAQ />
       <Footer />

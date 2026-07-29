@@ -1,7 +1,8 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ExternalLink, Store } from "lucide-react";
+import { Store, Gamepad2 } from "lucide-react";
+import stallsData from "@/data/stalls.json";
 
 interface Stall {
   name: string;
@@ -9,18 +10,12 @@ interface Stall {
   desc: string;
   url: string;
   color: string;
+  type: "exhibitor" | "games";
 }
 
-const stalls: Stall[] = [
-  { name: "Google Developer Groups", category: "Community", desc: "The official GDG stall — connect with local chapters, learn about programs, and pick up goodies.", url: "https://gdg.community.dev", color: "#027DFD" },
-  { name: "FlutterFlow", category: "Dev Tools", desc: "Build Flutter apps visually. See live demos and get hands-on with no-code + code hybrid development.", url: "https://flutterflow.io", color: "#13B9FD" },
-  { name: "Namma Flutter Community", category: "Community", desc: "The host community — learn how to get involved, contribute, and attend monthly meetups.", url: "https://nammaflutter.dev", color: "#22c55e" },
-  { name: "Shorebird", category: "Dev Tools", desc: "Code-push for Flutter. Update your app in production without going through the app store.", url: "https://shorebird.dev", color: "#a855f7" },
-  { name: "Serverpod", category: "Backend", desc: "The open-source backend framework built for Flutter. See full-stack Dart in action.", url: "https://serverpod.dev", color: "#f59e0b" },
-  { name: "Invertase", category: "Open Source", desc: "Maintainers of FlutterFire and Zapp. Meet the team and discover their Flutter tooling ecosystem.", url: "https://invertase.io", color: "#027DFD" },
-  { name: "LeanCode", category: "Agency", desc: "Flutter consultancy working on enterprise-scale apps. Explore career opportunities and see case studies.", url: "https://leancode.co", color: "#13B9FD" },
-  { name: "Codemagic CI/CD", category: "Dev Tools", desc: "The fastest CI/CD built for Flutter. Set up automated pipelines and ship apps faster.", url: "https://codemagic.io", color: "#22c55e" },
-];
+/* Exhibitor line-up is being finalised — data/stalls.json holds placeholders until confirmed */
+const stalls = stallsData as Stall[];
+const iconForType = { exhibitor: Store, games: Gamepad2 } as const;
 
 export default function Stalls() {
   return (
@@ -49,44 +44,36 @@ export default function Stalls() {
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
-          {stalls.map((stall, i) => (
-            <motion.a
-              key={stall.name}
-              href={stall.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              initial={{ opacity: 0, y: 32 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.1 }}
-              transition={{ duration: 0.5, delay: i * 0.07, ease: [0.22, 1, 0.36, 1] }}
-              className="glass rounded-2xl p-5 border border-[var(--card-border)] flex flex-col gap-3 group hover:border-[var(--flutter-blue)]/30 hover:-translate-y-1 transition-all duration-300 cursor-pointer"
-            >
-              <div className="flex items-start justify-between">
+          {stalls.map((stall, i) => {
+            const Icon = iconForType[stall.type];
+            return (
+              <motion.div
+                key={stall.name}
+                initial={{ opacity: 0, y: 32 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.1 }}
+                transition={{ duration: 0.5, delay: i * 0.07, ease: [0.22, 1, 0.36, 1] }}
+                className="glass rounded-2xl p-5 border border-[var(--card-border)] flex flex-col gap-3 group hover:border-[var(--flutter-blue)]/30 hover:-translate-y-1 transition-all duration-300"
+              >
                 <div className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0"
                   style={{ background: `${stall.color}18`, border: `1px solid ${stall.color}30` }}>
-                  <Store size={18} style={{ color: stall.color }} />
+                  <Icon size={18} style={{ color: stall.color }} />
                 </div>
-                <ExternalLink size={13} className="text-[color:var(--foreground)]/20 group-hover:text-[var(--flutter-cyan)] transition-colors mt-1" />
-              </div>
 
-              <div>
-                <span className="text-[10px] font-bold px-2 py-0.5 rounded-full"
-                  style={{ background: `${stall.color}15`, color: stall.color }}>
-                  {stall.category}
-                </span>
-              </div>
+                <div>
+                  <span className="text-[10px] font-bold px-2 py-0.5 rounded-full"
+                    style={{ background: `${stall.color}15`, color: stall.color }}>
+                    {stall.category}
+                  </span>
+                </div>
 
-              <div>
-                {/* Use flutter-blue on hover (works in both modes), not text-white */}
-                <h3 className="text-[var(--foreground)] font-bold text-sm mb-1 group-hover:text-[var(--flutter-cyan)] transition-colors">{stall.name}</h3>
-                <p className="text-[color:var(--foreground)]/45 text-xs leading-relaxed">{stall.desc}</p>
-              </div>
-
-              <div className="mt-auto pt-2 border-t border-[var(--card-border)] flex items-center gap-1.5">
-                <span className="text-[10px] text-[var(--flutter-cyan)] font-medium truncate">{stall.url.replace("https://", "")}</span>
-              </div>
-            </motion.a>
-          ))}
+                <div>
+                  <h3 className="text-[var(--foreground)] font-bold text-sm mb-1 group-hover:text-[var(--flutter-cyan)] transition-colors">{stall.name}</h3>
+                  <p className="text-[color:var(--foreground)]/45 text-xs leading-relaxed">{stall.desc}</p>
+                </div>
+              </motion.div>
+            );
+          })}
         </div>
 
         <motion.div className="text-center mt-10"
@@ -94,7 +81,7 @@ export default function Stalls() {
           viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.3 }}>
           <p className="text-[color:var(--foreground)]/40 text-sm">
             Want an exhibition stall?{" "}
-            <a href="mailto:nammaflutter@gmail.com" className="text-[var(--flutter-cyan)] hover:underline">Contact us to apply</a>
+            <a href="#get-involved" className="text-[var(--flutter-cyan)] hover:underline">Apply below</a>
           </p>
         </motion.div>
       </div>

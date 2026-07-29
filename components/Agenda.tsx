@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { Clock, Users, Mic2, Coffee, Award } from "lucide-react";
+import agendaData from "@/data/agenda.json";
 
 type SlotType = "plenary" | "track" | "break" | "panel" | "closing";
 
@@ -13,38 +14,7 @@ interface AgendaSlot {
   tracks?: { t1: string; t2: string; t3: string };
 }
 
-const agenda: AgendaSlot[] = [
-  { time: "08:30 – 10:00", title: "Registration & Welcome Desk", type: "plenary", person: "Volunteers Team" },
-  { time: "10:00 – 10:30", title: "Welcome Note, Community Introduction & Opening Ceremony", type: "plenary", person: "Organising Committee" },
-  { time: "10:30 – 10:45", title: "Sponsor Talk", type: "plenary", person: "Title Sponsor" },
-  {
-    time: "11:00 – 11:30", title: "Session Block 1", type: "track",
-    tracks: { t1: "Beginner Track", t2: "Intermediate Track", t3: "Advanced Track" },
-  },
-  {
-    time: "11:35 – 12:05", title: "Session Block 2", type: "track",
-    tracks: { t1: "Beginner Track", t2: "Intermediate Track", t3: "Advanced Track" },
-  },
-  {
-    time: "12:10 – 12:40", title: "Session Block 3", type: "track",
-    tracks: { t1: "Beginner Track", t2: "Intermediate Track", t3: "Advanced Track" },
-  },
-  {
-    time: "12:45 – 01:15", title: "Session Block 4", type: "track",
-    tracks: { t1: "Beginner Track", t2: "Intermediate Track", t3: "Advanced Track" },
-  },
-  { time: "01:20 – 02:25", title: "Lunch Break", type: "break", person: "All Attendees" },
-  {
-    time: "02:30 – 03:00", title: "Session Block 5", type: "track",
-    tracks: { t1: "Beginner Track", t2: "Intermediate Track", t3: "Advanced Track" },
-  },
-  {
-    time: "03:05 – 03:35", title: "Session Block 6", type: "track",
-    tracks: { t1: "Beginner Track", t2: "Intermediate Track", t3: "Advanced Track" },
-  },
-  { time: "03:45 – 04:30", title: "Panel Discussion", type: "panel", person: "Main Auditorium · 4–5 Panellists" },
-  { time: "04:30 – 05:30", title: "Closing Ceremony & Group Photos", type: "closing", person: "All Attendees" },
-];
+const agenda = agendaData as AgendaSlot[];
 
 const typeConfig: Record<SlotType, { color: string; bg: string; icon: typeof Clock }> = {
   plenary:  { color: "#027DFD", bg: "rgba(2,125,253,0.10)",  icon: Mic2    },
@@ -55,7 +25,7 @@ const typeConfig: Record<SlotType, { color: string; bg: string; icon: typeof Clo
 };
 
 const trackColors = ["#027DFD", "#13B9FD", "#a855f7"] as const;
-const trackLabels = ["Track 1 · Beginner", "Track 2 · Intermediate", "Track 3 · Advanced"];
+const trackLabels = ["Track 1", "Track 2", "Track 3"];
 
 export default function Agenda() {
   return (

@@ -4,12 +4,12 @@ import { motion, useInView } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
 
 const stats = [
-  { value: 500, suffix: "+", label: "Attendees Expected" },
-  { value: 30, suffix: "+", label: "Expert Speakers" },
+  { value: 400, suffix: "+", label: "Attendees Expected" },
+  { value: 25, suffix: "+", label: "Expert Speakers" },
   { value: 3, suffix: "", label: "Parallel Tracks" },
-  { value: 20, suffix: "+", label: "Sponsors & Partners" },
-  { value: 1000, suffix: "+", label: "Community Members" },
-  { value: 8, suffix: "+", label: "Workshops" },
+  { value: 10, suffix: "+", label: "Sponsors & Partners" },
+  { value: 10, suffix: "+", label: "Community Members" },
+  { value: 5, suffix: "+", label: "Lightning Talks" },
 ];
 
 function Counter({ target, suffix }: { target: number; suffix: string }) {
@@ -40,7 +40,7 @@ const fadeUp = (delay = 0) => ({
   initial: { opacity: 0, scale: 0.92 },
   whileInView: { opacity: 1, scale: 1 },
   viewport: { once: true, amount: 0.2 },
-  transition: { duration: 0.45, delay, ease: [0.22, 1, 0.36, 1] },
+  transition: { duration: 0.45, delay, ease: [0.22, 1, 0.36, 1] as const },
 });
 
 export default function Stats() {

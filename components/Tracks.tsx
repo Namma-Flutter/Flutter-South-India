@@ -2,48 +2,14 @@
 
 import { motion } from "framer-motion";
 import { Sparkles, Layers, Cpu } from "lucide-react";
+import tracksData from "@/data/tracks.json";
 
-const tracks = [
-  {
-    icon: Sparkles,
-    level: "Beginner",
-    color: "#22c55e",
-    tag: "Track 1",
-    desc: "Perfect for those new to Flutter or mobile development. Build your foundation.",
-    sessions: [
-      { title: "Getting Started with Flutter & Dart", speaker: "Priya Anand", role: "GDE Flutter" },
-      { title: "Building Your First App from Scratch", speaker: "Rahul Kumar", role: "Flutter Developer" },
-      { title: "Flutter Widgets: The Complete Guide", speaker: "Meena Suresh", role: "Senior Dev" },
-      { title: "State Management for Beginners", speaker: "Arjun Nair", role: "Mobile Lead" },
-    ],
-  },
-  {
-    icon: Layers,
-    level: "Intermediate",
-    color: "#027DFD",
-    tag: "Track 2",
-    desc: "Elevate your skills with architecture, performance, and real-world patterns.",
-    sessions: [
-      { title: "Clean Architecture in Flutter", speaker: "Karthik Raj", role: "Tech Lead" },
-      { title: "Riverpod 3.0: State Management Mastery", speaker: "Divya Krishnan", role: "GDE Flutter" },
-      { title: "Flutter + Firebase: Real-time Apps", speaker: "Sanjay Iyer", role: "Cloud Architect" },
-      { title: "Testing Strategies for Production Apps", speaker: "Lakshmi Balan", role: "QA Lead" },
-    ],
-  },
-  {
-    icon: Cpu,
-    level: "Advanced",
-    color: "#a855f7",
-    tag: "Track 3",
-    desc: "Deep dives into internals, platform channels, rendering, and cutting-edge topics.",
-    sessions: [
-      { title: "Flutter Engine Internals & Rendering", speaker: "Vikram Sood", role: "Flutter Team" },
-      { title: "Platform Channels & Native Interop", speaker: "Ananya Patel", role: "Platform Lead" },
-      { title: "Impeller: GPU-Accelerated Rendering", speaker: "Rohan Mehta", role: "Graphics Eng" },
-      { title: "Building Flutter DevTools Extensions", speaker: "Saanvi Rao", role: "DevTools Eng" },
-    ],
-  },
-];
+interface Session { title: string; speaker: string; role: string; }
+interface TrackInfo { tag: string; color: string; desc: string; sessions: Session[]; }
+
+/* Icons assigned by position — track topics/levels aren't finalised yet, so we don't label them by skill */
+const trackIcons = [Sparkles, Layers, Cpu];
+const tracks = (tracksData as TrackInfo[]).map((t, i) => ({ ...t, icon: trackIcons[i] ?? Sparkles }));
 
 export default function Tracks() {
   return (
@@ -84,14 +50,14 @@ export default function Tracks() {
             viewport={{ once: true, amount: 0.3 }}
             transition={{ duration: 0.5, delay: 0.16 }}
           >
-            Something for every level — from your first Flutter app to advanced engine internals.
+            Three parallel tracks running throughout the day — full lineup announced soon.
           </motion.p>
         </div>
 
         <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-6">
           {tracks.map((track, i) => (
             <motion.div
-              key={track.level}
+              key={track.tag}
               initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.1 }}
@@ -102,15 +68,12 @@ export default function Tracks() {
               {/* Track header */}
               <div className="p-6 border-b border-[var(--card-border)]">
                 <div className="flex items-center justify-between mb-4">
-                  <span
-                    className="text-xs font-bold px-3 py-1 rounded-full"
-                    style={{ background: `${track.color}20`, color: track.color }}
-                  >
-                    {track.tag}
-                  </span>
-                  <track.icon size={18} style={{ color: track.color }} />
+                  <div className="w-10 h-10 rounded-xl flex items-center justify-center"
+                    style={{ background: `${track.color}18` }}>
+                    <track.icon size={18} style={{ color: track.color }} />
+                  </div>
                 </div>
-                <h3 className="text-[var(--foreground)] font-black text-2xl mb-2">{track.level}</h3>
+                <h3 className="text-[var(--foreground)] font-black text-2xl mb-2">{track.tag}</h3>
                 <p className="text-[color:var(--foreground)]/55 text-sm leading-relaxed">{track.desc}</p>
               </div>
 

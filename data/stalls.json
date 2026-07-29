@@ -1,0 +1,10 @@
+[
+  { "name": "Stall 1", "category": "Exhibitor", "desc": "Details to be announced. Visit this stall at the conference to explore what they're building.", "url": "#", "color": "#027DFD", "type": "exhibitor" },
+  { "name": "Stall 2", "category": "Exhibitor", "desc": "Details to be announced. Visit this stall at the conference to explore what they're building.", "url": "#", "color": "#13B9FD", "type": "exhibitor" },
+  { "name": "Stall 3", "category": "Exhibitor", "desc": "Details to be announced. Visit this stall at the conference to explore what they're building.", "url": "#", "color": "#22c55e", "type": "exhibitor" },
+  { "name": "Stall 4", "category": "Exhibitor", "desc": "Details to be announced. Visit this stall at the conference to explore what they're building.", "url": "#", "color": "#a855f7", "type": "exhibitor" },
+  { "name": "Stall 5", "category": "Exhibitor", "desc": "Details to be announced. Visit this stall at the conference to explore what they're building.", "url": "#", "color": "#f59e0b", "type": "exhibitor" },
+  { "name": "Stall 6", "category": "Exhibitor", "desc": "Details to be announced. Visit this stall at the conference to explore what they're building.", "url": "#", "color": "#027DFD", "type": "exhibitor" },
+  { "name": "Stall 7", "category": "Exhibitor", "desc": "Details to be announced. Visit this stall at the conference to explore what they're building.", "url": "#", "color": "#13B9FD", "type": "exhibitor" },
+  { "name": "Flutter Games Zone", "category": "Activity", "desc": "Widget Bingo, quick quiz rounds, and mini challenges — drop by and play between sessions.", "url": "#", "color": "#22c55e", "type": "games" }
+]

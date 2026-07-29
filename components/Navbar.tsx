@@ -103,8 +103,6 @@ export default function Navbar() {
             : "bg-gradient-to-b from-[var(--background)]/80 via-[var(--background)]/30 to-transparent backdrop-blur-[6px] py-3.5"
         )}
       >
-        {/* //max-w-7xl mx-auto px-4 sm:px-5 lg:px-8 */}
-
         <div className="mx-auto px-4 sm:px-5 lg:px-8 flex items-center justify-between gap-4">
 
           {/* ── Logo ── */}
@@ -212,7 +210,6 @@ export default function Navbar() {
                 whileHover={{ scale: 1.04 }}
                 whileTap={{ scale: 0.97 }}
                 transition={{ type: "spring", stiffness: 400, damping: 18 }}
-                // className="relative flex items-center gap-1.5 px-4 sm:px-5 py-2 sm:py-2.5 rounded-lg sm:rounded-xl text-xs sm:text-sm font-black text-white overflow-hidden cursor-pointer select-none"
                 className="relative inline-flex items-center justify-center gap-2 px-5 sm:px-6 py-2.5 sm:py-3 rounded-xl text-sm font-bold text-white overflow-hidden cursor-pointer select-none whitespace-nowrap"
                 style={{
                   background: "linear-gradient(135deg, var(--flutter-blue) 0%, var(--flutter-cyan) 100%)",
@@ -223,7 +220,6 @@ export default function Navbar() {
                 <Ticket size={16} className="flex-shrink-0" />
                 <span>Get Tickets</span>
                 <motion.span
-
                   animate={{ x: [0, 3, 0] }}
                   transition={{ duration: 1.6, repeat: Infinity, ease: "easeInOut" }}
                 >
