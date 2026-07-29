@@ -210,20 +210,20 @@ export default function Navbar() {
                 whileHover={{ scale: 1.04 }}
                 whileTap={{ scale: 0.97 }}
                 transition={{ type: "spring", stiffness: 400, damping: 18 }}
-                className="relative flex items-center gap-2 px-5 py-2.5 rounded-xl text-[13px] font-black text-white overflow-hidden cursor-pointer select-none"
+                className="relative flex items-center gap-1.5 px-4 sm:px-5 py-2 sm:py-2.5 rounded-lg sm:rounded-xl text-xs sm:text-sm font-black text-white overflow-hidden cursor-pointer select-none"
                 style={{
                   background: "linear-gradient(135deg, var(--flutter-blue) 0%, var(--flutter-cyan) 100%)",
-                  boxShadow: "0 0 22px rgba(2,125,253,0.45), 0 2px 8px rgba(0,0,0,0.2), inset 0 1px 0 rgba(255,255,255,0.2)",
-                  border: "1.5px solid rgba(19,185,253,0.5)",
+                  boxShadow: "0 0 20px rgba(2,125,253,0.4), 0 2px 6px rgba(0,0,0,0.15), inset 0 1px 0 rgba(255,255,255,0.15)",
+                  border: "1.5px solid rgba(19,185,253,0.4)",
                 }}
               >
-                <Ticket size={13} className="flex-shrink-0" />
+                <Ticket size={14} className="flex-shrink-0" />
                 <span>Get Tickets</span>
                 <motion.span
-                  animate={{ x: [0, 3, 0] }}
+                  animate={{ x: [0, 2, 0] }}
                   transition={{ duration: 1.6, repeat: Infinity, ease: "easeInOut" }}
                 >
-                  <ArrowRight size={12} />
+                  <ArrowRight size={13} />
                 </motion.span>
                 {/* Shimmer sweep on hover */}
                 <span
@@ -334,14 +334,14 @@ export default function Navbar() {
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={() => setOpen(false)}
-                  className="flex items-center justify-center gap-2 w-full py-3.5 rounded-xl text-sm font-black text-white"
+                  className="flex items-center justify-center gap-2 w-full px-4 py-3 sm:py-3.5 rounded-lg sm:rounded-xl text-xs sm:text-sm font-black text-white transition-all hover:scale-[1.02]"
                   style={{
                     background: "linear-gradient(135deg, var(--flutter-blue), var(--flutter-cyan))",
-                    boxShadow: "0 0 20px rgba(2,125,253,0.35), inset 0 1px 0 rgba(255,255,255,0.18)",
+                    boxShadow: "0 0 18px rgba(2,125,253,0.3), inset 0 1px 0 rgba(255,255,255,0.15)",
                     border: "1.5px solid rgba(19,185,253,0.4)",
                   }}
                 >
-                  <Ticket size={14} />
+                  <Ticket size={14} className="flex-shrink-0" />
                   Get Tickets
                 </a>
                 <button
