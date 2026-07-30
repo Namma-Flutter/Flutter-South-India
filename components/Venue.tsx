@@ -9,7 +9,7 @@ const logistics = [
   { icon: Clock, title: "Doors Open", desc: "Registration begins at 8:00 AM. Please arrive early for smooth check-in." },
 ];
 
-const facilities = ["Main Auditorium (800 seats)", "3 Seminar Halls", "High-speed Wi-Fi", "Ample Parking", "Food Court", "Prayer Room"];
+const facilities = ["Main Auditorium (400+ seats)", "3 Seminar Halls", "Parking"];
 
 export default function Venue() {
   return (
