@@ -1,0 +1,49 @@
+.intro {
+  max-width: 44rem;
+}
+
+.center {
+  margin-inline: auto;
+  text-align: center;
+}
+
+.center :global(.eyebrow)::before {
+  display: none;
+}
+
+.title {
+  margin-top: 1.15rem;
+  color: var(--color-ink);
+  font-family: var(--font-display), sans-serif;
+  font-size: var(--step-3);
+  font-weight: 650;
+  letter-spacing: -0.055em;
+  line-height: 0.98;
+  text-wrap: balance;
+}
+
+.copy {
+  max-width: 39rem;
+  margin-top: 1.35rem;
+  color: var(--color-ink-soft);
+  font-size: var(--step-0);
+  line-height: 1.68;
+  text-wrap: pretty;
+}
+
+.center .copy {
+  margin-inline: auto;
+}
+
+.inverse .title {
+  color: var(--color-white);
+}
+
+.inverse .copy {
+  color: rgba(255, 253, 248, 0.66);
+}
+
+.inverse :global(.eyebrow) {
+  color: var(--color-cyan);
+}
+

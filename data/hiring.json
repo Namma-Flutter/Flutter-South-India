@@ -1,8 +1,0 @@
-[
-  { "name": "Company 1", "roles": ["Flutter Developer", "Mobile Lead", "Platform Engineer"], "size": "1,000+" },
-  { "name": "Company 2", "roles": ["Sr. Flutter Dev", "React Native Dev"], "size": "1,000+" },
-  { "name": "Company 3", "roles": ["Mobile Engineer", "Flutter Specialist"], "size": "1,000+" },
-  { "name": "Company 4", "roles": ["Android/Flutter Dev", "Tech Lead Mobile"], "size": "1,000+" },
-  { "name": "Company 5", "roles": ["Flutter Developer", "Full-Stack Mobile"], "size": "1,000+" },
-  { "name": "Company 6", "roles": ["Flutter Generalist", "Founding Engineer"], "size": "Startup" }
-]
