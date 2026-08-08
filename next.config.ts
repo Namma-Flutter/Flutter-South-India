@@ -8,6 +8,9 @@ const isGithubPagesBuild = process.env.GITHUB_PAGES === "true";
 const nextConfig: NextConfig = {
   output: "export",
   trailingSlash: true,
+  turbopack: {
+    root: process.cwd(),
+  },
   images: { unoptimized: true },
   ...(isGithubPagesBuild
     ? { basePath: repoBasePath, assetPrefix: repoBasePath }

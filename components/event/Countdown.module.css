@@ -1,0 +1,51 @@
+.countdown {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  border-top: 1px solid var(--color-line-light);
+}
+
+.unit {
+  display: grid;
+  gap: 0.2rem;
+  padding: 1rem 0.6rem 0.8rem;
+  perspective: 12rem;
+}
+
+.unit + .unit {
+  border-left: 1px solid var(--color-line-light);
+}
+
+.value {
+  color: var(--color-white);
+  font-family: var(--font-display), sans-serif;
+  font-size: clamp(1.45rem, 3vw, 2.2rem);
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
+  letter-spacing: -0.05em;
+  line-height: 1;
+}
+
+.tick {
+  transform-origin: center 70%;
+  animation: second-spin 360ms var(--ease-out);
+}
+
+.label {
+  color: var(--color-on-dark-subtle);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+@keyframes second-spin {
+  0% {
+    opacity: 0.15;
+    transform: rotateX(-82deg) translateY(-0.22rem);
+  }
+
+  100% {
+    opacity: 1;
+    transform: rotateX(0deg) translateY(0);
+  }
+}

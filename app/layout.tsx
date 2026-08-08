@@ -1,24 +1,43 @@
 import type { Metadata } from "next";
-import { Geist } from "next/font/google";
+import { Bricolage_Grotesque, Instrument_Sans } from "next/font/google";
 import "./globals.css";
-import SmoothScroll from "@/components/SmoothScroll";
-import ThemeProvider from "@/components/ThemeProvider";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const display = Bricolage_Grotesque({
+  variable: "--font-bricolage",
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700", "800", "900"],
+  display: "swap",
+});
+
+const body = Instrument_Sans({
+  variable: "--font-instrument",
+  subsets: ["latin"],
+  display: "swap",
 });
 
 export const metadata: Metadata = {
-  title: "Flutter South India 2026 | Namma Flutter",
+  metadataBase: new URL("https://nammaflutter.com"),
+  title: "Flutter South India 2026 | Chennai",
   description:
-    "The premier Flutter developer conference in South India. October 10, 2026 · Loyola College, Chennai. Join us for expert talks, 3 tracks, community networking and more.",
-  keywords: ["Flutter", "South India", "Conference", "Chennai", "Dart", "Mobile Development", "2026", "Namma Flutter"],
+    "A community-led day for Flutter and Dart developers, happening 10 October 2026 at Loyola College, Chennai.",
+  keywords: [
+    "Flutter conference",
+    "Dart",
+    "Chennai",
+    "South India",
+    "Namma Flutter",
+  ],
   openGraph: {
-    title: "Flutter South India 2026 | Namma Flutter",
-    description: "The premier Flutter developer conference in South India. October 10, 2026 · Loyola College, Chennai.",
+    title: "Flutter South India 2026 | Chennai",
+    description:
+      "One community-led day for Flutter and Dart developers in South India.",
     type: "website",
+    locale: "en_IN",
+  },
+  twitter: {
+    card: "summary",
+    title: "Flutter South India 2026 | Chennai",
+    description:
+      "One community-led day for Flutter and Dart developers in South India.",
   },
 };
 
@@ -26,12 +45,8 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={`${geistSans.variable} antialiased`} suppressHydrationWarning>
-      <body className="min-h-screen bg-[var(--background)] text-[var(--foreground)] overflow-x-hidden">
-        <ThemeProvider>
-          <SmoothScroll>{children}</SmoothScroll>
-        </ThemeProvider>
-      </body>
+    <html lang="en" className={`${display.variable} ${body.variable}`}>
+      <body>{children}</body>
     </html>
   );
 }

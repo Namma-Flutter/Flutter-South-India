@@ -1,0 +1,35 @@
+import { contact } from "./shared";
+
+export const faqItems = [
+  {
+    question: "Who is the day for?",
+    answer:
+      "Flutter South India is for people learning, using, teaching, or leading with Flutter and Dart. Students, independent developers, product teams, founders, and experienced engineers are all welcome.",
+  },
+  {
+    question: "When will tickets be available?",
+    answer:
+      "Ticket details will be shared by Namma Flutter as soon as registration opens. Use the ticket-updates link and we will make sure you hear about it.",
+  },
+  {
+    question: "Is the speaker line-up final?",
+    answer:
+      "Not yet. The programme is being curated now. Confirmed speakers and detailed session timings will replace the speaker placeholders once they are ready.",
+  },
+  {
+    question: "Can my company sponsor, exhibit, or hire at the event?",
+    answer:
+      "Yes. We are planning a small number of useful partner, product, and hiring spaces. Email the team through the partnership link to discuss the right format.",
+  },
+  {
+    question: "Will the venue be accessible?",
+    answer:
+      `Accessible routes will be part of the venue plan. If you have a specific access requirement, email ${contact} before the event so the team can support you properly.`,
+  },
+  {
+    question: "Where can I follow Namma Flutter?",
+    answer:
+      "Namma Flutter runs community meetups in Chennai throughout the year. Find the community on LinkedIn, Instagram, X, YouTube, GitHub, and Meetup using the links below.",
+  },
+] as const;
+
