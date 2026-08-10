@@ -23,4 +23,4 @@ styles/             Shared design-system styles
 public/             Static assets
 ```
 
-`app/page.tsx` renders the main event experience through `EventPage`. Content is kept separate in `data/event`, while each event section owns its component and scoped styles. `next.config.ts` produces a static export and applies the GitHub Pages base path during deployment builds.
+`app/page.tsx` renders the main event experience through `EventPage`. Content is kept separate in `data/event`, while each event section owns its component and scoped styles. `next.config.ts` produces a static export served from the root path required by `southindia.nammaflutter.com`.
