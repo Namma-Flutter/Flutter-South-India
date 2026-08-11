@@ -11,7 +11,7 @@ export const eventDetails = {
   address: "Details coming soon",
   contact,
   ticketLink: emailLink("Flutter South India 2026 | ticket updates"),
-  ticketLabel: "Tickets open 15 August",
+  ticketLabel: "Get ticket updates · 15 August 2026",
 } as const;
 
 export const eventNav = [
