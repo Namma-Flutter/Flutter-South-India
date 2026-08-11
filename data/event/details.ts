@@ -59,6 +59,7 @@ export const venueNotes = [
 ] as const;
 
 export const socialLinks = [
+  { label: "Website", href: "https://nammaflutter.com/" },
   { label: "LinkedIn", href: "https://linkedin.com/company/namma-flutter" },
   { label: "Instagram", href: "https://instagram.com/nammaflutter" },
   { label: "X", href: "https://x.com/nammaflutter" },
