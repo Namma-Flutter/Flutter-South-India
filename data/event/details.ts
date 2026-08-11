@@ -6,12 +6,12 @@ export const eventDetails = {
   dateISO: "2026-10-10T09:00:00+05:30",
   dateLabel: "10 October 2026",
   dayLabel: "Saturday",
-  venue: "Loyola College",
+  venue: "Venue TBA",
   city: "Chennai",
-  address: "Nungambakkam, Chennai 600034",
+  address: "Details coming soon",
   contact,
   ticketLink: emailLink("Flutter South India 2026 | ticket updates"),
-  ticketLabel: "Get ticket updates",
+  ticketLabel: "Tickets open 15 August",
 } as const;
 
 export const eventNav = [
@@ -26,7 +26,7 @@ export const eventNav = [
 export const eventFacts = [
   { value: "1", label: "community-led day" },
   { value: "3", label: "parallel talk tracks" },
-  { value: "400", label: "seat main auditorium" },
+  { value: "TBA", label: "venue announcement coming soon" },
   { value: "Chennai", label: "built here, shared everywhere" },
 ] as const;
 
@@ -52,10 +52,10 @@ export const eventPrinciples = [
 ] as const;
 
 export const venueNotes = [
-  "Main auditorium with 400+ seats",
-  "Three seminar halls for parallel tracks",
-  "Central Chennai location in Nungambakkam",
-  "On-site parking and accessible event spaces",
+  "Venue announcement coming soon",
+  "Accessibility details to follow",
+  "Travel guidance will be shared",
+  "Parking information will be confirmed",
 ] as const;
 
 export const socialLinks = [
