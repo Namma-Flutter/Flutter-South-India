@@ -9,7 +9,7 @@ export const faqItems = [
   {
     question: "When will tickets be available?",
     answer:
-      "Tickets open on 15 August 2026. Follow Namma Flutter for ticket details and availability updates.",
+      "Ticket opens on 15 August.",
   },
   {
     question: "Is the speaker line-up final?",
