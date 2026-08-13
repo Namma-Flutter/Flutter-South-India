@@ -29,7 +29,7 @@ import TicketsSection from "./TicketsSection";
 import styles from "./EventPage.module.css";
 
 const mapLink = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
-  `${eventDetails.venue}, ${eventDetails.address}`,
+  `${eventDetails.city}, Tamil Nadu`,
 )}`;
 
 const ticketLinkProps = isKonfhubExternal
@@ -290,7 +290,7 @@ export default function EventPage() {
               <SectionIntro
                 eyebrow="The venue"
                 title={`${eventDetails.venue}, ${eventDetails.city}`}
-                copy="The conference comes together in the heart of Chennai, with a main auditorium for shared moments and seminar halls for focused track sessions."
+                copy="The Chennai venue will be announced soon. Access, travel, and arrival details will be shared once confirmed."
               />
 
               <div className={styles.venueAddress} data-reveal>
@@ -300,7 +300,7 @@ export default function EventPage() {
                   <span>{eventDetails.address}</span>
                 </p>
                 <a href={mapLink} target="_blank" rel="noreferrer">
-                  Open map
+                  View Chennai
                   <ArrowUpRight aria-hidden="true" size={15} />
                 </a>
               </div>

@@ -15,10 +15,10 @@ const body = Instrument_Sans({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://nammaflutter.com"),
+  metadataBase: new URL("https://southindia.nammaflutter.com"),
   title: "Flutter South India 2026 | Chennai",
   description:
-    "A community-led day for Flutter and Dart developers, happening 10 October 2026 at Loyola College, Chennai.",
+    "A community-led day for Flutter and Dart developers, happening 10 October 2026 in Chennai.",
   keywords: [
     "Flutter conference",
     "Dart",
@@ -46,7 +46,7 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en" className={`${display.variable} ${body.variable}`}>
-      <body>{children}</body>
+      <body suppressHydrationWarning>{children}</body>
     </html>
   );
 }
