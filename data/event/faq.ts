@@ -32,3 +32,4 @@ export const faqItems = [
       "Namma Flutter runs community meetups in Chennai throughout the year. Visit the official website or find the community on LinkedIn, Instagram, X, YouTube, GitHub, and Meetup using the links below.",
   },
 ] as const;
+
