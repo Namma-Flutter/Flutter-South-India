@@ -18,6 +18,22 @@
   line-height: 1.6;
 }
 
+.widgetShell {
+  margin-top: var(--space-7);
+  overflow: hidden;
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-m);
+  background: var(--color-paper);
+}
+
+.widget {
+  display: block;
+  width: 100%;
+  min-height: 40rem;
+  border: 0;
+  background: var(--color-paper);
+}
+
 .list {
   margin-top: var(--space-7);
   border-top: 1px solid var(--color-line);

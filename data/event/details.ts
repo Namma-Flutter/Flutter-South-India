@@ -1,5 +1,5 @@
 import { contact } from "./shared";
-import { konfhubEventUrl } from "./tickets";
+import { ticketCtaHref } from "./tickets";
 
 export const eventDetails = {
   name: "Flutter South India 2026",
@@ -11,7 +11,7 @@ export const eventDetails = {
   city: "Chennai",
   address: "Nungambakkam, Chennai 600034",
   contact,
-  ticketLink: konfhubEventUrl,
+  ticketLink: ticketCtaHref,
   ticketLabel: "Get tickets",
 } as const;
 

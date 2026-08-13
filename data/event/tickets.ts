@@ -1,7 +1,22 @@
+const rawMode = process.env.NEXT_PUBLIC_TICKETING_MODE?.trim().toLowerCase();
+
+/** `redirect` = Option A (tier cards → KonfHub page). `embed` = Option B (iframe widget). */
+export const ticketingMode: "redirect" | "embed" =
+  rawMode === "embed" ? "embed" : "redirect";
+
 export const konfhubEventUrl =
   process.env.NEXT_PUBLIC_KONFHUB_EVENT_URL?.trim() || "#tickets";
 
-export const isKonfhubExternal = konfhubEventUrl.startsWith("http");
+export const konfhubWidgetSrc =
+  process.env.NEXT_PUBLIC_KONFHUB_WIDGET_SRC?.trim() || "";
+
+export const isTicketingEmbed =
+  ticketingMode === "embed" && konfhubWidgetSrc.length > 0;
+
+/** Header / hero CTA: scroll to widget in embed mode, else open KonfHub. */
+export const ticketCtaHref = isTicketingEmbed ? "#tickets" : konfhubEventUrl;
+
+export const isKonfhubExternal = ticketCtaHref.startsWith("http");
 
 export type TicketAudience = "student" | "professional" | "supporter";
 
