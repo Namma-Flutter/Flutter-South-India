@@ -1,14 +1,21 @@
 const rawMode = process.env.NEXT_PUBLIC_TICKETING_MODE?.trim().toLowerCase();
+const rawEventUrl = process.env.NEXT_PUBLIC_KONFHUB_EVENT_URL?.trim();
+const rawWidgetSrc = process.env.NEXT_PUBLIC_KONFHUB_WIDGET_SRC?.trim();
 
-/** `redirect` = Option A (tier cards → KonfHub page). `embed` = Option B (iframe widget). */
 export const ticketingMode: "redirect" | "embed" =
   rawMode === "embed" ? "embed" : "redirect";
 
-export const konfhubEventUrl =
-  process.env.NEXT_PUBLIC_KONFHUB_EVENT_URL?.trim() || "#tickets";
+if (!rawEventUrl) {
+  throw new Error("NEXT_PUBLIC_KONFHUB_EVENT_URL is required");
+}
 
-export const konfhubWidgetSrc =
-  process.env.NEXT_PUBLIC_KONFHUB_WIDGET_SRC?.trim() || "";
+if (ticketingMode === "embed" && !rawWidgetSrc) {
+  throw new Error("NEXT_PUBLIC_KONFHUB_WIDGET_SRC is required in embed mode");
+}
+
+export const konfhubEventUrl = rawEventUrl;
+
+export const konfhubWidgetSrc = rawWidgetSrc || "";
 
 export const isTicketingEmbed =
   ticketingMode === "embed" && konfhubWidgetSrc.length > 0;
