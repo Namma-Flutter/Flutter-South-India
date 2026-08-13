@@ -1,4 +1,5 @@
-import { contact, emailLink } from "./shared";
+import { contact } from "./shared";
+import { ticketCtaHref } from "./tickets";
 
 export const eventDetails = {
   name: "Flutter South India 2026",
@@ -10,12 +11,13 @@ export const eventDetails = {
   city: "Chennai",
   address: "Details coming soon",
   contact,
-  ticketLink: emailLink("Flutter South India 2026 | ticket updates"),
-  ticketLabel: "Ticket opens on 15 August",
+  ticketLink: ticketCtaHref,
+  ticketLabel: "Get tickets",
 } as const;
 
 export const eventNav = [
   { label: "About", href: "#about" },
+  { label: "Tickets", href: "#tickets" },
   { label: "Programme", href: "#programme" },
   { label: "Speakers", href: "#speakers" },
   { label: "Partners", href: "#partners" },
@@ -67,4 +69,3 @@ export const socialLinks = [
   { label: "GitHub", href: "https://github.com/nammaflutter" },
   { label: "Meetup", href: "https://meetup.com/namma-flutter" },
 ] as const;
-
