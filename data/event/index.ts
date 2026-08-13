@@ -5,4 +5,10 @@ export { participationPaths } from "./participation";
 export { programme } from "./programme";
 export { speakerSlots } from "./speakers";
 export { sponsorSlots } from "./sponsors";
+export {
+  formatTicketPrice,
+  isKonfhubExternal,
+  konfhubEventUrl,
+  ticketTiers,
+} from "./tickets";
 

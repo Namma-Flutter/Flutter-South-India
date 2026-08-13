@@ -12,6 +12,7 @@ import {
   eventNav,
   eventPrinciples,
   faqItems,
+  isKonfhubExternal,
   participationPaths,
   programme,
   socialLinks,
@@ -24,11 +25,16 @@ import HiringSection from "./HiringSection";
 import MotionEnhancer from "./MotionEnhancer";
 import SpeakersSection from "./SpeakersSection";
 import SponsorsSection from "./SponsorsSection";
+import TicketsSection from "./TicketsSection";
 import styles from "./EventPage.module.css";
 
 const mapLink = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
   `${eventDetails.venue}, ${eventDetails.address}`,
 )}`;
+
+const ticketLinkProps = isKonfhubExternal
+  ? ({ target: "_blank", rel: "noopener noreferrer" } as const)
+  : {};
 
 export default function EventPage() {
   return (
@@ -61,7 +67,11 @@ export default function EventPage() {
                 care about Flutter and Dart.
               </p>
               <div className={styles.heroActions} data-reveal>
-                <a className="button button-light" href={eventDetails.ticketLink}>
+                <a
+                  className="button button-light"
+                  href={eventDetails.ticketLink}
+                  {...ticketLinkProps}
+                >
                   {eventDetails.ticketLabel}
                   <ArrowUpRight aria-hidden="true" size={17} />
                 </a>
@@ -164,6 +174,8 @@ export default function EventPage() {
             ))}
           </div>
         </section>
+
+        <TicketsSection />
 
         <section className={styles.programme} id="programme">
           <div className={`container ${styles.programmeIntro}`}>
@@ -333,7 +345,11 @@ export default function EventPage() {
               <p className="eyebrow">10 October · Chennai</p>
               <h2>Be there when South India meets around Flutter.</h2>
             </div>
-            <a className="button button-light" href={eventDetails.ticketLink}>
+            <a
+              className="button button-light"
+              href={eventDetails.ticketLink}
+              {...ticketLinkProps}
+            >
               {eventDetails.ticketLabel}
               <ArrowRight aria-hidden="true" size={18} />
             </a>

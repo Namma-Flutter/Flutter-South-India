@@ -22,6 +22,9 @@ export default function EventHeader({
   const menuButtonRef = useRef<HTMLButtonElement>(null);
   const panelRef = useRef<HTMLDivElement>(null);
   const wasOpenRef = useRef(false);
+  const ticketLinkProps = ticketLink.startsWith("http")
+    ? ({ target: "_blank", rel: "noopener noreferrer" } as const)
+    : {};
 
   useEffect(() => {
     document.body.classList.toggle("menu-open", open);
@@ -123,7 +126,11 @@ export default function EventHeader({
           ))}
         </nav>
 
-        <a className={`button button-primary ${styles.headerCta}`} href={ticketLink}>
+        <a
+          className={`button button-primary ${styles.headerCta}`}
+          href={ticketLink}
+          {...ticketLinkProps}
+        >
           {ticketLabel}
           <ArrowUpRight aria-hidden="true" size={16} strokeWidth={2.2} />
         </a>
@@ -159,6 +166,7 @@ export default function EventHeader({
             className={`button button-primary ${styles.mobileCta}`}
             href={ticketLink}
             onClick={() => setOpen(false)}
+            {...ticketLinkProps}
           >
             {ticketLabel}
             <ArrowUpRight aria-hidden="true" size={17} />

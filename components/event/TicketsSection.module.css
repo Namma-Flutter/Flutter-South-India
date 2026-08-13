@@ -1,0 +1,120 @@
+.tickets {
+  padding-block: var(--space-8);
+  background: var(--color-paper-raised);
+}
+
+.intro {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 0.7fr);
+  gap: clamp(2rem, 6vw, 6rem);
+  align-items: end;
+}
+
+.note {
+  max-width: 28rem;
+  margin-bottom: 0.35rem;
+  color: var(--color-ink-soft);
+  font-size: 0.94rem;
+  line-height: 1.6;
+}
+
+.list {
+  margin-top: var(--space-7);
+  border-top: 1px solid var(--color-line);
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 3rem minmax(12rem, 1.2fr) minmax(7rem, auto) auto;
+  align-items: center;
+  gap: clamp(1rem, 3vw, 2.5rem);
+  padding-block: 1.75rem;
+  border-bottom: 1px solid var(--color-line);
+}
+
+.index {
+  color: var(--color-blue);
+  font-size: 0.72rem;
+  font-weight: 750;
+  letter-spacing: 0.1em;
+}
+
+.meta h3 {
+  font-family: var(--font-display), sans-serif;
+  font-size: var(--step-2);
+  font-weight: 620;
+  letter-spacing: -0.045em;
+  line-height: 1.1;
+}
+
+.badge {
+  display: inline-block;
+  margin-bottom: 0.45rem;
+  color: var(--color-blue);
+  font-size: 0.68rem;
+  font-weight: 750;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.tierNote {
+  margin-top: 0.45rem;
+  color: var(--color-ink-soft);
+  font-size: 0.84rem;
+  line-height: 1.45;
+}
+
+.price {
+  color: var(--color-ink);
+  font-family: var(--font-display), sans-serif;
+  font-size: clamp(1.45rem, 2.4vw, 2rem);
+  font-weight: 570;
+  letter-spacing: -0.04em;
+  text-align: right;
+  white-space: nowrap;
+}
+
+.cta {
+  justify-self: end;
+  min-height: 2.85rem;
+  padding-inline: 1.1rem;
+}
+
+@media (max-width: 832px) {
+  .intro {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    align-items: start;
+  }
+
+  .row {
+    grid-template-columns: auto 1fr;
+    grid-template-areas:
+      "index meta"
+      "price price"
+      "cta cta";
+    gap: 0.85rem 1rem;
+    padding-block: 1.5rem;
+  }
+
+  .index {
+    grid-area: index;
+    align-self: start;
+    margin-top: 0.35rem;
+  }
+
+  .meta {
+    grid-area: meta;
+  }
+
+  .price {
+    grid-area: price;
+    text-align: left;
+  }
+
+  .cta {
+    grid-area: cta;
+    justify-self: stretch;
+    width: 100%;
+  }
+}

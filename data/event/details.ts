@@ -1,4 +1,5 @@
-import { contact, emailLink } from "./shared";
+import { contact } from "./shared";
+import { konfhubEventUrl } from "./tickets";
 
 export const eventDetails = {
   name: "Flutter South India 2026",
@@ -10,12 +11,13 @@ export const eventDetails = {
   city: "Chennai",
   address: "Nungambakkam, Chennai 600034",
   contact,
-  ticketLink: emailLink("Flutter South India 2026 | ticket updates"),
-  ticketLabel: "Get ticket updates",
+  ticketLink: konfhubEventUrl,
+  ticketLabel: "Get tickets",
 } as const;
 
 export const eventNav = [
   { label: "About", href: "#about" },
+  { label: "Tickets", href: "#tickets" },
   { label: "Programme", href: "#programme" },
   { label: "Speakers", href: "#speakers" },
   { label: "Partners", href: "#partners" },
