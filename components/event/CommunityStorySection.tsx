@@ -20,19 +20,18 @@ import styles from "./CommunityStorySection.module.css";
 export default function CommunityStorySection() {
   const [activeIndex, setActiveIndex] = useState(0);
   const [isAutoPlayEnabled, setIsAutoPlayEnabled] = useState(true);
-  const [isInteractionPaused, setIsInteractionPaused] = useState(false);
 
   useEffect(() => {
-    if (!isAutoPlayEnabled || isInteractionPaused) {
+    if (!isAutoPlayEnabled) {
       return;
     }
 
-    const timer = window.setInterval(() => {
+    const timer = window.setTimeout(() => {
       setActiveIndex((index) => (index + 1) % communityPhotos.length);
     }, 6000);
 
-    return () => window.clearInterval(timer);
-  }, [isAutoPlayEnabled, isInteractionPaused]);
+    return () => window.clearTimeout(timer);
+  }, [activeIndex, isAutoPlayEnabled]);
 
   const visiblePhotos = Array.from({ length: 3 }, (_, offset) => {
     return communityPhotos[(activeIndex + offset) % communityPhotos.length];
@@ -83,10 +82,6 @@ export default function CommunityStorySection() {
         aria-label="Namma Flutter past event moments"
         aria-roledescription="carousel"
         data-reveal
-        onBlurCapture={() => setIsInteractionPaused(false)}
-        onFocusCapture={() => setIsInteractionPaused(true)}
-        onMouseEnter={() => setIsInteractionPaused(true)}
-        onMouseLeave={() => setIsInteractionPaused(false)}
       >
         <div className={styles.collage} aria-live="off">
           {visiblePhotos.map((photo, index) => (

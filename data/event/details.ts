@@ -61,10 +61,10 @@ export const venueNotes = [
 
 export const socialLinks = [
   { label: "Website", href: "https://nammaflutter.com/" },
-  { label: "LinkedIn", href: "https://linkedin.com/company/namma-flutter" },
-  { label: "Instagram", href: "https://instagram.com/nammaflutter" },
+  { label: "LinkedIn", href: "https://www.linkedin.com/company/nammaflutter/" },
+  { label: "Instagram", href: "https://www.instagram.com/nammaflutter/" },
   { label: "X", href: "https://x.com/nammaflutter" },
   { label: "YouTube", href: "https://youtube.com/@nammaflutter" },
-  { label: "GitHub", href: "https://github.com/nammaflutter" },
-  { label: "Meetup", href: "https://meetup.com/namma-flutter" },
+  { label: "GitHub", href: "https://github.com/Namma-Flutter" },
+  { label: "Meetup", href: "https://www.meetup.com/nammaflutter/" },
 ] as const;

@@ -839,6 +839,7 @@
 
 .participationRow a {
   display: inline-flex;
+  min-height: 2.75rem;
   align-items: center;
   justify-content: flex-end;
   gap: 0.55rem;
@@ -1433,6 +1434,7 @@
 
 .socials a {
   display: inline-flex;
+  min-height: 2.75rem;
   align-items: center;
   gap: 0.3rem;
   color: var(--color-on-dark-muted);
@@ -1457,6 +1459,9 @@
 }
 
 .footerBottom a {
+  display: inline-flex;
+  min-height: 2.75rem;
+  align-items: center;
   color: inherit;
 }
 

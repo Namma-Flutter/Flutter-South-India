@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { ArrowUpRight, Menu, X } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
+import nammaFlutterMascot from "@/assets/brand/namma-flutter-mascot.webp";
 import styles from "./EventPage.module.css";
 
 type EventHeaderProps = {
@@ -101,12 +102,11 @@ export default function EventHeader({
         <a
           className={styles.brand}
           href="#top"
-          aria-label="Back to top"
           onClick={() => setOpen(false)}
         >
           <span className={styles.brandMark}>
             <Image
-              src="https://nammaflutter.com/images/logo.png"
+              src={nammaFlutterMascot}
               alt=""
               width={38}
               height={38}

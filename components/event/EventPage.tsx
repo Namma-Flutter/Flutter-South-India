@@ -7,6 +7,7 @@ import {
   FileText,
   MapPin,
 } from "lucide-react";
+import nammaFlutterMascot from "@/assets/brand/namma-flutter-mascot.webp";
 import {
   eventDetails,
   eventFacts,
@@ -58,7 +59,7 @@ export default function EventPage() {
               <p className={styles.heroKicker} data-reveal>
                 {eventDetails.organizer} presents · {eventDetails.dayLabel}
               </p>
-              <h1 data-reveal>
+              <h1>
                 South India
                 <span>builds with Flutter.</span>
               </h1>
@@ -89,7 +90,7 @@ export default function EventPage() {
               </div>
               <div className={styles.passBrand}>
                 <Image
-                  src="https://nammaflutter.com/images/logo.png"
+                  src={nammaFlutterMascot}
                   alt="Namma Flutter mascot"
                   width={72}
                   height={72}
@@ -372,7 +373,7 @@ export default function EventPage() {
         <div className={`container ${styles.footerTop}`}>
           <div className={styles.footerBrand}>
             <Image
-              src="https://nammaflutter.com/images/logo.png"
+              src={nammaFlutterMascot}
               alt="Namma Flutter mascot"
               width={54}
               height={54}
