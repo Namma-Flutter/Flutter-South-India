@@ -4,6 +4,7 @@ import {
   ArrowRight,
   ArrowUpRight,
   CalendarDays,
+  FileText,
   MapPin,
 } from "lucide-react";
 import {
@@ -19,12 +20,11 @@ import {
   venueNotes,
 } from "@/data/event";
 import SectionIntro from "@/components/ui/SectionIntro";
+import CommunityStorySection from "./CommunityStorySection";
 import Countdown from "./Countdown";
 import EventHeader from "./EventHeader";
-import HiringSection from "./HiringSection";
 import MotionEnhancer from "./MotionEnhancer";
 import SpeakersSection from "./SpeakersSection";
-import SponsorsSection from "./SponsorsSection";
 import TicketsSection from "./TicketsSection";
 import styles from "./EventPage.module.css";
 
@@ -257,18 +257,29 @@ export default function EventPage() {
                 <span>{item.number}</span>
                 <h3>{item.title}</h3>
                 <p>{item.description}</p>
-                <a href={item.href} aria-label={`${item.action}: ${item.title}`}>
-                  {item.action}
-                  <ArrowUpRight aria-hidden="true" size={18} />
-                </a>
+                <div className={styles.participationActions}>
+                  <a href={item.href} aria-label={`${item.action}: ${item.title}`}>
+                    {item.action}
+                    <ArrowUpRight aria-hidden="true" size={18} />
+                  </a>
+                  {item.secondaryAction && item.secondaryHref ? (
+                    <a
+                      href={item.secondaryHref}
+                      target="_blank"
+                      rel="noreferrer"
+                      aria-label={`${item.secondaryAction}: ${item.title}`}
+                    >
+                      {item.secondaryAction}
+                      <FileText aria-hidden="true" size={17} />
+                    </a>
+                  ) : null}
+                </div>
               </article>
             ))}
           </div>
         </section>
 
-        <SponsorsSection />
-
-        <HiringSection />
+        <CommunityStorySection />
 
         <section className={styles.venue} id="venue">
           <div className={`container ${styles.venueGrid}`}>

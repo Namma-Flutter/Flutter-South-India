@@ -13,7 +13,7 @@ export type SpeakerSlot = SpeakerSlotBase &
     | {
         status: Extract<ContentStatus, "confirmed">;
         name: string;
-        role: string;
+        role?: string;
         organization?: string;
         topic: string;
         photo?: EventImage;
@@ -24,30 +24,45 @@ export type SpeakerSlot = SpeakerSlotBase &
 export const speakerSlots: SpeakerSlot[] = [
   {
     id: "S01",
-    format: "Opening voice",
-    focus: "A shared idea to set the tone for the day.",
-    status: "placeholder",
+    format: "Confirmed speaker",
+    focus: "Topic to be announced",
+    status: "confirmed",
+    name: "Dhrumil Shah",
+    role: "Engineering at Scapia",
+    organization: "Google Developer Expert for Flutter & Dart",
+    topic: "Topic to be announced",
     featured: true,
   },
   {
     id: "S02",
-    format: "Product engineering",
-    focus: "Lessons from building and operating real Flutter products.",
-    status: "placeholder",
+    format: "Confirmed speaker",
+    focus: "Topic to be announced",
+    status: "confirmed",
+    name: "Sai Rajendran",
+    role: "Software Developer",
+    organization: "IBM",
+    topic: "Topic to be announced",
     featured: false,
   },
   {
     id: "S03",
-    format: "Platform craft",
-    focus: "Deep technical thinking across performance, tooling, and architecture.",
-    status: "placeholder",
+    format: "Confirmed speaker",
+    focus: "Topic to be announced",
+    status: "confirmed",
+    name: "Surya",
+    role: "Technical Lead",
+    organization: "Sharpsell AI",
+    topic: "Topic to be announced",
     featured: false,
   },
   {
     id: "S04",
-    format: "Dart ecosystem",
-    focus: "Ideas and practice from the wider Dart and open-source community.",
-    status: "placeholder",
+    format: "Confirmed speaker",
+    focus: "Topic to be announced",
+    status: "confirmed",
+    name: "Hari Prasanth",
+    role: "Lead Engineer",
+    topic: "Topic to be announced",
     featured: false,
   },
 ];
