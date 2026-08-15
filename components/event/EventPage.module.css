@@ -22,8 +22,15 @@
   border-bottom: 1px solid rgba(255, 255, 255, 0.12);
   background: rgba(6, 29, 41, 0.9);
   color: var(--color-white);
+}
+
+.header::before {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
+  content: "";
 }
 
 .headerInner {
@@ -1513,9 +1520,14 @@
 
   .mobilePanel {
     position: fixed;
-    inset: 4.75rem 0 0;
-    z-index: 1;
+    top: 4.75rem;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 40;
     display: block;
+    overflow-y: auto;
+    overscroll-behavior: contain;
     padding: var(--page-gutter);
     background: var(--color-navy-deep);
     opacity: 0;
@@ -1532,8 +1544,21 @@
     transform: translateY(0);
   }
 
+  .mobilePanel:focus {
+    outline: none;
+  }
+
   .mobileNav {
     display: grid;
+  }
+
+  .mobileNav > a:focus,
+  .mobileNav > a:focus-visible {
+    outline: none;
+  }
+
+  .mobileNav > a:focus-visible {
+    background: rgba(255, 255, 255, 0.06);
   }
 
   .mobileNav > a:not(.mobileCta) {

@@ -53,7 +53,7 @@ export default function EventHeader({
       : [];
     const focusables = trigger ? [trigger, ...panelFocusables] : panelFocusables;
 
-    window.requestAnimationFrame(() => panelFocusables[0]?.focus());
+    window.requestAnimationFrame(() => panel?.focus({ preventScroll: true }));
 
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
@@ -95,6 +95,7 @@ export default function EventHeader({
   }, []);
 
   return (
+    <>
     <header className={styles.header}>
       <div className={`container ${styles.headerInner}`}>
         <a
@@ -147,11 +148,13 @@ export default function EventHeader({
           {open ? <X aria-hidden="true" /> : <Menu aria-hidden="true" />}
         </button>
       </div>
+    </header>
 
       <div
         className={`${styles.mobilePanel} ${open ? styles.mobilePanelOpen : ""}`}
         id="mobile-navigation"
         ref={panelRef}
+        tabIndex={-1}
         aria-hidden={!open}
         inert={!open}
       >
@@ -173,6 +176,6 @@ export default function EventHeader({
           </a>
         </nav>
       </div>
-    </header>
+    </>
   );
 }
