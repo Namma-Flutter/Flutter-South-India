@@ -10,8 +10,8 @@ export default function SpeakersSection() {
       <div className={`container ${styles.speakersIntro}`}>
         <SectionIntro
           eyebrow="The people on stage"
-          title="Speakers worth listening to, announced with care."
-          copy="The line-up is still being curated. These slots show the shape of the speaker programme without inventing names before confirmations are complete."
+          title="Meet the first confirmed speakers."
+          copy="Four voices are confirmed for Flutter South India. Their session topics and full speaker profiles will be added as they are finalised."
         />
         <a className="text-link" href={participationPaths[0].href} data-reveal>
           Propose a session
@@ -36,7 +36,7 @@ export default function SpeakersSection() {
               data-reveal
               key={speaker.id}
             >
-              <div className={styles.speakerVisual} aria-hidden={isPlaceholder}>
+              <div className={styles.speakerVisual} aria-hidden={!photo}>
                 {photo ? (
                   <Image
                     className={styles.speakerPhoto}

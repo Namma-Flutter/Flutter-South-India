@@ -1,0 +1,334 @@
+.story {
+  position: relative;
+  overflow: hidden;
+  padding-block: var(--space-8);
+  background:
+    linear-gradient(145deg, rgba(19, 185, 253, 0.08), transparent 42%),
+    var(--color-navy-deep);
+  color: var(--color-white);
+}
+
+.story::after {
+  position: absolute;
+  top: 5rem;
+  right: -8rem;
+  width: 24rem;
+  height: 24rem;
+  border: 1px solid rgba(19, 185, 253, 0.12);
+  border-radius: 50%;
+  content: "";
+  pointer-events: none;
+}
+
+.intro {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(17rem, 0.55fr);
+  align-items: end;
+  gap: clamp(3rem, 8vw, 8rem);
+}
+
+.collaboration {
+  padding-left: 1.5rem;
+  border-left: 1px solid rgba(19, 185, 253, 0.42);
+}
+
+.collaboration > p {
+  color: var(--color-on-dark-subtle);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  line-height: 1.5;
+  text-transform: uppercase;
+}
+
+.collaboratorList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+  margin-top: 1rem;
+}
+
+.collaboratorList span {
+  padding: 0.7rem 0.9rem;
+  border: 1px solid rgba(255, 255, 255, 0.17);
+  border-radius: 999px;
+  color: var(--color-white);
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+.stats {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  margin-top: var(--space-6);
+  border-block: 1px solid rgba(255, 255, 255, 0.14);
+}
+
+.stats > div {
+  min-width: 0;
+  padding: clamp(1.4rem, 3vw, 2.2rem);
+}
+
+.stats > div + div {
+  border-left: 1px solid rgba(255, 255, 255, 0.14);
+}
+
+.stats strong,
+.stats span {
+  display: block;
+}
+
+.stats strong {
+  color: var(--color-cyan);
+  font-family: var(--font-display), sans-serif;
+  font-size: clamp(2.1rem, 4vw, 3.8rem);
+  font-weight: 610;
+  letter-spacing: -0.06em;
+  line-height: 0.9;
+}
+
+.stats span {
+  margin-top: 0.65rem;
+  color: var(--color-on-dark-subtle);
+  font-size: 0.72rem;
+  font-weight: 650;
+  letter-spacing: 0.08em;
+  line-height: 1.35;
+  text-transform: uppercase;
+}
+
+.carousel {
+  position: relative;
+  z-index: 1;
+  margin-top: clamp(1.5rem, 4vw, 3rem);
+}
+
+.collage {
+  display: grid;
+  aspect-ratio: 3 / 2;
+  grid-template-columns: 2fr 1fr;
+  grid-template-rows: repeat(2, minmax(0, 1fr));
+  gap: clamp(0.5rem, 1vw, 0.85rem);
+}
+
+.photo {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: clamp(0.65rem, 1.2vw, 1rem);
+  background: var(--color-navy);
+  box-shadow: 0 1rem 2.5rem rgba(0, 0, 0, 0.18);
+  animation: carouselEnter 520ms var(--ease-out) both;
+}
+
+.photoLarge {
+  grid-row: 1 / -1;
+}
+
+.photoSmall:nth-child(3) {
+  animation-delay: 80ms;
+}
+
+.photo img {
+  object-fit: cover;
+  transition:
+    filter 500ms var(--ease-soft),
+    transform 700ms var(--ease-out);
+}
+
+.photo:hover img {
+  filter: saturate(1.08);
+  transform: scale(1.045);
+}
+
+.photo::after {
+  position: absolute;
+  inset: 48% 0 0;
+  background: linear-gradient(transparent, rgba(6, 29, 41, 0.9));
+  content: "";
+  pointer-events: none;
+}
+
+.photo figcaption {
+  position: absolute;
+  right: clamp(0.65rem, 1.4vw, 1.2rem);
+  bottom: clamp(0.6rem, 1.2vw, 1rem);
+  left: clamp(0.65rem, 1.4vw, 1.2rem);
+  z-index: 1;
+  opacity: 0.92;
+}
+
+.photo figcaption span,
+.photo figcaption strong {
+  display: block;
+}
+
+.photo figcaption span {
+  color: var(--color-cyan);
+  font-size: 0.63rem;
+  font-weight: 750;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.photo figcaption strong {
+  margin-top: 0.25rem;
+  font-family: var(--font-display), sans-serif;
+  font-size: clamp(0.78rem, 1.3vw, 1.15rem);
+  font-weight: 590;
+}
+
+.carouselControls {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 1rem;
+  margin-top: 0.85rem;
+}
+
+.carouselControls > span {
+  color: var(--color-on-dark-muted);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+}
+
+.carouselControls > div {
+  display: flex;
+  gap: 0.4rem;
+}
+
+.carouselControls button {
+  display: grid;
+  width: 2.35rem;
+  height: 2.35rem;
+  place-items: center;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 50%;
+  background: transparent;
+  color: var(--color-white);
+  cursor: pointer;
+  transition:
+    border-color 180ms ease,
+    background-color 180ms ease,
+    color 180ms ease;
+}
+
+.carouselControls button:hover,
+.carouselControls button:focus-visible {
+  border-color: var(--color-cyan);
+  background: var(--color-cyan);
+  color: var(--color-navy-deep);
+  outline: none;
+}
+
+@keyframes carouselEnter {
+  from {
+    opacity: 0;
+    transform: translate3d(1rem, 0, 0);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.footnote {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  margin-top: 1.5rem;
+  color: var(--color-on-dark-muted);
+  font-size: 0.84rem;
+}
+
+.footnote strong {
+  color: var(--color-white);
+}
+
+.footnote a {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  gap: 0.4rem;
+  color: var(--color-cyan);
+  font-size: 0.74rem;
+  font-weight: 750;
+  text-decoration: none;
+}
+
+@media (max-width: 52rem) {
+  .intro {
+    grid-template-columns: 1fr;
+    align-items: start;
+    gap: 3rem;
+  }
+
+  .collaboration {
+    max-width: 32rem;
+  }
+
+  .stats {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .stats > div:nth-child(3) {
+    border-top: 1px solid rgba(255, 255, 255, 0.14);
+    border-left: 0;
+  }
+
+  .stats > div:nth-child(4) {
+    border-top: 1px solid rgba(255, 255, 255, 0.14);
+  }
+
+}
+
+@media (max-width: 38rem) {
+  .collaboration {
+    padding-left: 1rem;
+  }
+
+  .collaboratorList {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .stats > div {
+    padding: 1.3rem 1rem;
+  }
+
+  .collage {
+    aspect-ratio: 2 / 3;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-rows: 2fr 1fr;
+    gap: 0.5rem;
+  }
+
+  .photoLarge {
+    grid-row: auto;
+    grid-column: 1 / -1;
+  }
+
+  .footnote {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .photo {
+    animation: none;
+  }
+
+  .photo img {
+    transition: none;
+  }
+}

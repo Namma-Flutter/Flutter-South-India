@@ -857,6 +857,18 @@
   transform: translate(2px, -2px);
 }
 
+.participationActions {
+  display: flex;
+  align-items: flex-end;
+  flex-direction: column;
+  gap: 0.7rem;
+}
+
+.participationActions a + a {
+  color: var(--color-blue);
+  font-size: 0.72rem;
+}
+
 .partners {
   padding-block: var(--space-8);
   background: #0d3344;
@@ -1798,8 +1810,12 @@
 
   .participationRow h3,
   .participationRow p,
-  .participationRow a {
+  .participationActions {
     grid-column: 2;
+  }
+
+  .participationActions {
+    align-items: flex-start;
   }
 
   .venuePoster {

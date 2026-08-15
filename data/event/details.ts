@@ -20,8 +20,7 @@ export const eventNav = [
   { label: "Tickets", href: "#tickets" },
   { label: "Programme", href: "#programme" },
   { label: "Speakers", href: "#speakers" },
-  { label: "Partners", href: "#partners" },
-  { label: "Hiring", href: "#hiring" },
+  { label: "Past events", href: "#past-events" },
   { label: "Venue", href: "#venue" },
 ] as const;
 

@@ -6,6 +6,8 @@ export type ParticipationPath = {
   description: string;
   action: string;
   href: string;
+  secondaryAction?: string;
+  secondaryHref?: string;
 };
 
 export const participationPaths = [
@@ -24,6 +26,8 @@ export const participationPaths = [
       "Sponsor the event, host a product or hiring space, or help a community-led conference happen well.",
     action: "Discuss partnership",
     href: emailLink("Flutter South India 2026 | partnership"),
+    secondaryAction: "View sponsorship prospectus",
+    secondaryHref: "/assets/NammaFlutter%20South%20India%20Brochure.pdf",
   },
   {
     number: "03",
