@@ -346,12 +346,22 @@
   border-top: 1px dashed rgba(255, 255, 255, 0.2);
 }
 
-.passMeta span {
+.passMeta > span,
+.passMeta > a {
   display: flex;
   align-items: center;
   gap: 0.6rem;
   color: var(--color-on-dark-muted);
   font-size: 0.78rem;
+}
+
+.passMeta > a {
+  width: fit-content;
+  text-decoration: none;
+}
+
+.passMeta > a:hover {
+  color: white;
 }
 
 .passMeta svg {
@@ -1158,23 +1168,36 @@
   text-transform: uppercase;
 }
 
-.venuePin {
+.venuePartner {
   position: absolute;
   top: 42%;
-  left: 46%;
-  display: grid;
-  width: 4.25rem;
-  height: 4.25rem;
-  place-items: center;
-  border-radius: 50% 50% 50% 0;
-  background: var(--color-sun);
-  color: var(--color-navy-deep);
-  transform: rotate(-45deg);
+  left: 50%;
+  z-index: 1;
+  width: min(78%, 23rem);
+  transform: translate(-50%, -50%);
+}
+
+.venuePartner > span {
+  display: block;
+  margin-bottom: 0.7rem;
+  font-size: 0.68rem;
+  font-weight: 750;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+.venuePartnerLogo {
+  display: block;
+  padding: clamp(1rem, 3vw, 1.5rem);
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  background: var(--color-navy-deep);
   box-shadow: 0 1.5rem 3rem rgba(6, 29, 41, 0.2);
 }
 
-.venuePin svg {
-  transform: rotate(45deg);
+.venuePartnerLogo img {
+  display: block;
+  width: 100%;
+  height: auto;
 }
 
 .venueWordmark {

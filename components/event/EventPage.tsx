@@ -28,9 +28,7 @@ import SpeakersSection from "./SpeakersSection";
 import TicketsSection from "./TicketsSection";
 import styles from "./EventPage.module.css";
 
-const mapLink = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
-  `${eventDetails.city}, Tamil Nadu`,
-)}`;
+const mapLink = eventDetails.venueMapLink;
 
 const ticketLinkProps = isKonfhubExternal
   ? ({ target: "_blank", rel: "noopener noreferrer" } as const)
@@ -114,10 +112,15 @@ export default function EventPage() {
                   <CalendarDays aria-hidden="true" size={16} />
                   {eventDetails.dayLabel}
                 </span>
-                <span>
+                <a
+                  href={mapLink}
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label="Open SRM IST Ramapuram in Google Maps"
+                >
                   <MapPin aria-hidden="true" size={16} />
                   {eventDetails.venue}, {eventDetails.city}
-                </span>
+                </a>
               </div>
               <Countdown targetDate={eventDetails.dateISO} />
             </aside>
@@ -285,11 +288,26 @@ export default function EventPage() {
           <div className={`container ${styles.venueGrid}`}>
             <div className={styles.venuePoster} data-reveal>
               <div className={styles.venueCoordinates}>
-                <span>13.0607° N</span>
-                <span>80.2255° E</span>
+                <span>13.0323° N</span>
+                <span>80.1800° E</span>
               </div>
-              <div className={styles.venuePin}>
-                <MapPin aria-hidden="true" size={28} strokeWidth={1.7} />
+              <div className={styles.venuePartner}>
+                <span>Venue partner</span>
+                <a
+                  className={styles.venuePartnerLogo}
+                  href={eventDetails.venueWebsite}
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label="Visit the SRM IST Ramapuram website"
+                >
+                  <Image
+                    src={eventDetails.venuePartnerLogo}
+                    alt="SRM Institute of Science and Technology, Ramapuram"
+                    width={1024}
+                    height={446}
+                    sizes="(max-width: 720px) 70vw, 22rem"
+                  />
+                </a>
               </div>
               <div className={styles.venueWordmark}>
                 <span>Meet us in</span>
@@ -299,9 +317,9 @@ export default function EventPage() {
 
             <div className={styles.venueCopy}>
               <SectionIntro
-                eyebrow="The venue"
+                eyebrow="Venue partner"
                 title={`${eventDetails.venue}, ${eventDetails.city}`}
-                copy="The Chennai venue will be announced soon. Access, travel, and arrival details will be shared once confirmed."
+                copy="Flutter South India 2026 is hosted in partnership with SRM Institute of Science and Technology at its Ramapuram campus."
               />
 
               <div className={styles.venueAddress} data-reveal>
@@ -311,7 +329,7 @@ export default function EventPage() {
                   <span>{eventDetails.address}</span>
                 </p>
                 <a href={mapLink} target="_blank" rel="noreferrer">
-                  View Chennai
+                  Open in Maps
                   <ArrowUpRight aria-hidden="true" size={15} />
                 </a>
               </div>
