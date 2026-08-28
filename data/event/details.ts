@@ -7,9 +7,13 @@ export const eventDetails = {
   dateISO: "2026-10-10T09:00:00+05:30",
   dateLabel: "10 October 2026",
   dayLabel: "Saturday",
-  venue: "Venue TBA",
+  venue: "SRM IST Ramapuram",
   city: "Chennai",
-  address: "Details coming soon",
+  address: "Bharathi Salai, Ramapuram, Chennai, Tamil Nadu 600089",
+  venueWebsite: "https://srmrmp.edu.in/",
+  venueMapLink: "https://maps.app.goo.gl/TcjDzLXkZ8xofRMc8?g_st=ac",
+  venuePartnerLogo:
+    "https://i0.wp.com/srmrmp.edu.in/wp-content/uploads/2025/02/New-Logo-SRM-02-1-1024x446.png",
   contact,
   ticketLink: ticketCtaHref,
   ticketLabel: "Get tickets",
@@ -27,7 +31,7 @@ export const eventNav = [
 export const eventFacts = [
   { value: "1", label: "community-led day" },
   { value: "3", label: "parallel talk tracks" },
-  { value: "TBA", label: "venue announcement coming soon" },
+  { value: "SRM IST RMP", label: "Venue partner" },
   { value: "Chennai", label: "built here, shared everywhere" },
 ] as const;
 
@@ -53,10 +57,7 @@ export const eventPrinciples = [
 ] as const;
 
 export const venueNotes = [
-  "Venue announcement coming soon",
-  "Accessibility details to follow",
   "Travel guidance will be shared",
-  "Parking information will be confirmed",
 ] as const;
 
 export const socialLinks = [
