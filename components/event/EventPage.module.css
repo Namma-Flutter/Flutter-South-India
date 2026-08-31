@@ -614,32 +614,94 @@
   color: var(--color-blue);
 }
 
-.speakerGrid {
-  display: grid;
-  grid-template-columns: minmax(0, 1.4fr) minmax(17rem, 0.6fr);
-  gap: 1px;
+.speakerTrackPanel {
   margin-top: var(--space-7);
-  background: var(--color-line);
+}
+
+.speakerTrackChips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+  margin-bottom: 1.5rem;
+}
+
+.speakerTrackChip {
+  padding: 0.55rem 1rem;
   border: 1px solid var(--color-line);
+  border-radius: var(--radius-pill);
+  background: transparent;
+  color: var(--color-ink-soft);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  transition:
+    background-color var(--duration-fast) var(--ease-out),
+    border-color var(--duration-fast) var(--ease-out),
+    color var(--duration-fast) var(--ease-out);
 }
 
-.speakerSlot {
+.speakerTrackChip:hover {
+  border-color: rgba(2, 125, 253, 0.35);
+  color: var(--color-ink);
+}
+
+.speakerTrackChipActive {
+  border-color: var(--color-blue);
+  background: var(--color-blue);
+  color: white;
+}
+
+.speakerTrackChipActive:hover {
+  border-color: var(--color-blue);
+  color: white;
+}
+
+.speakerTrackGrid {
   display: grid;
-  grid-template-columns: minmax(9rem, 0.75fr) minmax(0, 1fr);
-  min-height: 12rem;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-auto-rows: 1fr;
+  align-items: stretch;
+  gap: 1.25rem;
+}
+
+.speakerCard {
+  display: flex;
+  min-width: 0;
+  height: 100%;
+  min-height: 29rem;
+  flex-direction: column;
+  border: 1px solid var(--color-line);
   background: var(--color-paper);
+  box-shadow: 0 1rem 2.5rem rgba(6, 29, 41, 0.05);
+  transition: box-shadow var(--duration-base) var(--ease-soft);
 }
 
-.speakerSlotFeatured {
-  grid-row: span 3;
-  grid-template-columns: 1fr;
+.speakerCard:has(.speakerPhoto):hover {
+  box-shadow: 0 1.25rem 3rem rgba(6, 29, 41, 0.1);
 }
 
-.speakerVisual {
+.speakerCardPlaceholder {
+  display: grid;
+  min-height: 16rem;
+  place-items: center;
+  padding: 2rem;
+  border: 1px dashed var(--color-line);
+  background: rgba(255, 255, 255, 0.45);
+}
+
+.speakerCardPlaceholder p {
+  color: var(--color-ink-soft);
+  font-size: 0.85rem;
+  font-weight: 650;
+}
+
+.speakerCardVisual {
   position: relative;
-  min-height: 12rem;
+  height: 15rem;
+  flex-shrink: 0;
   overflow: hidden;
-  background-color: #d6e9ef;
+  background-color: #eef4f6;
   background-image: repeating-linear-gradient(
     132deg,
     transparent 0 1.35rem,
@@ -647,43 +709,32 @@
   );
 }
 
-.speakerSlotFeatured .speakerVisual {
-  min-height: 24rem;
-  background-color: var(--color-blue);
-  background-image: repeating-linear-gradient(
-    132deg,
-    transparent 0 2.3rem,
-    rgba(255, 255, 255, 0.16) 2.3rem 2.42rem
-  );
-  color: white;
-}
-
-.speakerVisual span {
+.speakerCardVisual span {
   position: absolute;
   right: 1rem;
   bottom: 0.55rem;
   font-family: var(--font-display), sans-serif;
-  font-size: clamp(3.5rem, 7vw, 7rem);
+  font-size: clamp(2.5rem, 5vw, 4rem);
   font-weight: 580;
   letter-spacing: -0.08em;
   line-height: 0.8;
   opacity: 0.34;
 }
 
-.speakerVisual i {
+.speakerCardVisual i {
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 3rem;
-  height: 3rem;
+  width: 2.5rem;
+  height: 2.5rem;
   border: 1px solid currentColor;
   border-radius: 50%;
   opacity: 0.35;
   transform: translate(-50%, -50%);
 }
 
-.speakerVisual i::before,
-.speakerVisual i::after {
+.speakerCardVisual i::before,
+.speakerCardVisual i::after {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -694,56 +745,85 @@
 
 .speakerPhoto {
   object-fit: cover;
+  object-position: 50% 30%;
+  transition:
+    filter var(--duration-base) var(--ease-soft),
+    transform 700ms var(--ease-out);
 }
 
-.speakerVisual i::before {
-  width: 1rem;
+.speakerCard:hover .speakerPhoto {
+  filter: saturate(1.06) brightness(1.02);
+  transform: scale(1.045);
+}
+
+.speakerCardVisual i::before {
+  width: 0.85rem;
   height: 1px;
 }
 
-.speakerVisual i::after {
+.speakerCardVisual i::after {
   width: 1px;
-  height: 1rem;
+  height: 0.85rem;
 }
 
-.speakerDetails {
+.speakerCardBody {
   display: flex;
+  min-width: 0;
+  min-height: 11.5rem;
+  flex: 1;
   flex-direction: column;
-  justify-content: flex-end;
-  padding: clamp(1.2rem, 3vw, 2rem);
+  padding: clamp(1.25rem, 2.5vw, 1.75rem);
 }
 
-.speakerDetails > p {
-  margin-bottom: auto;
+.speakerRole {
   color: var(--color-blue);
-  font-size: 0.75rem;
+  font-size: 0.72rem;
   font-weight: 750;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
 }
 
-.speakerDetails h3 {
-  margin-top: 2rem;
-  font-family: var(--font-display), sans-serif;
-  font-size: var(--step-2);
-  font-weight: 620;
-  letter-spacing: -0.045em;
-  line-height: 1.02;
+.speakerIdentity {
+  display: flex;
+  margin-top: 1rem;
+  flex-direction: column;
+  gap: 0.15rem;
 }
 
-.speakerDetails > span {
-  max-width: 29rem;
-  margin-top: 0.7rem;
+.speakerIdentity h4 {
+  margin: 0;
+  font-family: var(--font-display), sans-serif;
+  font-size: var(--step-1);
+  font-weight: 620;
+  letter-spacing: -0.04em;
+  line-height: 1.05;
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
+
+.speakerOrganization {
+  margin: 0;
+  color: var(--color-ink-soft);
+  font-size: 0.82rem;
+  font-weight: 650;
+  line-height: 1.35;
+  text-transform: none;
+  letter-spacing: normal;
+}
+
+.speakerTopic {
+  margin-top: auto;
+  padding-top: 0.65rem;
   color: var(--color-ink-soft);
   font-size: 0.82rem;
   line-height: 1.5;
 }
 
-.speakerDetails > a {
+.speakerCardBody > a {
   display: inline-flex;
   align-items: center;
   gap: 0.35rem;
-  margin-top: 1rem;
+  margin-top: 0.75rem;
   color: var(--color-blue);
   font-size: 0.75rem;
   font-weight: 750;
@@ -1682,12 +1762,8 @@
     justify-self: start;
   }
 
-  .speakerGrid {
-    grid-template-columns: 1fr;
-  }
-
-  .speakerSlotFeatured {
-    grid-row: auto;
+  .speakerTrackGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .partnerWall {
@@ -1802,14 +1878,8 @@
     flex-direction: column;
   }
 
-  .speakerSlot,
-  .speakerSlotFeatured {
+  .speakerTrackGrid {
     grid-template-columns: 1fr;
-  }
-
-  .speakerVisual,
-  .speakerSlotFeatured .speakerVisual {
-    min-height: 15rem;
   }
 
   .partnerWall {
@@ -1882,5 +1952,21 @@
 
   .footerBottom span:last-child {
     text-align: left;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .speakerCard,
+  .speakerPhoto {
+    transition: none;
+  }
+
+  .speakerCard:hover .speakerPhoto {
+    filter: none;
+    transform: none;
+  }
+
+  .speakerCard:has(.speakerPhoto):hover {
+    box-shadow: 0 1rem 2.5rem rgba(6, 29, 41, 0.05);
   }
 }
