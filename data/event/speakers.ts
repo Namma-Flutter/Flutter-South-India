@@ -1,10 +1,18 @@
 import type { ContentStatus, EventImage } from "./shared";
 
+export const speakerTracks = [
+  { id: "track-1", title: "Track TBA" },
+  { id: "track-2", title: "Track TBA" },
+  { id: "track-3", title: "Track TBA" },
+] as const;
+
+export type SpeakerTrackId = (typeof speakerTracks)[number]["id"];
+
 type SpeakerSlotBase = {
   id: string;
+  trackId: SpeakerTrackId;
   format: string;
   focus: string;
-  featured?: boolean;
 };
 
 export type SpeakerSlot = SpeakerSlotBase &
@@ -24,6 +32,7 @@ export type SpeakerSlot = SpeakerSlotBase &
 export const speakerSlots: SpeakerSlot[] = [
   {
     id: "S01",
+    trackId: "track-1",
     format: "Confirmed speaker",
     focus: "Topic to be announced",
     status: "confirmed",
@@ -31,38 +40,58 @@ export const speakerSlots: SpeakerSlot[] = [
     role: "Engineering at Scapia",
     organization: "Google Developer Expert for Flutter & Dart",
     topic: "Topic to be announced",
-    featured: true,
+    photo: {
+      src: "/assets/speakers/dhrumil-shah.jpg",
+      alt: "Portrait of Dhrumil Shah",
+    },
+    profileUrl: "https://www.linkedin.com/in/dhuma1981/",
   },
   {
     id: "S02",
+    trackId: "track-1",
     format: "Confirmed speaker",
     focus: "Topic to be announced",
     status: "confirmed",
-    name: "Sai Rajendran",
-    role: "Software Developer",
-    organization: "IBM",
+    name: "Drishtant Ranjan Srivastava",
+    role: "Software Engineer at Landmark Group",
+    organization: "Organizer of Flutter Kanpur",
     topic: "Topic to be announced",
-    featured: false,
+    photo: {
+      src: "/assets/speakers/drishtant-ranjan-srivastava.jpg",
+      alt: "Portrait of Drishtant Ranjan Srivastava",
+    },
+    profileUrl: "https://www.linkedin.com/in/drishtant-ranjan/",
   },
   {
     id: "S03",
+    trackId: "track-1",
     format: "Confirmed speaker",
     focus: "Topic to be announced",
     status: "confirmed",
-    name: "Surya",
-    role: "Technical Lead",
-    organization: "Sharpsell AI",
+    name: "Surya Saravanakumar",
+    role: "Tech Lead at Sharpsell.ai",
+    organization: "Flutter Enthusiast",
     topic: "Topic to be announced",
-    featured: false,
+    photo: {
+      src: "/assets/speakers/surya-saravanakumar.png",
+      alt: "Portrait of Surya Saravanakumar",
+    },
+    profileUrl: "https://www.linkedin.com/in/suryasaravanakumar/",
   },
   {
     id: "S04",
+    trackId: "track-1",
     format: "Confirmed speaker",
     focus: "Topic to be announced",
     status: "confirmed",
-    name: "Hari Prasanth",
-    role: "Lead Engineer",
+    name: "Gowtham M G",
+    role: "Mobile Engineer at CRED",
+    organization: "Flutter Enthusiast",
     topic: "Topic to be announced",
-    featured: false,
+    photo: {
+      src: "/assets/speakers/gowtham-m-g.png",
+      alt: "Portrait of Gowtham M G",
+    },
+    profileUrl: "https://www.linkedin.com/in/gowtham-m-g-139951179",
   },
 ];

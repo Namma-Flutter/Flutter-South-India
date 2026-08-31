@@ -3,7 +3,7 @@ export { faqItems } from "./faq";
 export { hiringStalls } from "./hiring";
 export { participationPaths } from "./participation";
 export { programme } from "./programme";
-export { speakerSlots } from "./speakers";
+export { speakerSlots, speakerTracks, type SpeakerTrackId } from "./speakers";
 export { sponsorSlots } from "./sponsors";
 export {
   formatTicketPrice,
