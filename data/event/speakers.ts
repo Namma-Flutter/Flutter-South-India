@@ -44,6 +44,7 @@ export const speakerSlots: SpeakerSlot[] = [
       src: "/assets/speakers/dhrumil-shah.jpg",
       alt: "Portrait of Dhrumil Shah",
     },
+    profileUrl: "https://www.linkedin.com/in/dhuma1981/",
   },
   {
     id: "S02",
@@ -59,6 +60,7 @@ export const speakerSlots: SpeakerSlot[] = [
       src: "/assets/speakers/drishtant-ranjan-srivastava.jpg",
       alt: "Portrait of Drishtant Ranjan Srivastava",
     },
+    profileUrl: "https://www.linkedin.com/in/drishtant-ranjan/",
   },
   {
     id: "S03",
@@ -74,6 +76,7 @@ export const speakerSlots: SpeakerSlot[] = [
       src: "/assets/speakers/surya-saravanakumar.png",
       alt: "Portrait of Surya Saravanakumar",
     },
+    profileUrl: "https://www.linkedin.com/in/suryasaravanakumar/",
   },
   {
     id: "S04",
@@ -89,5 +92,6 @@ export const speakerSlots: SpeakerSlot[] = [
       src: "/assets/speakers/gowtham-m-g.png",
       alt: "Portrait of Gowtham M G",
     },
+    profileUrl: "https://www.linkedin.com/in/gowtham-m-g-139951179",
   },
 ];

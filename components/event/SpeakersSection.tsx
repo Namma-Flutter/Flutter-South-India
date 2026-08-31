@@ -51,8 +51,12 @@ function SpeakerCard({ speaker }: { speaker: (typeof speakerSlots)[number] }) {
           {isPlaceholder ? speaker.focus : speaker.topic}
         </span>
         {speaker.status === "confirmed" && speaker.profileUrl ? (
-          <a href={speaker.profileUrl} target="_blank" rel="noreferrer">
-            Speaker profile
+          <a
+            href={speaker.profileUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            LinkedIn
             <ArrowUpRight aria-hidden="true" size={14} />
           </a>
         ) : null}
@@ -75,7 +79,7 @@ export default function SpeakersSection() {
         <SectionIntro
           eyebrow="The people on stage"
           title="Meet the first confirmed speakers."
-          copy="Four voices are confirmed across three parallel Flutter tracks. Session topics and full speaker profiles will be added as they are finalised."
+          copy="Confirmed speakers are being announced across three parallel Flutter tracks. Session topics and full speaker profiles will be added as they are finalised."
         />
         <a className="text-link" href={participationPaths[0].href} data-reveal>
           Propose a session
@@ -86,8 +90,8 @@ export default function SpeakersSection() {
       <div className={`container ${styles.speakerTrackPanel}`}>
         <div
           className={styles.speakerTrackChips}
-          role="tablist"
-          aria-label="Speaker tracks"
+          role="group"
+          aria-label="Filter speakers by track"
         >
           {speakerTracks.map((track) => {
             const isActive = activeTrackId === track.id;
@@ -96,8 +100,7 @@ export default function SpeakersSection() {
               <button
                 key={track.id}
                 type="button"
-                role="tab"
-                aria-selected={isActive}
+                aria-pressed={isActive}
                 className={`${styles.speakerTrackChip} ${
                   isActive ? styles.speakerTrackChipActive : ""
                 }`}
@@ -111,7 +114,7 @@ export default function SpeakersSection() {
 
         <div
           className={styles.speakerTrackGrid}
-          role="tabpanel"
+          aria-live="polite"
           aria-label={`${activeTrack.title} speakers`}
         >
           {activeTrackSpeakers.length > 0 ? (

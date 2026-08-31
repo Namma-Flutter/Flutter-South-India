@@ -111,6 +111,7 @@
 .collage {
   --collage-gap: clamp(0.5rem, 1vw, 0.85rem);
   --cell: calc((100cqi - 2 * var(--collage-gap)) / 3);
+
   display: grid;
   width: 100%;
   grid-template-columns: calc(2 * var(--cell) + var(--collage-gap)) var(--cell);
@@ -315,6 +316,7 @@
 
   .collage {
     --cell: calc((100cqi - var(--collage-gap)) / 2);
+
     grid-template-columns: var(--cell) var(--cell);
     grid-template-rows: 100cqi var(--cell);
   }
