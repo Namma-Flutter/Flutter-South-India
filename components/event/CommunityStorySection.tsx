@@ -18,7 +18,9 @@ import SectionIntro from "@/components/ui/SectionIntro";
 import styles from "./CommunityStorySection.module.css";
 
 export default function CommunityStorySection() {
-  const [activeIndex, setActiveIndex] = useState(0);
+  const visibleCount = 3;
+  const pageCount = Math.ceil(communityPhotos.length / visibleCount);
+  const [activePage, setActivePage] = useState(0);
   const [isAutoPlayEnabled, setIsAutoPlayEnabled] = useState(true);
   const [isInteractionPaused, setIsInteractionPaused] = useState(false);
 
@@ -28,25 +30,24 @@ export default function CommunityStorySection() {
     }
 
     const timer = window.setInterval(() => {
-      setActiveIndex((index) => (index + 1) % communityPhotos.length);
+      setActivePage((page) => (page + 1) % pageCount);
     }, 6000);
 
     return () => window.clearInterval(timer);
-  }, [isAutoPlayEnabled, isInteractionPaused]);
+  }, [isAutoPlayEnabled, isInteractionPaused, pageCount]);
 
-  const visiblePhotos = Array.from({ length: 3 }, (_, offset) => {
-    return communityPhotos[(activeIndex + offset) % communityPhotos.length];
-  });
+  const pageStart = activePage * visibleCount;
+  const visiblePhotos = communityPhotos.slice(
+    pageStart,
+    pageStart + visibleCount,
+  );
 
   const showPrevious = () => {
-    setActiveIndex(
-      (index) =>
-        (index - 1 + communityPhotos.length) % communityPhotos.length,
-    );
+    setActivePage((page) => (page - 1 + pageCount) % pageCount);
   };
 
   const showNext = () => {
-    setActiveIndex((index) => (index + 1) % communityPhotos.length);
+    setActivePage((page) => (page + 1) % pageCount);
   };
 
   return (
@@ -94,7 +95,7 @@ export default function CommunityStorySection() {
               className={`${styles.photo} ${
                 index === 0 ? styles.photoLarge : styles.photoSmall
               }`}
-              key={`${activeIndex}-${photo.src}`}
+              key={`${activePage}-${photo.src}`}
             >
               <Image
                 src={photo.src}
@@ -116,7 +117,7 @@ export default function CommunityStorySection() {
 
         <div className={styles.carouselControls}>
           <span aria-live="polite">
-            {String(activeIndex + 1).padStart(2, "0")} / {communityPhotos.length}
+            {String(activePage + 1).padStart(2, "0")} / {String(pageCount).padStart(2, "0")}
           </span>
           <div>
             <button type="button" onClick={showPrevious} aria-label="Previous event">
