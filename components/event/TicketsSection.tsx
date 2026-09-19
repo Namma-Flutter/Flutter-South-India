@@ -1,4 +1,7 @@
+"use client";
+
 import { ArrowUpRight } from "lucide-react";
+import { trackTicketIntentClick } from "@/lib/analytics";
 import SectionIntro from "@/components/ui/SectionIntro";
 import {
   formatTicketPrice,
@@ -56,6 +59,14 @@ export default function TicketsSection() {
                 className={`button button-quiet ${styles.cta}`}
                 href={konfhubEventUrl}
                 aria-label={`Get ${tier.name} ticket`}
+                onClick={() =>
+                  trackTicketIntentClick({
+                    cta_location: "tickets_tier",
+                    ticket_tier: tier.id,
+                    ticket_price: tier.priceInr,
+                    link_url: konfhubEventUrl,
+                  })
+                }
                 {...externalLinkProps}
               >
                 Get tickets

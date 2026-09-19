@@ -10,6 +10,11 @@ import {
   speakerTracks,
   type SpeakerTrackId,
 } from "@/data/event";
+import {
+  trackSpeakerInquiry,
+  trackSpeakerProfileClick,
+  trackTrackSelect,
+} from "@/lib/analytics";
 import styles from "./EventPage.module.css";
 
 function SpeakerCard({ speaker }: { speaker: (typeof speakerSlots)[number] }) {
@@ -55,6 +60,13 @@ function SpeakerCard({ speaker }: { speaker: (typeof speakerSlots)[number] }) {
             href={speaker.profileUrl}
             target="_blank"
             rel="noopener noreferrer"
+            onClick={() =>
+              trackSpeakerProfileClick({
+                speaker_name: speaker.name,
+                speaker_role: speaker.role || "",
+                speaker_org: speaker.organization || "",
+              })
+            }
           >
             LinkedIn
             <ArrowUpRight aria-hidden="true" size={14} />
@@ -81,7 +93,17 @@ export default function SpeakersSection() {
           title="Meet the first confirmed speakers."
           copy="Confirmed speakers are being announced across three parallel Flutter tracks. Session topics and full speaker profiles will be added as they are finalised."
         />
-        <a className="text-link" href={participationPaths[0].href} data-reveal>
+        <a
+          className="text-link"
+          href={participationPaths[0].href}
+          onClick={() =>
+            trackSpeakerInquiry({
+              cta_location: "speakers",
+              inquiry_type: "speaking",
+            })
+          }
+          data-reveal
+        >
           Propose a session
           <ArrowUpRight aria-hidden="true" size={16} />
         </a>
@@ -104,7 +126,13 @@ export default function SpeakersSection() {
                 className={`${styles.speakerTrackChip} ${
                   isActive ? styles.speakerTrackChipActive : ""
                 }`}
-                onClick={() => setActiveTrackId(track.id)}
+                onClick={() => {
+                  setActiveTrackId(track.id);
+                  trackTrackSelect({
+                    track_id: track.id,
+                    track_title: track.title,
+                  });
+                }}
               >
                 {track.title}
               </button>
