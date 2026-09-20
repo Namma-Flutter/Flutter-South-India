@@ -1,16 +1,7 @@
 import type { ContentStatus, EventImage } from "./shared";
 
-export const speakerTracks = [
-  { id: "track-1", title: "Track TBA" },
-  { id: "track-2", title: "Track TBA" },
-  { id: "track-3", title: "Track TBA" },
-] as const;
-
-export type SpeakerTrackId = (typeof speakerTracks)[number]["id"];
-
 type SpeakerSlotBase = {
   id: string;
-  trackId: SpeakerTrackId;
   format: string;
   focus: string;
 };
@@ -32,7 +23,6 @@ export type SpeakerSlot = SpeakerSlotBase &
 export const speakerSlots: SpeakerSlot[] = [
   {
     id: "S01",
-    trackId: "track-1",
     format: "Confirmed speaker",
     focus: "Topic to be announced",
     status: "confirmed",
@@ -48,7 +38,6 @@ export const speakerSlots: SpeakerSlot[] = [
   },
   {
     id: "S02",
-    trackId: "track-1",
     format: "Confirmed speaker",
     focus: "Topic to be announced",
     status: "confirmed",
@@ -64,7 +53,6 @@ export const speakerSlots: SpeakerSlot[] = [
   },
   {
     id: "S03",
-    trackId: "track-1",
     format: "Confirmed speaker",
     focus: "Topic to be announced",
     status: "confirmed",
@@ -80,7 +68,6 @@ export const speakerSlots: SpeakerSlot[] = [
   },
   {
     id: "S04",
-    trackId: "track-1",
     format: "Confirmed speaker",
     focus: "Topic to be announced",
     status: "confirmed",

@@ -15,7 +15,6 @@ import {
   faqItems,
   isKonfhubExternal,
   participationPaths,
-  programme,
   socialLinks,
   venueNotes,
 } from "@/data/event";
@@ -24,6 +23,8 @@ import CommunityStorySection from "./CommunityStorySection";
 import Countdown from "./Countdown";
 import EventHeader from "./EventHeader";
 import MotionEnhancer from "./MotionEnhancer";
+import PartnersSection from "./PartnersSection";
+import OrganizerRow from "./OrganizerRow";
 import SpeakersSection from "./SpeakersSection";
 import TicketsSection from "./TicketsSection";
 import styles from "./EventPage.module.css";
@@ -42,7 +43,6 @@ export default function EventPage() {
         Skip to content
       </a>
       <EventHeader
-        organizer={eventDetails.organizer}
         nav={eventNav}
         ticketLabel={eventDetails.ticketLabel}
         ticketLink={eventDetails.ticketLink}
@@ -54,7 +54,7 @@ export default function EventPage() {
           <div className={`container ${styles.heroGrid}`}>
             <div className={styles.heroCopy}>
               <p className={styles.heroKicker} data-reveal>
-                {eventDetails.organizer} presents · {eventDetails.dayLabel}
+                FSI / 26 · {eventDetails.dayLabel}
               </p>
               <h1 data-reveal>
                 South India
@@ -86,13 +86,6 @@ export default function EventPage() {
                 <span>FSI / 26</span>
               </div>
               <div className={styles.passBrand}>
-                <Image
-                  src="https://nammaflutter.com/images/logo.png"
-                  alt="Namma Flutter mascot"
-                  width={72}
-                  height={72}
-                  priority
-                />
                 <p>
                   Flutter
                   <br />
@@ -145,14 +138,10 @@ export default function EventPage() {
           <div className={`container ${styles.aboutGrid}`}>
             <div className={styles.aboutIntro}>
               <SectionIntro
-                eyebrow="Why this day"
-                title="A conference that feels like the community behind it."
-                copy="Flutter South India brings the region's builders into one room; not only to listen, but to compare notes, ask better questions, and leave with something useful."
+                eyebrow="Built by the community"
+                title="Local roots. Shared ideas. One Flutter community."
+                copy="A day in Chennai to meet the people building with Flutter, exchange practical ideas, and leave with new connections. Three communities coming together to make it happen."
               />
-              <p className={styles.localNote} data-reveal>
-                Organised in Chennai by Namma Flutter, for the wider South Indian
-                developer community.
-              </p>
             </div>
 
             <div className={styles.principles}>
@@ -168,6 +157,8 @@ export default function EventPage() {
             </div>
           </div>
 
+          <OrganizerRow />
+
           <div className={`container ${styles.facts}`} data-reveal>
             {eventFacts.map((fact) => (
               <div key={fact.label}>
@@ -181,47 +172,20 @@ export default function EventPage() {
         <TicketsSection />
 
         <section className={styles.programme} id="programme">
-          <div className={`container ${styles.programmeIntro}`}>
+          <div className={`container ${styles.agendaAnnouncement}`}>
+            <p className={styles.agendaBadge} data-reveal>Agenda · TBA</p>
             <SectionIntro
-              eyebrow="Programme preview"
-              title="One day. A clear rhythm. Plenty of room to connect."
-              copy="The detailed line-up is being curated now. This is the shape of the day; confirmed speakers, sessions, and exact timings will be published as they are ready."
+              eyebrow="Something worth gathering for"
+              title="Great conversations are on the way."
+              copy="We’re putting together a day of Flutter, fresh ideas, and community connections in Chennai. The full agenda will be announced soon."
               inverse
             />
-            <p className={styles.programmeStatus} data-reveal>
-              <span aria-hidden="true" /> Programme in curation
-            </p>
-          </div>
-
-          <div className={`container ${styles.programmeList}`}>
-            {programme.map((item, index) => (
-              <article
-                className={styles.programmeRow}
-                data-reveal
-                data-tone={item.tone}
-                key={item.title}
-              >
-                <span className={styles.programmeNumber}>0{index + 1}</span>
-                <p className={styles.programmeTime}>{item.time}</p>
-                <h3>{item.title}</h3>
-                <p className={styles.programmeDescription}>{item.description}</p>
-              </article>
-            ))}
-          </div>
-
-          <div className={`container ${styles.programmeFoot}`} data-reveal>
-            <p>
-              Speaker announcements and the full three-track agenda will appear
-              here once confirmed.
-            </p>
-            <a className="text-link" href={participationPaths[0].href}>
-              Interested in speaking?
-              <ArrowUpRight aria-hidden="true" size={16} />
-            </a>
           </div>
         </section>
 
         <SpeakersSection />
+
+        <PartnersSection />
 
         <section className={styles.between}>
           <div className={`container ${styles.betweenGrid}`}>
@@ -390,15 +354,13 @@ export default function EventPage() {
         <div className={`container ${styles.footerTop}`}>
           <div className={styles.footerBrand}>
             <Image
-              src="https://nammaflutter.com/images/logo.png"
-              alt="Namma Flutter mascot"
-              width={54}
-              height={54}
+              className={styles.footerEventLogo}
+              src="/assets/fsi-logo.png"
+              alt="Flutter South India 2026"
+              width={680}
+              height={252}
             />
-            <div>
-              <strong>{eventDetails.organizer}</strong>
-              <span>Building Flutter community in Chennai.</span>
-            </div>
+            <span>Made together by three Flutter communities.</span>
           </div>
           <div className={styles.socials} aria-label="Namma Flutter social links">
             {socialLinks.map((social) => (
@@ -410,7 +372,7 @@ export default function EventPage() {
           </div>
         </div>
         <div className={`container ${styles.footerBottom}`}>
-          <span>© 2026 Namma Flutter</span>
+          <span>© 2026 Flutter South India</span>
           <a href={`mailto:${eventDetails.contact}`}>{eventDetails.contact}</a>
           <span>Made with care for the community.</span>
         </div>
