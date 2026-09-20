@@ -1,0 +1,113 @@
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1.25rem;
+  margin-top: var(--space-6);
+}
+
+.card {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  overflow: hidden;
+  border: 1px solid var(--color-line-light);
+  border-radius: var(--radius-m);
+  background: var(--color-navy);
+  color: var(--color-white);
+  text-decoration: none;
+  transition: transform 220ms var(--ease-out), border-color 220ms ease, box-shadow 220ms ease;
+}
+
+.card:hover,
+.card:focus-visible {
+  transform: translateY(-5px);
+  border-color: var(--color-cyan);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.22);
+}
+
+.logo {
+  position: relative;
+  height: 10rem;
+  margin: 0.75rem 0.75rem 0;
+  overflow: hidden;
+  border-radius: 0.45rem;
+  background: white;
+}
+
+.logo img {
+  padding: 1.25rem;
+  object-fit: contain;
+  transition: transform 300ms var(--ease-out);
+}
+
+.card:hover .logo img,
+.card:focus-visible .logo img {
+  transform: scale(1.04);
+}
+
+.body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  padding: 1.4rem;
+}
+
+.label {
+  color: var(--color-cyan);
+  font-size: 0.64rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.body h3 {
+  margin-top: 0.6rem;
+  font-family: var(--font-display), sans-serif;
+  font-size: 1.35rem;
+  line-height: 1.15;
+  letter-spacing: -0.035em;
+}
+
+.body p {
+  margin-block: 0.75rem 1.25rem;
+  color: var(--color-on-dark-muted);
+  font-size: 0.84rem;
+  line-height: 1.6;
+}
+
+.link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-top: auto;
+  padding-top: 1rem;
+  border-top: 1px solid var(--color-line-light);
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+.link svg {
+  color: var(--color-cyan);
+  transition: transform 220ms var(--ease-out);
+}
+
+.card:hover .link svg,
+.card:focus-visible .link svg {
+  transform: translate(2px, -2px);
+}
+
+@media (max-width: 64rem) {
+  .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (max-width: 38rem) {
+  .grid { grid-template-columns: 1fr; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card, .logo img, .link svg { transition: none; }
+  .card:hover, .card:focus-visible, .card:hover .logo img,
+  .card:focus-visible .logo img, .card:hover .link svg,
+  .card:focus-visible .link svg { transform: none; }
+}

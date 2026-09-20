@@ -1,15 +1,7 @@
-"use client";
-
-import { useState } from "react";
 import Image from "next/image";
 import { ArrowUpRight } from "lucide-react";
 import SectionIntro from "@/components/ui/SectionIntro";
-import {
-  participationPaths,
-  speakerSlots,
-  speakerTracks,
-  type SpeakerTrackId,
-} from "@/data/event";
+import { participationPaths, speakerSlots } from "@/data/event";
 import styles from "./EventPage.module.css";
 
 function SpeakerCard({ speaker }: { speaker: (typeof speakerSlots)[number] }) {
@@ -66,20 +58,13 @@ function SpeakerCard({ speaker }: { speaker: (typeof speakerSlots)[number] }) {
 }
 
 export default function SpeakersSection() {
-  const [activeTrackId, setActiveTrackId] = useState<SpeakerTrackId>("track-1");
-  const activeTrackSpeakers = speakerSlots.filter(
-    (speaker) => speaker.trackId === activeTrackId,
-  );
-  const activeTrack =
-    speakerTracks.find((track) => track.id === activeTrackId) ?? speakerTracks[0];
-
   return (
     <section className={styles.speakers} id="speakers">
       <div className={`container ${styles.speakersIntro}`}>
         <SectionIntro
           eyebrow="The people on stage"
           title="Meet the first confirmed speakers."
-          copy="Confirmed speakers are being announced across three parallel Flutter tracks. Session topics and full speaker profiles will be added as they are finalised."
+          copy="Session topics and full speaker profiles will be added as they are finalised."
         />
         <a className="text-link" href={participationPaths[0].href} data-reveal>
           Propose a session
@@ -88,44 +73,10 @@ export default function SpeakersSection() {
       </div>
 
       <div className={`container ${styles.speakerTrackPanel}`}>
-        <div
-          className={styles.speakerTrackChips}
-          role="group"
-          aria-label="Filter speakers by track"
-        >
-          {speakerTracks.map((track) => {
-            const isActive = activeTrackId === track.id;
-
-            return (
-              <button
-                key={track.id}
-                type="button"
-                aria-pressed={isActive}
-                className={`${styles.speakerTrackChip} ${
-                  isActive ? styles.speakerTrackChipActive : ""
-                }`}
-                onClick={() => setActiveTrackId(track.id)}
-              >
-                {track.title}
-              </button>
-            );
-          })}
-        </div>
-
-        <div
-          className={styles.speakerTrackGrid}
-          aria-live="polite"
-          aria-label={`${activeTrack.title} speakers`}
-        >
-          {activeTrackSpeakers.length > 0 ? (
-            activeTrackSpeakers.map((speaker) => (
-              <SpeakerCard key={speaker.id} speaker={speaker} />
-            ))
-          ) : (
-            <article className={styles.speakerCardPlaceholder}>
-              <p>Speakers to be announced</p>
-            </article>
-          )}
+        <div className={styles.speakerTrackGrid} aria-label="Confirmed speakers">
+          {speakerSlots.map((speaker) => (
+            <SpeakerCard key={speaker.id} speaker={speaker} />
+          ))}
         </div>
       </div>
     </section>

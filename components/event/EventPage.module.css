@@ -57,6 +57,44 @@
   height: 2.55rem;
 }
 
+.eventLogo {
+  display: block;
+  width: clamp(9rem, 16vw, 11rem);
+  overflow: hidden;
+  border-radius: 0.4rem;
+}
+
+.eventLogo img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.agendaAnnouncement {
+  max-width: 52rem;
+  padding-left: clamp(1.5rem, 4vw, 3rem);
+  border-left: 2px solid var(--color-cyan);
+}
+
+.agendaBadge {
+  display: inline-flex;
+  margin-bottom: 2rem;
+  padding: 0.55rem 1rem;
+  border: 1px solid var(--color-line-light);
+  border-radius: var(--radius-pill);
+  color: var(--color-cyan);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.organizerMascot {
+  width: 3.25rem;
+  height: 3.25rem;
+  object-fit: contain;
+}
+
 .brandMark img {
   width: 100%;
   height: 100%;
@@ -417,11 +455,113 @@
 .aboutGrid {
   display: grid;
   grid-template-columns: minmax(0, 0.84fr) minmax(0, 1.16fr);
-  gap: clamp(4rem, 9vw, 9rem);
+  gap: clamp(3rem, 6vw, 6rem);
 }
 
 .aboutIntro {
   align-self: start;
+}
+
+.aboutOrganizers {
+  margin-top: var(--space-6);
+  padding-top: var(--space-5);
+  border-top: 1px solid var(--color-line);
+}
+
+.organizerRowHeading {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.5rem 2rem;
+}
+
+.organizerRowHeading h3 {
+  font-family: var(--font-display), sans-serif;
+  font-size: var(--step-1);
+  letter-spacing: -0.035em;
+}
+
+.organizerRowHeading p {
+  color: var(--color-ink-soft);
+  font-size: 0.85rem;
+}
+
+.organizerRow {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.organizerCompact {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 1.25rem 1.25rem;
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-m);
+  background: linear-gradient(145deg, rgba(19, 185, 253, 0.04), transparent 65%), var(--color-paper-raised);
+  text-decoration: none;
+  transition: border-color var(--duration-fast), transform var(--duration-fast);
+}
+
+.organizerLogoPanel {
+  position: relative;
+  grid-column: 1 / -1;
+  width: 100%;
+  height: 7rem;
+  overflow: hidden;
+  border-radius: var(--radius-s);
+  background: white;
+}
+
+.organizerLogoPanel img {
+  padding: 0.85rem 1.25rem;
+  object-fit: contain;
+}
+
+.organizerCompact:hover {
+  border-color: var(--color-blue);
+  transform: translateY(-2px);
+}
+
+.organizerCompact > :first-child {
+  flex-shrink: 0;
+}
+
+.organizerCompact > svg {
+  flex-shrink: 0;
+  margin-left: auto;
+  color: var(--color-blue);
+}
+
+.organizerCompactName small,
+.organizerCompactName strong {
+  display: block;
+}
+
+.organizerCompactName small {
+  margin-bottom: 0.3rem;
+  color: var(--color-blue);
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.organizerCompactName strong {
+  font-family: var(--font-display), sans-serif;
+  font-size: 1.1rem;
+  line-height: 1.2;
+  letter-spacing: -0.035em;
+}
+
+@media (max-width: 38rem) {
+  .organizerRow {
+    grid-template-columns: 1fr;
+  }
 }
 
 .localNote {
@@ -617,6 +757,229 @@
 .speakerTrackPanel {
   margin-top: var(--space-7);
 }
+
+.speakerTrackPreview {
+  margin-bottom: 1.5rem;
+}
+
+.speakerTrackLabels {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+  padding: 0;
+  list-style: none;
+}
+
+.speakerTrackLabels li {
+  padding: 0.55rem 1rem;
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-pill);
+  color: var(--color-ink);
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+.speakerTrackNote {
+  margin-top: 0.8rem;
+  color: var(--color-ink-soft);
+  font-size: 0.85rem;
+}
+
+.organizers,
+.sponsors {
+  padding-block: var(--space-8);
+  background: var(--color-paper);
+}
+
+.organizerGrid,
+.communityPartnerGrid,
+.sponsorGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+  margin-top: var(--space-6);
+}
+
+.organizerCard {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  align-items: stretch;
+  padding: clamp(1.2rem, 2.5vw, 1.8rem);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-m);
+  background: linear-gradient(150deg, rgba(19, 185, 253, 0.055), transparent 60%), var(--color-paper-raised);
+  color: var(--color-ink);
+  text-decoration: none;
+  transition: border-color var(--duration-fast) var(--ease-soft), transform var(--duration-fast) var(--ease-out);
+}
+
+.organizerCard:hover {
+  border-color: var(--color-blue);
+  transform: translateY(-0.25rem);
+}
+
+.organizers {
+  border-top: 1px solid var(--color-line);
+}
+
+.organizerCardTop,
+.organizerCardFoot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.organizerCard .organizerCardTop small {
+  color: var(--color-ink-soft);
+  font-size: 0.62rem;
+}
+
+.organizerCardTop svg {
+  flex-shrink: 0;
+  color: var(--color-blue);
+}
+
+.organizerEmblem {
+  display: grid;
+  place-items: center;
+  margin-block: 2rem 1.25rem;
+}
+
+.organizerEmblem .organizerMark,
+.organizerEmblem .organizerMascot {
+  width: 5rem;
+  height: 5rem;
+  font-size: 1.6rem;
+}
+
+.organizerIdentity {
+  text-align: center;
+  margin-bottom: 1.75rem;
+}
+
+.organizerCard .organizerIdentity strong {
+  margin-top: 0;
+  line-height: 1.2;
+}
+
+.organizerIdentity small {
+  margin-top: 0.6rem;
+}
+
+.organizerCardFoot {
+  margin-top: auto;
+  padding-top: 1rem;
+  border-top: 1px solid var(--color-line);
+  color: var(--color-blue);
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+.organizerMark,
+.communityPartnerMark {
+  display: grid;
+  width: 3.25rem;
+  height: 3.25rem;
+  place-items: center;
+  border-radius: 0.8rem;
+  background: var(--color-navy-deep);
+  color: white;
+  font-family: var(--font-display), sans-serif;
+  font-weight: 700;
+  letter-spacing: -0.06em;
+}
+
+.organizerMarkKozhikode { background: #0753a8; }
+.organizerMarkFlakes { background: #6d3cc7; }
+
+.organizerCard small,
+.organizerCard strong {
+  display: block;
+}
+
+.organizerCard small,
+.communityPartnerCard p,
+.sponsorCard p {
+  color: var(--color-blue);
+  font-size: 0.72rem;
+  font-weight: 750;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.organizerCard strong {
+  margin-top: 0.45rem;
+  font-family: var(--font-display), sans-serif;
+  font-size: var(--step-1);
+  letter-spacing: -0.04em;
+  line-height: 1;
+}
+
+.organizerCard > svg { color: var(--color-blue); }
+
+.communityPartners {
+  padding-block: var(--space-8);
+  background: var(--color-navy-deep);
+  color: var(--color-white);
+}
+
+.communityPartnerGrid { margin-top: var(--space-6); }
+
+.communityPartnerCard {
+  min-height: 11rem;
+  padding: clamp(1.2rem, 2.5vw, 1.8rem);
+  border: 1px dashed rgba(255, 255, 255, 0.28);
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.communityPartnerMark {
+  width: auto;
+  height: auto;
+  justify-content: start;
+  border-radius: 0;
+  background: transparent;
+  color: var(--color-cyan);
+  font-family: var(--font-body), sans-serif;
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+}
+
+.communityPartnerCard p { margin-top: 2rem; color: var(--color-on-dark-subtle); }
+
+.communityPartnerCard h3,
+.sponsorCard strong {
+  display: block;
+  margin-top: 0.55rem;
+  font-family: var(--font-display), sans-serif;
+  font-size: var(--step-1);
+  font-weight: 600;
+  letter-spacing: -0.04em;
+}
+
+.sponsorsIntro {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: end;
+  gap: 3rem;
+}
+
+.sponsorCard {
+  min-height: 11rem;
+  padding: clamp(1.2rem, 2.5vw, 1.8rem);
+  border: 1px solid var(--color-line);
+  background: var(--color-paper-raised);
+}
+
+.sponsorCard > span {
+  color: var(--color-ink-soft);
+  font-size: 0.72rem;
+  font-weight: 750;
+  letter-spacing: 0.1em;
+}
+
+.sponsorCard p { margin-top: 2.2rem; }
 
 .speakerTrackChips {
   display: flex;
@@ -1502,22 +1865,24 @@
 
 .footerBrand {
   display: flex;
-  align-items: center;
-  gap: 1rem;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.5rem;
 }
 
 .footerBrand img {
   border-radius: 0.9rem;
 }
 
-.footerBrand strong,
-.footerBrand span {
-  display: block;
+.footerBrand .footerEventLogo {
+  width: 10rem;
+  height: auto;
+  flex-shrink: 0;
+  border-radius: 0.4rem;
 }
 
-.footerBrand strong {
-  font-family: var(--font-display), sans-serif;
-  font-size: 1.15rem;
+.footerBrand span {
+  display: block;
 }
 
 .footerBrand span {
@@ -1607,6 +1972,15 @@
 }
 
 @media (max-width: 52rem) {
+  .organizerCard {
+    grid-template-columns: 1fr;
+    justify-items: center;
+    text-align: center;
+  }
+
+  .organizerCard strong {
+    font-size: 1.1rem;
+  }
   .desktopNav,
   .headerCta {
     display: none !important;
@@ -1752,6 +2126,7 @@
 
   .speakersIntro,
   .partnersIntro,
+  .sponsorsIntro,
   .hiringHeader {
     grid-template-columns: 1fr;
   }
@@ -1762,6 +2137,11 @@
   }
 
   .speakerTrackGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .communityPartnerGrid,
+  .sponsorGrid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
@@ -1808,6 +2188,13 @@
 }
 
 @media (max-width: 38rem) {
+  .organizerGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .footerBrand {
+    flex-wrap: wrap;
+  }
   .heroKicker {
     margin-bottom: 2.4rem;
   }
@@ -1878,6 +2265,11 @@
   }
 
   .speakerTrackGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .communityPartnerGrid,
+  .sponsorGrid {
     grid-template-columns: 1fr;
   }
 
