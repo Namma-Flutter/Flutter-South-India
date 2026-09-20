@@ -3,7 +3,8 @@ export { faqItems } from "./faq";
 export { hiringStalls } from "./hiring";
 export { participationPaths } from "./participation";
 export { programme } from "./programme";
-export { speakerSlots, speakerTracks, type SpeakerTrackId } from "./speakers";
+export { organizers, communityPartnerSlots } from "./partners";
+export { speakerSlots } from "./speakers";
 export { sponsorSlots } from "./sponsors";
 export {
   formatTicketPrice,
@@ -15,4 +16,3 @@ export {
   ticketTiers,
   ticketingMode,
 } from "./tickets";
-

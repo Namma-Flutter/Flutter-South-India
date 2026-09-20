@@ -7,14 +7,12 @@ import { trackTicketIntentClick } from "@/lib/analytics";
 import styles from "./EventPage.module.css";
 
 type EventHeaderProps = {
-  organizer: string;
   nav: ReadonlyArray<{ label: string; href: string }>;
   ticketLabel: string;
   ticketLink: string;
 };
 
 export default function EventHeader({
-  organizer,
   nav,
   ticketLabel,
   ticketLink,
@@ -105,18 +103,14 @@ export default function EventHeader({
           aria-label="Back to top"
           onClick={() => setOpen(false)}
         >
-          <span className={styles.brandMark}>
+          <span className={styles.eventLogo}>
             <Image
-              src="https://nammaflutter.com/images/logo.png"
-              alt=""
-              width={38}
-              height={38}
+              src="/assets/fsi-logo.png"
+              alt="Flutter South India 2026"
+              width={680}
+              height={252}
               priority
             />
-          </span>
-          <span>
-            <strong>{organizer}</strong>
-            <small>South India · 2026</small>
           </span>
         </a>
 
