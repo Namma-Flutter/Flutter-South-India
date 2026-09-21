@@ -1,3 +1,5 @@
+"use client";
+
 import Image from "next/image";
 import {
   ArrowDown,
@@ -19,6 +21,14 @@ import {
   venueNotes,
 } from "@/data/event";
 import SectionIntro from "@/components/ui/SectionIntro";
+import {
+  trackBrochureDownload,
+  trackPartnerInquiry,
+  trackSpeakerInquiry,
+  trackTicketIntentClick,
+  trackVenueMapClick,
+  trackVolunteerInquiry,
+} from "@/lib/analytics";
 import CommunityStorySection from "./CommunityStorySection";
 import Countdown from "./Countdown";
 import EventHeader from "./EventHeader";
@@ -68,6 +78,13 @@ export default function EventPage() {
                 <a
                   className="button button-light"
                   href={eventDetails.ticketLink}
+                  onClick={() =>
+                    trackTicketIntentClick({
+                      cta_location: "hero",
+                      ticket_tier: "unspecified",
+                      link_url: eventDetails.ticketLink,
+                    })
+                  }
                   {...ticketLinkProps}
                 >
                   {eventDetails.ticketLabel}
@@ -110,6 +127,12 @@ export default function EventPage() {
                   target="_blank"
                   rel="noreferrer"
                   aria-label="Open SRM IST Ramapuram in Google Maps"
+                  onClick={() =>
+                    trackVenueMapClick({
+                      cta_location: "hero_pass",
+                      destination_domain: "maps.app.goo.gl",
+                    })
+                  }
                 >
                   <MapPin aria-hidden="true" size={16} />
                   {eventDetails.venue}, {eventDetails.city}
@@ -225,7 +248,28 @@ export default function EventPage() {
                 <h3>{item.title}</h3>
                 <p>{item.description}</p>
                 <div className={styles.participationActions}>
-                  <a href={item.href} aria-label={`${item.action}: ${item.title}`}>
+                  <a
+                    href={item.href}
+                    aria-label={`${item.action}: ${item.title}`}
+                    onClick={() => {
+                      if (item.number === "01") {
+                        trackSpeakerInquiry({
+                          cta_location: "take_part",
+                          inquiry_type: "speaking",
+                        });
+                      } else if (item.number === "02") {
+                        trackPartnerInquiry({
+                          cta_location: "take_part",
+                          inquiry_type: "partnership",
+                        });
+                      } else if (item.number === "03") {
+                        trackVolunteerInquiry({
+                          cta_location: "take_part",
+                          inquiry_type: "volunteering",
+                        });
+                      }
+                    }}
+                  >
                     {item.action}
                     <ArrowUpRight aria-hidden="true" size={18} />
                   </a>
@@ -235,6 +279,7 @@ export default function EventPage() {
                       target="_blank"
                       rel="noreferrer"
                       aria-label={`${item.secondaryAction}: ${item.title}`}
+                      onClick={() => trackBrochureDownload()}
                     >
                       {item.secondaryAction}
                       <FileText aria-hidden="true" size={17} />
@@ -292,7 +337,17 @@ export default function EventPage() {
                   <strong>{eventDetails.venue}</strong>
                   <span>{eventDetails.address}</span>
                 </p>
-                <a href={mapLink} target="_blank" rel="noreferrer">
+                <a
+                  href={mapLink}
+                  target="_blank"
+                  rel="noreferrer"
+                  onClick={() =>
+                    trackVenueMapClick({
+                      cta_location: "venue_section",
+                      destination_domain: "maps.app.goo.gl",
+                    })
+                  }
+                >
                   Open in Maps
                   <ArrowUpRight aria-hidden="true" size={15} />
                 </a>
@@ -341,6 +396,13 @@ export default function EventPage() {
             <a
               className="button button-light"
               href={eventDetails.ticketLink}
+              onClick={() =>
+                trackTicketIntentClick({
+                  cta_location: "final_cta",
+                  ticket_tier: "unspecified",
+                  link_url: eventDetails.ticketLink,
+                })
+              }
               {...ticketLinkProps}
             >
               {eventDetails.ticketLabel}

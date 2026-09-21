@@ -2,6 +2,10 @@ import Image from "next/image";
 import { ArrowUpRight } from "lucide-react";
 import SectionIntro from "@/components/ui/SectionIntro";
 import { participationPaths, speakerSlots } from "@/data/event";
+import {
+  trackSpeakerInquiry,
+  trackSpeakerProfileClick,
+} from "@/lib/analytics";
 import styles from "./EventPage.module.css";
 
 function SpeakerCard({ speaker }: { speaker: (typeof speakerSlots)[number] }) {
@@ -47,6 +51,13 @@ function SpeakerCard({ speaker }: { speaker: (typeof speakerSlots)[number] }) {
             href={speaker.profileUrl}
             target="_blank"
             rel="noopener noreferrer"
+            onClick={() =>
+              trackSpeakerProfileClick({
+                speaker_name: speaker.name,
+                speaker_role: speaker.role || "",
+                speaker_org: speaker.organization || "",
+              })
+            }
           >
             LinkedIn
             <ArrowUpRight aria-hidden="true" size={14} />
@@ -66,7 +77,17 @@ export default function SpeakersSection() {
           title="Meet the first confirmed speakers."
           copy="Session topics and full speaker profiles will be added as they are finalised."
         />
-        <a className="text-link" href={participationPaths[0].href} data-reveal>
+        <a
+          className="text-link"
+          href={participationPaths[0].href}
+          onClick={() =>
+            trackSpeakerInquiry({
+              cta_location: "speakers",
+              inquiry_type: "speaking",
+            })
+          }
+          data-reveal
+        >
           Propose a session
           <ArrowUpRight aria-hidden="true" size={16} />
         </a>

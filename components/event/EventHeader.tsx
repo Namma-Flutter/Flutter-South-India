@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { ArrowUpRight, Menu, X } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
+import { trackTicketIntentClick } from "@/lib/analytics";
 import styles from "./EventPage.module.css";
 
 type EventHeaderProps = {
@@ -124,6 +125,13 @@ export default function EventHeader({
         <a
           className={`button button-primary ${styles.headerCta}`}
           href={ticketLink}
+          onClick={() =>
+            trackTicketIntentClick({
+              cta_location: "header",
+              ticket_tier: "unspecified",
+              link_url: ticketLink,
+            })
+          }
           {...ticketLinkProps}
         >
           {ticketLabel}
@@ -162,7 +170,14 @@ export default function EventHeader({
           <a
             className={`button button-primary ${styles.mobileCta}`}
             href={ticketLink}
-            onClick={() => setOpen(false)}
+            onClick={() => {
+              setOpen(false);
+              trackTicketIntentClick({
+                cta_location: "mobile_nav",
+                ticket_tier: "unspecified",
+                link_url: ticketLink,
+              });
+            }}
             {...ticketLinkProps}
           >
             {ticketLabel}
