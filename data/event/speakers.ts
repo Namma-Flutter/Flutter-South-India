@@ -15,7 +15,7 @@ export type SpeakerSlot = SpeakerSlotBase &
         role?: string;
         organization?: string;
         topic: string;
-        photo?: EventImage;
+        photo?: EventImage & { objectPosition?: string };
         profileUrl?: string;
       }
   );
@@ -61,7 +61,7 @@ export const speakerSlots: SpeakerSlot[] = [
     organization: "Flutter Enthusiast",
     topic: "Topic to be announced",
     photo: {
-      src: "/assets/speakers/surya-saravanakumar.png",
+      src: "/assets/speakers/surya-saravanakumar.jpeg",
       alt: "Portrait of Surya Saravanakumar",
     },
     profileUrl: "https://www.linkedin.com/in/suryasaravanakumar/",
@@ -76,9 +76,96 @@ export const speakerSlots: SpeakerSlot[] = [
     organization: "Flutter Enthusiast",
     topic: "Topic to be announced",
     photo: {
-      src: "/assets/speakers/gowtham-m-g.png",
+      src: "/assets/speakers/gowtham-m-g.jpeg",
       alt: "Portrait of Gowtham M G",
     },
     profileUrl: "https://www.linkedin.com/in/gowtham-m-g-139951179",
+  },
+  {
+    id: "S05",
+    format: "Confirmed speaker",
+    focus: "Topic to be announced",
+    status: "confirmed",
+    name: "Sri Madhumitha",
+    topic: "Topic to be announced",
+    photo: {
+      src: "/assets/speakers/sri-madhumitha.jpg",
+      alt: "Portrait of Sri Madhumitha",
+    },
+  },
+  {
+    id: "S06",
+    format: "Confirmed speaker",
+    focus: "Topic to be announced",
+    status: "confirmed",
+    name: "Hari Prasath Ganesan",
+    topic: "Topic to be announced",
+    photo: {
+      src: "/assets/speakers/hari-prasath.jpg",
+      alt: "Portrait of Hari Prasath Ganesan",
+      objectPosition: "50% 0%",
+    },
+    profileUrl: "https://www.linkedin.com/in/hari-prasath-ganesan/",
+  },
+  {
+    id: "S07",
+    format: "Confirmed speaker",
+    focus: "Topic to be announced",
+    status: "confirmed",
+    name: "Kamal Shree",
+    topic: "Topic to be announced",
+    photo: {
+      src: "/assets/speakers/kamal-shree.jpeg",
+      alt: "Portrait of Kamal Shree",
+    },
+    profileUrl: "https://www.linkedin.com/in/kamalshree/",
+  },
+  {
+    id: "S08",
+    format: "Confirmed speaker",
+    focus: "Topic to be announced",
+    status: "confirmed",
+    name: "Prabhu",
+    topic: "Topic to be announced",
+    photo: {
+      src: "/assets/speakers/prabhu.jpg",
+      alt: "Portrait of Prabhu",
+    },
+  },
+  {
+    id: "S09",
+    format: "Confirmed speaker",
+    focus: "Topic to be announced",
+    status: "confirmed",
+    name: "Sai Rajendran",
+    topic: "Topic to be announced",
+    photo: {
+      src: "/assets/speakers/sai-rajendran.jpg",
+      alt: "Portrait of Sai Rajendran",
+    },
+  },
+  {
+    id: "S10",
+    format: "Confirmed speaker",
+    focus: "Topic to be announced",
+    status: "confirmed",
+    name: "Shubham",
+    topic: "Topic to be announced",
+    photo: {
+      src: "/assets/speakers/shubham.jpg",
+      alt: "Portrait of Shubham",
+    },
+  },
+  {
+    id: "S11",
+    format: "Confirmed speaker",
+    focus: "Topic to be announced",
+    status: "confirmed",
+    name: "Vivek",
+    topic: "Topic to be announced",
+    photo: {
+      src: "/assets/speakers/vivek.png",
+      alt: "Portrait of Vivek",
+    },
   },
 ];

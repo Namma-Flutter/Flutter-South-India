@@ -23,6 +23,7 @@ function SpeakerCard({ speaker }: { speaker: (typeof speakerSlots)[number] }) {
             className={styles.speakerPhoto}
             src={photo.src}
             alt={photo.alt}
+            style={{ objectPosition: photo.objectPosition }}
             fill
             sizes="(max-width: 38rem) 100vw, (max-width: 64rem) 50vw, 33vw"
           />
