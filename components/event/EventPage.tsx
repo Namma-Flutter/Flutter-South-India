@@ -9,6 +9,7 @@ import {
   CalendarDays,
   FileText,
   MapPin,
+  PartyPopper,
 } from "lucide-react";
 import {
   eventDetails,
@@ -95,7 +96,13 @@ export default function EventPage() {
                   See the day
                   <ArrowDown aria-hidden="true" size={16} />
                 </a>
-                <Link className={styles.programLink} href="/i-am-attending/">
+                <Link className={styles.posterCta} href="/i-am-attending/">
+                  <span className={styles.confetti} aria-hidden="true">
+                    {Array.from({ length: 14 }, (_, index) => (
+                      <i key={index} />
+                    ))}
+                  </span>
+                  <PartyPopper aria-hidden="true" size={18} />
                   Make your attendee poster
                   <ArrowRight aria-hidden="true" size={16} />
                 </Link>
