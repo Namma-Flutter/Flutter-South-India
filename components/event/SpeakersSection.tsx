@@ -75,8 +75,8 @@ export default function SpeakersSection() {
       <div className={`container ${styles.speakersIntro}`}>
         <SectionIntro
           eyebrow="The people on stage"
-          title="Meet the first confirmed speakers."
-          copy="Session topics and full speaker profiles will be added as they are finalised."
+          title="Meet the confirmed speakers."
+          copy="Explore the sessions and meet the 12 speakers joining Flutter South India 2026."
         />
         <a
           className="text-link"
