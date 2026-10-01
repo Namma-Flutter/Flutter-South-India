@@ -23,6 +23,7 @@ function SpeakerCard({ speaker }: { speaker: (typeof speakerSlots)[number] }) {
             className={styles.speakerPhoto}
             src={photo.src}
             alt={photo.alt}
+            style={{ objectPosition: photo.objectPosition }}
             fill
             sizes="(max-width: 38rem) 100vw, (max-width: 64rem) 50vw, 33vw"
           />
@@ -74,8 +75,8 @@ export default function SpeakersSection() {
       <div className={`container ${styles.speakersIntro}`}>
         <SectionIntro
           eyebrow="The people on stage"
-          title="Meet the first confirmed speakers."
-          copy="Session topics and full speaker profiles will be added as they are finalised."
+          title="Meet the confirmed speakers."
+          copy="Explore the sessions and meet the 12 speakers joining Flutter South India 2026."
         />
         <a
           className="text-link"
