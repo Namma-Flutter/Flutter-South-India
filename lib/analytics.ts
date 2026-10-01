@@ -71,6 +71,11 @@ export type VenueMapClickEvent = {
   destination_domain: "maps.app.goo.gl";
 };
 
+export type AttendingPosterEvent = {
+  event: "attending_poster_export";
+  export_method: "download" | "share";
+};
+
 export type AnalyticsEvent =
   | TicketIntentClickEvent
   | BrochureDownloadEvent
@@ -79,7 +84,8 @@ export type AnalyticsEvent =
   | VolunteerInquiryEvent
   | TrackSelectEvent
   | SpeakerProfileClickEvent
-  | VenueMapClickEvent;
+  | VenueMapClickEvent
+  | AttendingPosterEvent;
 
 /**
  * Pushes an event payload to window.dataLayer.
@@ -170,6 +176,15 @@ export function trackVenueMapClick(
 ): void {
   pushAnalyticsEvent({
     event: "venue_map_click",
+    ...params,
+  });
+}
+
+export function trackAttendingPosterExport(
+  params: Omit<AttendingPosterEvent, "event">,
+): void {
+  pushAnalyticsEvent({
+    event: "attending_poster_export",
     ...params,
   });
 }

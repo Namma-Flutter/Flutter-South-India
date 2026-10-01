@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import {
   ArrowDown,
   ArrowRight,
@@ -94,6 +95,10 @@ export default function EventPage() {
                   See the day
                   <ArrowDown aria-hidden="true" size={16} />
                 </a>
+                <Link className={styles.programLink} href="/i-am-attending/">
+                  Make your attendee poster
+                  <ArrowRight aria-hidden="true" size={16} />
+                </Link>
               </div>
             </div>
 
