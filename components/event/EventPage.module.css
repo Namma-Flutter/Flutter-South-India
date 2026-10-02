@@ -290,6 +290,140 @@
   transform: translateY(3px);
 }
 
+.posterCta {
+  position: relative;
+  isolation: isolate;
+  display: inline-flex;
+  min-height: 3.25rem;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  border-radius: var(--radius-pill);
+  padding: 0.75rem 1.3rem;
+  background: linear-gradient(
+    110deg,
+    #13b9fd 0%,
+    #027dfd 35%,
+    #7c5cff 65%,
+    #13b9fd 100%
+  );
+  background-size: 220% 100%;
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.18) inset,
+    0 10px 30px rgba(19, 185, 253, 0.35);
+  color: white;
+  font-size: 0.92rem;
+  font-weight: 700;
+  line-height: 1;
+  text-decoration: none;
+  animation: posterGradient 4s linear infinite;
+  transition: transform var(--duration-fast) var(--ease-out);
+}
+
+.posterCta:hover {
+  transform: translateY(-2px) scale(1.02);
+}
+
+.posterCta > svg:last-child {
+  transition: transform var(--duration-fast) var(--ease-out);
+}
+
+.posterCta:hover > svg:last-child {
+  transform: translateX(3px);
+}
+
+.posterCta > svg:first-of-type {
+  animation: posterPop 2.4s var(--ease-out) infinite;
+}
+
+.confetti {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+}
+
+.confetti i {
+  position: absolute;
+  top: 50%;
+  left: var(--left);
+  width: 0.42rem;
+  height: 0.7rem;
+  border-radius: 2px;
+  background: var(--color);
+  opacity: 0;
+  animation: confettiBurst 2.4s var(--ease-out) var(--delay) infinite;
+}
+
+.confetti i:nth-child(3n) {
+  width: 0.45rem;
+  height: 0.45rem;
+  border-radius: 50%;
+}
+
+.confetti i:nth-child(1) { --left: 8%; --x: -2.4rem; --y: -2.6rem; --r: -220deg; --color: #ffb444; --delay: 0ms; }
+.confetti i:nth-child(2) { --left: 18%; --x: -1.2rem; --y: -3.2rem; --r: 180deg; --color: #40f0a6; --delay: 120ms; }
+.confetti i:nth-child(3) { --left: 28%; --x: -0.6rem; --y: -3.6rem; --r: 260deg; --color: #ff5fa2; --delay: 60ms; }
+.confetti i:nth-child(4) { --left: 38%; --x: 0.4rem; --y: -3rem; --r: -160deg; --color: #13b9fd; --delay: 200ms; }
+.confetti i:nth-child(5) { --left: 48%; --x: -0.2rem; --y: -3.8rem; --r: 300deg; --color: #fffdf8; --delay: 90ms; }
+.confetti i:nth-child(6) { --left: 58%; --x: 0.8rem; --y: -3.3rem; --r: -240deg; --color: #ffb444; --delay: 160ms; }
+.confetti i:nth-child(7) { --left: 68%; --x: 1.1rem; --y: -3.6rem; --r: 200deg; --color: #7c5cff; --delay: 30ms; }
+.confetti i:nth-child(8) { --left: 78%; --x: 1.6rem; --y: -2.9rem; --r: -280deg; --color: #40f0a6; --delay: 220ms; }
+.confetti i:nth-child(9) { --left: 90%; --x: 2.5rem; --y: -2.4rem; --r: 240deg; --color: #ff5fa2; --delay: 100ms; }
+.confetti i:nth-child(10) { --left: 14%; --x: -2rem; --y: 1.6rem; --r: 160deg; --color: #13b9fd; --delay: 1200ms; }
+.confetti i:nth-child(11) { --left: 34%; --x: -0.8rem; --y: 2rem; --r: -200deg; --color: #ffb444; --delay: 1320ms; }
+.confetti i:nth-child(12) { --left: 54%; --x: 0.6rem; --y: 2.2rem; --r: 220deg; --color: #fffdf8; --delay: 1260ms; }
+.confetti i:nth-child(13) { --left: 74%; --x: 1.4rem; --y: 1.8rem; --r: -180deg; --color: #7c5cff; --delay: 1380ms; }
+.confetti i:nth-child(14) { --left: 92%; --x: 2.2rem; --y: 1.4rem; --r: 260deg; --color: #40f0a6; --delay: 1220ms; }
+
+@keyframes confettiBurst {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%) rotate(0deg) scale(0.4);
+  }
+
+  12% {
+    opacity: 1;
+  }
+
+  45% {
+    opacity: 1;
+    transform: translate(calc(-50% + var(--x)), calc(-50% + var(--y)))
+      rotate(calc(var(--r) * 0.6)) scale(1);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate(
+        calc(-50% + var(--x) * 1.35),
+        calc(-50% + var(--y) + 1.6rem)
+      )
+      rotate(var(--r)) scale(0.8);
+  }
+}
+
+@keyframes posterGradient {
+  to {
+    background-position: -220% 0;
+  }
+}
+
+@keyframes posterPop {
+  0%,
+  60%,
+  100% {
+    transform: rotate(0deg) scale(1);
+  }
+
+  8% {
+    transform: rotate(-18deg) scale(1.25);
+  }
+
+  18% {
+    transform: rotate(10deg) scale(1.05);
+  }
+}
+
 .eventPass {
   position: relative;
   align-self: center;
@@ -2220,6 +2354,10 @@
   .programLink {
     justify-content: center;
     padding: 0.7rem;
+  }
+
+  .posterCta {
+    width: 100%;
   }
 
   .eventPass {
