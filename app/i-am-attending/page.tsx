@@ -3,7 +3,7 @@ import { Poppins } from "next/font/google";
 import PosterGenerator from "@/components/poster/PosterGenerator";
 
 const posterFont = Poppins({
-  weight: ["400", "500", "600"],
+  weight: ["400", "500", "600", "700", "800", "900"],
   subsets: ["latin"],
   display: "swap",
 });
