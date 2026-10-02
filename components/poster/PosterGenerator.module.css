@@ -323,6 +323,45 @@
   }
 }
 
+/* ── Template picker ────────────────────────────────────────────── */
+
+.templatePicker {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.templateTab {
+  padding: 0.42rem 0.9rem;
+  border: 1px solid var(--color-line-light);
+  border-radius: var(--radius-pill, 999px);
+  background: transparent;
+  color: var(--color-on-dark-muted);
+  font-family: inherit;
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    border-color var(--duration-fast) var(--ease-soft),
+    background-color var(--duration-fast) var(--ease-soft),
+    color var(--duration-fast) var(--ease-soft);
+}
+
+.templateTab:hover {
+  border-color: var(--color-cyan);
+  color: var(--color-white);
+}
+
+.templateTabActive {
+  background: var(--color-blue);
+  border-color: var(--color-blue);
+  color: var(--color-white);
+}
+
+.templateTabActive:hover {
+  border-color: var(--color-blue);
+}
+
 @media (max-width: 60rem) {
   .workspace {
     grid-template-columns: minmax(0, 1fr);

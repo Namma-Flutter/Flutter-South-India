@@ -24,15 +24,13 @@ import {
 } from "react";
 import { trackAttendingPosterExport } from "@/lib/analytics";
 import {
-  PHOTO_SLOT,
-  POSTER_HEIGHT,
-  POSTER_TEMPLATE_SRC,
-  POSTER_WIDTH,
-  clampCrop,
-  drawPoster,
+  TEMPLATES,
+  clampCropForSlot,
+  isInPhotoSlot,
+  type PosterTemplate,
   type PhotoCrop,
   type PosterFields,
-} from "./drawPoster";
+} from "./templates";
 import styles from "./PosterGenerator.module.css";
 
 type PosterGeneratorProps = {
@@ -75,14 +73,14 @@ function detectFileSharing() {
   }
 }
 
-function posterFileName(fields: PosterFields) {
-  const slug = [fields.firstName, fields.lastName]
+function posterFileName(fields: PosterFields, templateId: string) {
+  const nameSlug = [fields.firstName, fields.lastName]
     .join(" ")
     .trim()
     .toLowerCase()
     .replace(/[^a-z0-9]+/g, "-")
     .replace(/^-|-$/g, "");
-  return `flutter-south-india-2026${slug ? `-${slug}` : ""}.jpg`;
+  return `flutter-south-india-2026-${templateId}${nameSlug ? `-${nameSlug}` : ""}.jpg`;
 }
 
 export default function PosterGenerator({
@@ -92,54 +90,97 @@ export default function PosterGenerator({
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const dragRef = useRef<{ x: number; y: number } | null>(null);
   const photoUrlRef = useRef<string | null>(null);
+  const templateImageRef = useRef<HTMLImageElement | null>(null);
 
-  const [template, setTemplate] = useState<HTMLImageElement | null>(null);
+  const [selectedTemplate, setSelectedTemplate] = useState<PosterTemplate>(
+    TEMPLATES[0],
+  );
   const [fontsReady, setFontsReady] = useState(false);
+  const [loadedTemplateId, setLoadedTemplateId] = useState<string | null>(null);
   const [photo, setPhoto] = useState<HTMLImageElement | null>(null);
   const [photoName, setPhotoName] = useState("");
   const [crop, setCrop] = useState<PhotoCrop>(DEFAULT_CROP);
   const [fields, setFields] = useState<PosterFields>(EMPTY_FIELDS);
   const [error, setError] = useState("");
-  const [exporting, setExporting] = useState<"download" | "share" | null>(
-    null,
-  );
+  const [exporting, setExporting] = useState<"download" | "share" | null>(null);
   const canShareFiles = useSyncExternalStore(
     subscribeToNothing,
     detectFileSharing,
     () => false,
   );
   const [dragOver, setDragOver] = useState(false);
+  const templateReady =
+    !selectedTemplate.templateSrc ||
+    loadedTemplateId === selectedTemplate.id;
 
+  // Load fonts (extend weights to support bold headings in new templates)
   useEffect(() => {
     let cancelled = false;
-    loadImage(POSTER_TEMPLATE_SRC)
-      .then((image) => !cancelled && setTemplate(image))
-      .catch(() => !cancelled && setError("The poster template failed to load. Please refresh the page."));
-
     Promise.all(
-      [400, 500, 600].map((weight) =>
+      [400, 500, 600, 700, 800, 900].map((weight) =>
         document.fonts.load(`${weight} 64px ${fontFamily}`),
       ),
     )
       .catch(() => undefined)
       .finally(() => !cancelled && setFontsReady(true));
-
     return () => {
       cancelled = true;
-      if (photoUrlRef.current) URL.revokeObjectURL(photoUrlRef.current);
     };
   }, [fontFamily]);
 
+  // Load template PNG when the selected template changes (PNG-backed only)
+  useEffect(() => {
+    let cancelled = false;
+    templateImageRef.current = null;
+
+    if (selectedTemplate.templateSrc) {
+      loadImage(selectedTemplate.templateSrc)
+        .then((img) => {
+          if (!cancelled) {
+            templateImageRef.current = img;
+            setLoadedTemplateId(selectedTemplate.id);
+          }
+        })
+        .catch(() => {
+          if (!cancelled)
+            setError(
+              "The poster template failed to load. Please refresh the page.",
+            );
+        });
+    }
+
+    return () => {
+      cancelled = true;
+    };
+  }, [selectedTemplate]);
+
+  // Redraw canvas whenever anything visual changes
   useEffect(() => {
     const canvas = canvasRef.current;
     const ctx = canvas?.getContext("2d");
-    if (!ctx || !template || !fontsReady) return;
-    drawPoster(
+    if (!ctx || !templateReady || !fontsReady) return;
+    selectedTemplate.draw(
       ctx,
-      { template, photo, crop, fields, fontFamily, showPlaceholders: true },
+      {
+        photo,
+        crop,
+        fields,
+        fontFamily,
+        showPlaceholders: true,
+        assets: {
+          templateImage: templateImageRef.current,
+        },
+      },
       PREVIEW_SCALE,
     );
-  }, [template, fontsReady, photo, crop, fields, fontFamily]);
+  }, [selectedTemplate, templateReady, fontsReady, photo, crop, fields, fontFamily]);
+
+  // Revoke blob URL on unmount
+  useEffect(() => {
+    return () => {
+      if (photoUrlRef.current) URL.revokeObjectURL(photoUrlRef.current);
+    };
+  }, []);
 
   const loadPhotoFile = useCallback(async (file: File | undefined) => {
     if (!file) return;
@@ -151,7 +192,6 @@ export default function PosterGenerator({
       setError("That photo is over 25 MB. Please choose a smaller one.");
       return;
     }
-
     const url = URL.createObjectURL(file);
     try {
       const image = await loadImage(url);
@@ -179,15 +219,17 @@ export default function PosterGenerator({
   };
 
   const updateField =
-    (key: keyof PosterFields) => (event: ChangeEvent<HTMLInputElement>) => {
-      const { value } = event.target;
-      setFields((current) => ({ ...current, [key]: value }));
+    (key: keyof PosterFields) =>
+    (event: ChangeEvent<HTMLInputElement>) => {
+      setFields((current) => ({ ...current, [key]: event.target.value }));
     };
+
+  const photoSlot = selectedTemplate.photoSlot;
 
   const moveCrop = (dx: number, dy: number) => {
     if (!photo) return;
     setCrop((current) =>
-      clampCrop(photo, {
+      clampCropForSlot(photo, photoSlot, {
         ...current,
         offsetX: current.offsetX + dx,
         offsetY: current.offsetY + dy,
@@ -196,7 +238,7 @@ export default function PosterGenerator({
   };
 
   const toTemplateUnits = (canvas: HTMLCanvasElement) =>
-    POSTER_WIDTH / canvas.getBoundingClientRect().width;
+    selectedTemplate.width / canvas.getBoundingClientRect().width;
 
   const handlePointerDown = (event: PointerEvent<HTMLCanvasElement>) => {
     if (!photo) return;
@@ -205,8 +247,7 @@ export default function PosterGenerator({
     const units = toTemplateUnits(canvas);
     const x = (event.clientX - rect.left) * units;
     const y = (event.clientY - rect.top) * units;
-    if (Math.hypot(x - PHOTO_SLOT.cx, y - PHOTO_SLOT.cy) > PHOTO_SLOT.r) return;
-
+    if (!isInPhotoSlot(photoSlot, x, y)) return;
     canvas.setPointerCapture(event.pointerId);
     dragRef.current = { x: event.clientX, y: event.clientY };
   };
@@ -243,24 +284,39 @@ export default function PosterGenerator({
   const handleZoom = (event: ChangeEvent<HTMLInputElement>) => {
     if (!photo) return;
     const zoom = Number(event.target.value);
-    setCrop((current) => clampCrop(photo, { ...current, zoom }));
+    setCrop((current) =>
+      clampCropForSlot(photo, photoSlot, { ...current, zoom }),
+    );
+  };
+
+  const selectTemplate = (template: PosterTemplate) => {
+    setSelectedTemplate(template);
+    setLoadedTemplateId(null);
+    setCrop(DEFAULT_CROP);
+    setError("");
   };
 
   const renderPosterBlob = async () => {
-    if (!template) throw new Error("Template not ready");
+    if (!templateReady) throw new Error("Template not ready");
     const canvas = document.createElement("canvas");
-    canvas.width = POSTER_WIDTH;
-    canvas.height = POSTER_HEIGHT;
+    canvas.width = selectedTemplate.width;
+    canvas.height = selectedTemplate.height;
     const ctx = canvas.getContext("2d");
     if (!ctx) throw new Error("Canvas unavailable");
-    drawPoster(ctx, {
-      template,
-      photo,
-      crop,
-      fields,
-      fontFamily,
-      showPlaceholders: false,
-    });
+    selectedTemplate.draw(
+      ctx,
+      {
+        photo,
+        crop,
+        fields,
+        fontFamily,
+        showPlaceholders: false,
+        assets: {
+          templateImage: templateImageRef.current,
+        },
+      },
+      1,
+    );
     return new Promise<Blob>((resolve, reject) =>
       canvas.toBlob(
         (blob) =>
@@ -293,14 +349,16 @@ export default function PosterGenerator({
       const url = URL.createObjectURL(blob);
       const link = document.createElement("a");
       link.href = url;
-      link.download = posterFileName(fields);
+      link.download = posterFileName(fields, selectedTemplate.id);
       document.body.appendChild(link);
       link.click();
       link.remove();
       window.setTimeout(() => URL.revokeObjectURL(url), 1000);
       trackAttendingPosterExport({ export_method: "download" });
     } catch {
-      setError("Something went wrong while creating your poster. Please try again.");
+      setError(
+        "Something went wrong while creating your poster. Please try again.",
+      );
     } finally {
       setExporting(null);
     }
@@ -311,7 +369,7 @@ export default function PosterGenerator({
     setExporting("share");
     try {
       const blob = await renderPosterBlob();
-      const file = new File([blob], posterFileName(fields), {
+      const file = new File([blob], posterFileName(fields, selectedTemplate.id), {
         type: "image/jpeg",
       });
       await navigator.share({
@@ -322,14 +380,16 @@ export default function PosterGenerator({
       trackAttendingPosterExport({ export_method: "share" });
     } catch (shareError) {
       if ((shareError as DOMException)?.name !== "AbortError") {
-        setError("Sharing isn't available right now. Download the poster instead.");
+        setError(
+          "Sharing isn't available right now. Download the poster instead.",
+        );
       }
     } finally {
       setExporting(null);
     }
   };
 
-  const ready = Boolean(template && fontsReady);
+  const ready = fontsReady && templateReady;
 
   return (
     <div className={styles.page}>
@@ -339,7 +399,11 @@ export default function PosterGenerator({
 
       <header className={styles.topbar}>
         <div className={`container ${styles.topbarInner}`}>
-          <Link className={styles.brand} href="/" aria-label="Flutter South India 2026 home">
+          <Link
+            className={styles.brand}
+            href="/"
+            aria-label="Flutter South India 2026 home"
+          >
             <Image
               src="/assets/fsi-logo.png"
               alt="Flutter South India 2026"
@@ -374,10 +438,10 @@ export default function PosterGenerator({
               <canvas
                 ref={canvasRef}
                 className={`${styles.canvas} ${photo ? styles.canvasDraggable : ""}`}
-                width={POSTER_WIDTH * PREVIEW_SCALE}
-                height={POSTER_HEIGHT * PREVIEW_SCALE}
+                width={selectedTemplate.width * PREVIEW_SCALE}
+                height={selectedTemplate.height * PREVIEW_SCALE}
                 role="img"
-                aria-label="Live preview of your I'm Attending poster"
+                aria-label="Live preview of your attendee poster"
                 tabIndex={photo ? 0 : -1}
                 onPointerDown={handlePointerDown}
                 onPointerMove={handlePointerMove}
@@ -405,6 +469,26 @@ export default function PosterGenerator({
           </figure>
 
           <form className={styles.form} onSubmit={handleDownload} noValidate>
+            {/* ── Template picker ── */}
+            <div className={styles.field}>
+              <span className={styles.label}>Template</span>
+              <div className={styles.templatePicker}>
+                {TEMPLATES.map((t) => (
+                  <button
+                    key={t.id}
+                    type="button"
+                    className={`${styles.templateTab} ${
+                      selectedTemplate.id === t.id ? styles.templateTabActive : ""
+                    }`}
+                    onClick={() => selectTemplate(t)}
+                  >
+                    {t.label}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* ── Photo upload ── */}
             <div className={styles.field}>
               <span className={styles.label}>
                 Photo <em>required</em>
@@ -517,7 +601,11 @@ export default function PosterGenerator({
                 disabled={!ready || exporting !== null}
               >
                 {exporting === "download" ? (
-                  <LoaderCircle aria-hidden="true" size={17} className={styles.spin} />
+                  <LoaderCircle
+                    aria-hidden="true"
+                    size={17}
+                    className={styles.spin}
+                  />
                 ) : (
                   <Download aria-hidden="true" size={17} />
                 )}
@@ -531,7 +619,11 @@ export default function PosterGenerator({
                   disabled={!ready || exporting !== null}
                 >
                   {exporting === "share" ? (
-                    <LoaderCircle aria-hidden="true" size={17} className={styles.spin} />
+                    <LoaderCircle
+                      aria-hidden="true"
+                      size={17}
+                      className={styles.spin}
+                    />
                   ) : (
                     <Share2 aria-hidden="true" size={17} />
                   )}
