@@ -873,7 +873,8 @@
     transform: none;
   }
 
-  .dotPulse {
+  .dotPulse,
+  .steamPath {
     animation: none;
   }
 }
