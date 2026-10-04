@@ -2,7 +2,7 @@ import { ArrowUpRight } from "lucide-react";
 import Image from "next/image";
 import communityStyles from "./CommunityPartners.module.css";
 import SectionIntro from "@/components/ui/SectionIntro";
-import { communityPartnerSlots, participationPaths } from "@/data/event";
+import { communityPartnerSlots } from "@/data/event";
 import styles from "./EventPage.module.css";
 
 import SponsorsSection from "./SponsorsSection";
