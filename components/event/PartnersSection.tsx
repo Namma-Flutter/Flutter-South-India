@@ -2,8 +2,10 @@ import { ArrowUpRight } from "lucide-react";
 import Image from "next/image";
 import communityStyles from "./CommunityPartners.module.css";
 import SectionIntro from "@/components/ui/SectionIntro";
-import { communityPartnerSlots, participationPaths } from "@/data/event";
+import { communityPartnerSlots } from "@/data/event";
 import styles from "./EventPage.module.css";
+
+import SponsorsSection from "./SponsorsSection";
 
 export default function PartnersSection() {
   return (
@@ -29,17 +31,7 @@ export default function PartnersSection() {
         </div>
       </section>
 
-      <section className={styles.sponsors} id="sponsors">
-        <div className={`container ${styles.sponsorsIntro}`}>
-          <SectionIntro eyebrow="Sponsors" title="Make space for the community to grow." copy="Sponsor announcements will be shared here as they are confirmed." />
-          <a className="button button-primary" href={participationPaths[1].href}>Become a sponsor<ArrowUpRight aria-hidden="true" size={17} /></a>
-        </div>
-        <div className={`container ${styles.sponsorGrid}`}>
-          {['Title sponsor', 'Gold sponsor', 'Community sponsor'].map((tier, index) => (
-            <article className={styles.sponsorCard} data-reveal key={tier}><span>0{index + 1}</span><p>{tier}</p><strong>To be announced</strong></article>
-          ))}
-        </div>
-      </section>
+      <SponsorsSection />
     </>
   );
 }

@@ -14,4 +14,5 @@ export const communityPartnerSlots = [
   { id: "flutter-kanpur", name: "Flutter Kanpur", logo: "flutter kanpur.png", label: "Flutter community", description: "Developers and designers learning, sharing, and creating together in Kanpur.", href: "https://in.linkedin.com/company/flutterkanpur" },
   { id: "flutter-nagpur", name: "Flutter Nagpur", logo: "flutter nagpur.png", label: "Flutter community", description: "A place for Nagpur’s Flutter enthusiasts to meet and exchange ideas.", href: "https://www.meetup.com/flutternagpur/" },
   { id: "flutter-surat", name: "Flutter Surat", logo: "flutter surat.png", label: "Flutter community", description: "Connect with the Flutter developer community in Surat.", href: "https://www.linkedin.com/company/fluttersurat" },
+  { id: "flutter-silicon-valley", name: "Flutter Silicon Valley", logo: "flutter silicon valley.png", label: "Flutter community", description: "Bringing Flutter and Dart developers together in Silicon Valley to meet, learn, and grow.", href: "https://www.linkedin.com/company/flutter-silicon-valley" },
 ] as const;

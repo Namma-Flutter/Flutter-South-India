@@ -1,0 +1,881 @@
+/* ═══════════════════════════════════════════════════════════════════
+   AgendaSection — Full event schedule with timeline & track cards
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* ── Section wrapper ─────────────────────────────────────────────── */
+.agenda {
+  position: relative;
+  scroll-margin-top: 6.5rem;
+  padding-block: var(--space-8);
+  background: var(--color-navy-deep);
+  color: var(--color-white);
+  overflow: hidden;
+}
+
+.agenda::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 140%;
+  height: 100%;
+  transform: translateX(-50%);
+  background:
+    radial-gradient(ellipse 50% 30% at 20% 10%, rgba(2, 125, 253, 0.08), transparent),
+    radial-gradient(ellipse 40% 40% at 80% 80%, rgba(19, 185, 253, 0.06), transparent);
+  pointer-events: none;
+}
+
+.agendaInner {
+  position: relative;
+  z-index: 1;
+  --time-col-width: 9rem;
+  --spine-col-width: 2rem;
+  --col-gap: 1.25rem;
+  --track-gap: 1rem;
+}
+
+/* ── Header area ─────────────────────────────────────────────────── */
+.agendaHeader {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: end;
+  gap: 2rem;
+  margin-bottom: var(--space-6);
+}
+
+/* ── Filter pills ────────────────────────────────────────────────── */
+.filterBar {
+  display: flex;
+  gap: 0.5rem;
+  flex-shrink: 0;
+}
+
+.pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.55rem 1.1rem;
+  border: 1px solid var(--color-line-light);
+  border-radius: var(--radius-pill);
+  background: transparent;
+  color: var(--color-on-dark-muted);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  transition:
+    background-color var(--duration-fast) var(--ease-soft),
+    color var(--duration-fast) var(--ease-soft),
+    border-color var(--duration-fast) var(--ease-soft),
+    transform var(--duration-fast) var(--ease-out);
+}
+
+.pill:hover {
+  border-color: var(--color-cyan);
+  color: var(--color-white);
+  transform: translateY(-1px);
+}
+
+.pillActive {
+  border-color: var(--color-cyan);
+  background: rgba(19, 185, 253, 0.14);
+  color: var(--color-cyan);
+}
+
+/* ── Track venue header bar ───────────────────────────────────────── */
+.trackHeaderBar {
+  display: grid;
+  grid-template-columns: var(--time-col-width) var(--spine-col-width) minmax(0, 1fr);
+  gap: 0 var(--col-gap);
+  align-items: center;
+  margin-top: 1.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.trackHeaderTimeSpacer,
+.trackHeaderSpineSpacer {
+  display: block;
+}
+
+.trackHeaderContent {
+  min-width: 0;
+}
+
+.trackVenueCols {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--track-gap);
+}
+
+.trackVenueSingle {
+  display: flex;
+  justify-content: center;
+}
+
+.venueCard {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  padding: 0.65rem 1.25rem;
+  border-radius: var(--radius-m);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.25);
+  transition:
+    transform var(--duration-fast) var(--ease-out),
+    border-color var(--duration-fast) var(--ease-soft),
+    box-shadow var(--duration-fast) var(--ease-soft);
+}
+
+.venueCardSingleFit {
+  width: 100%;
+  max-width: 440px;
+}
+
+.venueCardTrack1 {
+  background: linear-gradient(135deg, rgba(2, 125, 253, 0.12) 0%, rgba(19, 185, 253, 0.05) 100%);
+  border: 1px solid rgba(19, 185, 253, 0.28);
+}
+
+.venueCardTrack1:hover {
+  border-color: rgba(19, 185, 253, 0.55);
+  box-shadow: 0 6px 24px rgba(19, 185, 253, 0.18);
+  transform: translateY(-1px);
+}
+
+.venueCardTrack2 {
+  background: linear-gradient(135deg, rgba(147, 98, 255, 0.12) 0%, rgba(147, 98, 255, 0.05) 100%);
+  border: 1px solid rgba(147, 98, 255, 0.28);
+}
+
+.venueCardTrack2:hover {
+  border-color: rgba(147, 98, 255, 0.55);
+  box-shadow: 0 6px 24px rgba(147, 98, 255, 0.18);
+  transform: translateY(-1px);
+}
+
+.venueBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.venueDot1,
+.venueDot2 {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.venueDot1 {
+  background: var(--color-cyan);
+  box-shadow: 0 0 8px rgba(19, 185, 253, 0.85);
+}
+
+.venueDot2 {
+  background: #a78bfa;
+  box-shadow: 0 0 8px rgba(167, 139, 250, 0.85);
+}
+
+.venueTrackLabel1,
+.venueTrackLabel2 {
+  font-size: 0.76rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.venueTrackLabel1 {
+  color: var(--color-cyan);
+}
+
+.venueTrackLabel2 {
+  color: #c4a7ff;
+}
+
+.venueDivider {
+  color: rgba(255, 255, 255, 0.25);
+  font-size: 0.85rem;
+}
+
+.venueLocation {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.venuePin {
+  color: var(--color-on-dark-subtle);
+  flex-shrink: 0;
+}
+
+.venueCardTrack1 .venuePin {
+  color: rgba(19, 185, 253, 0.7);
+}
+
+.venueCardTrack2 .venuePin {
+  color: rgba(167, 139, 250, 0.7);
+}
+
+.venueHallName {
+  font-size: 0.8rem;
+  font-weight: 650;
+  color: var(--color-white);
+  letter-spacing: 0.02em;
+}
+
+/* ── Timeline variables ──────────────────────────────────────────── */
+.timeline {
+  position: relative;
+  padding-left: 0;
+  margin-top: 0.5rem;
+}
+
+/* Vertical timeline spine passing through the exact center of spine column */
+.timelineLine {
+  position: absolute;
+  top: 2.35rem;
+  bottom: 2rem;
+  left: calc(var(--time-col-width) + var(--col-gap) + (var(--spine-col-width) / 2));
+  width: 2px;
+  transform: translateX(-50%);
+  background: linear-gradient(
+    to bottom,
+    rgba(19, 185, 253, 0.45) 0%,
+    rgba(19, 185, 253, 0.45) 96%,
+    transparent 100%
+  );
+  box-shadow: 0 0 10px rgba(19, 185, 253, 0.25);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ── Timeline row ────────────────────────────────────────────────── */
+.timelineRow {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: var(--time-col-width) var(--spine-col-width) minmax(0, 1fr);
+  gap: 0 var(--col-gap);
+  padding-block: 0.65rem;
+  opacity: 1;
+  transform: none;
+}
+
+/* ── Time cell ───────────────────────────────────────────────────── */
+.timeCell {
+  text-align: right;
+  padding-top: 1.3rem;
+}
+
+.timeLabel {
+  display: inline-block;
+  color: var(--color-on-dark-muted);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+
+.timeLabelSpecial {
+  color: var(--color-sun);
+  font-weight: 750;
+}
+
+/* ── Spine cell ──────────────────────────────────────────────────── */
+.spineCell {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding-top: 1.35rem;
+  position: relative;
+  z-index: 2;
+}
+
+/* ── Timeline dot ────────────────────────────────────────────────── */
+.timelineDot {
+  position: relative;
+  flex-shrink: 0;
+  width: 0.85rem;
+  height: 0.85rem;
+  z-index: 2;
+}
+
+.dotInner {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: var(--color-cyan);
+  box-shadow: 0 0 10px rgba(19, 185, 253, 0.65);
+  z-index: 2;
+}
+
+.dotPulse {
+  position: absolute;
+  inset: -4px;
+  border-radius: 50%;
+  background: rgba(19, 185, 253, 0.25);
+  z-index: 1;
+  animation: dotPulseAnim 2.4s ease-out infinite;
+}
+
+.timelineDotSpecial .dotInner {
+  background: var(--color-sun);
+  box-shadow: 0 0 10px rgba(255, 180, 68, 0.65);
+}
+
+.timelineDotSpecial .dotPulse {
+  background: rgba(255, 180, 68, 0.25);
+}
+
+@keyframes dotPulseAnim {
+  0% {
+    transform: scale(1);
+    opacity: 0.6;
+  }
+  70% {
+    transform: scale(1.9);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1.9);
+    opacity: 0;
+  }
+}
+
+/* ── Cards column ────────────────────────────────────────────────── */
+.cardsCol {
+  min-width: 0;
+}
+
+.trackColumns {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--track-gap);
+}
+
+.trackColumnsSingle {
+  grid-template-columns: 1fr;
+}
+
+.fullWidthSession {
+  width: 100%;
+}
+
+/* ── Session card ────────────────────────────────────────────────── */
+.sessionCard {
+  position: relative;
+  padding: 1.2rem 1.35rem;
+  border-radius: var(--radius-m);
+  background: rgba(255, 255, 255, 0.045);
+  backdrop-filter: blur(6px);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  transition:
+    transform var(--duration-base) var(--ease-out),
+    background-color var(--duration-base) var(--ease-soft),
+    border-color var(--duration-base) var(--ease-soft),
+    box-shadow var(--duration-base) var(--ease-soft);
+  overflow: hidden;
+}
+
+.sessionCard:hover {
+  transform: translateY(-3px);
+  background: rgba(255, 255, 255, 0.07);
+  border-color: rgba(19, 185, 253, 0.3);
+  box-shadow: 0 12px 40px rgba(6, 29, 41, 0.35);
+}
+
+/* accent bar on left for talk cards */
+.sessionAccent {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 3px;
+  height: 100%;
+  border-radius: 3px 0 0 3px;
+  background: linear-gradient(to bottom, var(--color-cyan), var(--color-blue));
+  opacity: 0;
+  transition: opacity var(--duration-base) var(--ease-soft);
+}
+
+.cardLeft:hover .sessionAccent {
+  opacity: 1;
+}
+
+.cardTrack2 .sessionAccent {
+  background: linear-gradient(to bottom, #a78bfa, #7c3aed);
+}
+
+.cardCentered .sessionAccent {
+  display: none;
+}
+
+/* Card Header with Badges */
+.cardHeader {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.55rem;
+}
+
+.badgeGroup {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+}
+
+/* ── Content alignment states ─────────────────────────────────────── */
+.cardCentered {
+  text-align: center;
+}
+
+.cardCentered .cardHeader {
+  justify-content: center;
+}
+
+.cardCentered .badgeGroup {
+  justify-content: center;
+}
+
+.cardCentered .sessionSpeaker,
+.cardCentered .sessionCompany {
+  text-align: center;
+}
+
+.cardLeft {
+  text-align: left;
+}
+
+.cardLeft .cardHeader {
+  justify-content: flex-start;
+}
+
+.cardLeft .badgeGroup {
+  justify-content: flex-start;
+}
+
+.cardLeft .sessionSpeaker,
+.cardLeft .sessionCompany {
+  text-align: left;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.2rem 0.55rem;
+  border-radius: var(--radius-pill);
+  font-size: 0.68rem;
+  font-weight: 750;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.badgeTrack1 {
+  background: rgba(19, 185, 253, 0.12);
+  color: var(--color-cyan);
+  border: 1px solid rgba(19, 185, 253, 0.25);
+}
+
+.badgeTrack2 {
+  background: rgba(147, 98, 255, 0.12);
+  color: #c4a7ff;
+  border: 1px solid rgba(147, 98, 255, 0.25);
+}
+
+.badgeSpecial {
+  background: rgba(19, 185, 253, 0.1);
+  color: var(--color-cyan);
+  border: 1px solid rgba(19, 185, 253, 0.2);
+}
+
+.badgeBreak {
+  background: rgba(255, 180, 68, 0.12);
+  color: var(--color-sun);
+  border: 1px solid rgba(255, 180, 68, 0.25);
+}
+
+.badgeProvided {
+  background: rgba(255, 180, 68, 0.16);
+  color: #ffb84d;
+  border: 1px solid rgba(255, 180, 68, 0.45);
+  box-shadow: 0 0 10px rgba(255, 180, 68, 0.2);
+  gap: 0.35rem;
+}
+
+.badgeProvidedDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #ffb84d;
+  box-shadow: 0 0 8px rgba(255, 184, 77, 0.85);
+  display: inline-block;
+  flex-shrink: 0;
+}
+
+.badgeDevRoom {
+  background: rgba(147, 98, 255, 0.12);
+  color: #c4a7ff;
+  border: 1px solid rgba(147, 98, 255, 0.25);
+}
+
+.sessionTitle {
+  font-family: var(--font-display), sans-serif;
+  font-size: 0.95rem;
+  font-weight: 620;
+  letter-spacing: -0.015em;
+  line-height: 1.35;
+  color: var(--color-white);
+  margin: 0;
+}
+
+.sessionSpeaker {
+  margin-top: 0.5rem;
+  font-size: 0.84rem;
+  font-weight: 700;
+  color: var(--color-cyan);
+  line-height: 1.3;
+}
+
+.speakerLink {
+  color: var(--color-cyan);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  border-bottom: 1px dotted rgba(19, 185, 253, 0.45);
+  transition:
+    color var(--duration-fast) var(--ease-soft),
+    border-color var(--duration-fast) var(--ease-soft);
+}
+
+.speakerLink:hover,
+.speakerLink:focus-visible {
+  color: var(--color-white);
+  border-bottom-color: var(--color-white);
+  text-decoration: none;
+}
+
+.speakerAmp {
+  color: var(--color-on-dark-subtle);
+  font-weight: 500;
+  margin-inline: 0.35rem;
+}
+
+.speakerLinkIcon {
+  display: inline-block;
+  opacity: 0.75;
+  transition:
+    transform var(--duration-fast) var(--ease-out),
+    opacity var(--duration-fast) var(--ease-soft);
+}
+
+.speakerLink:hover .speakerLinkIcon,
+.speakerLink:focus-visible .speakerLinkIcon {
+  opacity: 1;
+  transform: translate(1px, -1px);
+}
+
+.cardTrack2 .sessionSpeaker,
+.cardTrack2 .speakerLink {
+  color: #c4b5fd;
+  border-bottom-color: rgba(196, 181, 253, 0.45);
+}
+
+.cardTrack2 .speakerLink:hover,
+.cardTrack2 .speakerLink:focus-visible {
+  color: var(--color-white);
+  border-bottom-color: var(--color-white);
+}
+
+.sessionCompany {
+  margin-top: 0.25rem;
+  font-size: 0.76rem;
+  font-weight: 500;
+  color: var(--color-on-dark-subtle);
+  line-height: 1.3;
+}
+
+.sessionDescription {
+  margin-top: 0.45rem;
+  font-size: 0.84rem;
+  font-weight: 500;
+  color: #ffdda8;
+  line-height: 1.45;
+  max-width: 44rem;
+  opacity: 0.9;
+}
+
+.cardCentered .sessionDescription {
+  margin-inline: auto;
+}
+
+/* ── Special session types ───────────────────────────────────────── */
+.type_registration,
+.type_ceremony {
+  background:
+    linear-gradient(135deg, rgba(2, 125, 253, 0.1), rgba(19, 185, 253, 0.06));
+  border-color: rgba(19, 185, 253, 0.2);
+}
+
+.type_registration .sessionTitle,
+.type_ceremony .sessionTitle {
+  font-size: 1.1rem;
+  font-weight: 680;
+  letter-spacing: 0.02em;
+}
+
+.type_break {
+  background:
+    radial-gradient(ellipse 65% 85% at 50% 0%, rgba(255, 180, 68, 0.14), transparent 75%),
+    rgba(255, 180, 68, 0.04);
+  border-color: rgba(255, 180, 68, 0.3);
+  box-shadow: 0 4px 20px rgba(255, 180, 68, 0.06);
+}
+
+.type_break:hover {
+  border-color: rgba(255, 180, 68, 0.52);
+  box-shadow: 0 8px 30px rgba(255, 180, 68, 0.14);
+}
+
+.type_break .sessionTitle {
+  color: #fff4d1;
+  font-size: 1.05rem;
+  font-weight: 750;
+  letter-spacing: 0.01em;
+}
+
+.type_panel {
+  background:
+    linear-gradient(135deg, rgba(19, 185, 253, 0.08), rgba(2, 125, 253, 0.04));
+  border-color: rgba(19, 185, 253, 0.18);
+}
+
+.type_standup {
+  background:
+    linear-gradient(135deg, rgba(255, 180, 68, 0.08), rgba(2, 125, 253, 0.06));
+  border-color: rgba(255, 180, 68, 0.18);
+}
+
+.type_standup .sessionTitle {
+  font-size: 1.1rem;
+}
+
+.type_devroom {
+  background:
+    linear-gradient(135deg, rgba(147, 98, 255, 0.08), rgba(147, 98, 255, 0.03));
+  border: 1px dashed rgba(167, 139, 250, 0.25);
+}
+
+.type_devroom .sessionTitle {
+  color: var(--color-white);
+  font-size: 0.92rem;
+  letter-spacing: 0.01em;
+}
+
+/* ── Break Vector Illustrations (Lunch & Tea) ────────────────────── */
+.breakIllustrationBox {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-block: 0.45rem 0.65rem;
+}
+
+.breakVectorWrap {
+  width: 140px;
+  height: 90px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.breakVectorSvg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  filter: drop-shadow(0 4px 14px rgba(255, 180, 68, 0.28));
+  transition: transform var(--duration-base) var(--ease-out);
+}
+
+.sessionCard:hover .breakVectorSvg {
+  transform: translateY(-2px) scale(1.04);
+}
+
+.steamPath {
+  stroke-dasharray: 45;
+  stroke-dashoffset: 45;
+  animation: steamRiseAnim 2.6s ease-in-out infinite;
+}
+
+.steam1 {
+  animation-delay: 0s;
+}
+
+.steam2 {
+  animation-delay: 0.7s;
+}
+
+.steam3 {
+  animation-delay: 1.4s;
+}
+
+@keyframes steamRiseAnim {
+  0% {
+    stroke-dashoffset: 45;
+    opacity: 0;
+    transform: translateY(2px);
+  }
+  30% {
+    opacity: 0.9;
+  }
+  75% {
+    opacity: 0.45;
+  }
+  100% {
+    stroke-dashoffset: 0;
+    opacity: 0;
+    transform: translateY(-7px);
+  }
+}
+
+/* ── Footer note ─────────────────────────────────────────────────── */
+.agendaNote {
+  margin-top: var(--space-5);
+  color: var(--color-on-dark-subtle);
+  font-size: 0.76rem;
+  font-style: italic;
+  text-align: center;
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   Responsive breakpoints
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* Tablets */
+@media (max-width: 64rem) {
+  .agendaInner {
+    --time-col-width: 8rem;
+    --spine-col-width: 1.75rem;
+    --col-gap: 0.85rem;
+  }
+
+  .agendaHeader {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+}
+
+/* Mobile */
+@media (max-width: 48rem) {
+  .agendaInner {
+    --time-col-width: 0px;
+    --spine-col-width: 1.5rem;
+    --col-gap: 0.75rem;
+  }
+
+  .trackHeaderBar {
+    grid-template-columns: var(--spine-col-width) minmax(0, 1fr);
+    gap: 0 var(--col-gap);
+    margin-top: 1rem;
+    margin-bottom: 0.35rem;
+  }
+
+  .trackHeaderTimeSpacer {
+    display: none;
+  }
+
+  .trackVenueCols {
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+  }
+
+  .venueCard {
+    padding: 0.5rem 0.85rem;
+    justify-content: flex-start;
+    gap: 0.6rem;
+  }
+
+  .venueCardSingleFit {
+    max-width: 100%;
+    justify-content: flex-start;
+  }
+
+  .timelineLine {
+    top: 1.5rem;
+    bottom: 1.5rem;
+    left: calc(var(--spine-col-width) / 2);
+  }
+
+  .timelineRow {
+    grid-template-columns: var(--spine-col-width) minmax(0, 1fr);
+    grid-template-rows: auto auto;
+    gap: 0.25rem var(--col-gap);
+    padding-block: 0.85rem;
+  }
+
+  .spineCell {
+    grid-column: 1;
+    grid-row: 1 / span 2;
+    padding-top: 0.25rem;
+  }
+
+  .timeCell {
+    grid-column: 2;
+    grid-row: 1;
+    text-align: left;
+    padding-top: 0;
+    margin-bottom: 0.25rem;
+  }
+
+  .cardsCol {
+    grid-column: 2;
+    grid-row: 2;
+  }
+
+  .trackColumns {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
+}
+
+/* Small mobile */
+@media (max-width: 30rem) {
+  .filterBar {
+    flex-wrap: wrap;
+    gap: 0.4rem;
+  }
+
+  .pill {
+    padding: 0.45rem 0.85rem;
+    font-size: 0.72rem;
+  }
+
+  .timeLabel {
+    font-size: 0.72rem;
+  }
+
+  .sessionTitle {
+    font-size: 0.88rem;
+  }
+
+  .sessionSpeaker {
+    font-size: 0.78rem;
+  }
+}
+
+/* ── Reduced motion ──────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .timelineRow {
+    opacity: 1;
+    transform: none;
+  }
+
+  .dotPulse,
+  .steamPath {
+    animation: none;
+  }
+}
+
