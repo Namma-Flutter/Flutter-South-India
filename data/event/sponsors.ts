@@ -53,7 +53,7 @@ export const sponsorTierGroups: SponsorTierGroup[] = [
         id: "mahathaan",
         name: "Mahathaan",
         tier: "Super Dash Sponsor",
-        href: "http://mahathaan.com/",
+        href: "https://mahathaan.com/",
         logo: "/assets/sponsors/mahathaan.svg",
         tagline: "Building Digital Dreams Together",
         description:
