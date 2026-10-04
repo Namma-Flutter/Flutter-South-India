@@ -77,7 +77,7 @@ export const sponsorTierGroups: SponsorTierGroup[] = [
       },
       {
         id: "emerger-tech",
-        name: "Emerger Tech",
+        name: "Emergere Tech",
         tier: "Dashling Sponsor",
         href: "https://emergertech.com/",
         logo: "/assets/sponsors/emerger-tech.svg",
