@@ -63,9 +63,15 @@ function SessionCard({
         {session.type === "ceremony" && (
           <span className={`${styles.badge} ${styles.badgeSpecial}`}>Main Stage</span>
         )}
-        {session.type === "break" && (
-          <span className={`${styles.badge} ${styles.badgeBreak}`}>Break</span>
-        )}
+        {session.type === "break" &&
+          (session.highlight ? (
+            <span className={`${styles.badge} ${styles.badgeProvided}`}>
+              <span className={styles.badgeProvidedDot} />
+              {session.highlight}
+            </span>
+          ) : (
+            <span className={`${styles.badge} ${styles.badgeBreak}`}>Break</span>
+          ))}
         {session.type === "standup" && (
           <span className={`${styles.badge} ${styles.badgeSpecial}`}>Community</span>
         )}
@@ -142,7 +148,20 @@ function SessionCard({
       <div className={styles.cardHeader}>
         {renderBadge()}
       </div>
+      {session.illustration === "lunch" && (
+        <div className={styles.breakIllustrationBox}>
+          <LunchSteamVector />
+        </div>
+      )}
+      {session.illustration === "tea" && (
+        <div className={styles.breakIllustrationBox}>
+          <TeaSteamVector />
+        </div>
+      )}
       <h4 className={styles.sessionTitle}>{session.title}</h4>
+      {session.description && (
+        <p className={styles.sessionDescription}>{session.description}</p>
+      )}
       {renderSpeaker()}
       {session.company && (
         <p className={styles.sessionCompany}>{session.company}</p>
@@ -150,6 +169,185 @@ function SessionCard({
       {isDevRoom && (
         <p className={styles.sessionCompany}>Open group discussion on open topics</p>
       )}
+    </div>
+  );
+}
+
+/* ── Lunch Animated Tech Vector Illustration ──────────────────────── */
+function LunchSteamVector() {
+  return (
+    <div className={styles.breakVectorWrap} aria-hidden="true">
+      <svg
+        viewBox="0 0 160 100"
+        className={styles.breakVectorSvg}
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <defs>
+          <radialGradient id="lunchGlow" cx="50%" cy="55%" r="60%">
+            <stop offset="0%" stopColor="#ffb84d" stopOpacity="0.4" />
+            <stop offset="60%" stopColor="#ff9800" stopOpacity="0.12" />
+            <stop offset="100%" stopColor="#ff9800" stopOpacity="0" />
+          </radialGradient>
+          <linearGradient id="clocheGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stopColor="#ffc977" />
+            <stop offset="45%" stopColor="#ff9f2e" />
+            <stop offset="100%" stopColor="#e67e10" />
+          </linearGradient>
+          <linearGradient id="plateGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stopColor="rgba(255,255,255,0.2)" />
+            <stop offset="50%" stopColor="rgba(255,255,255,0.75)" />
+            <stop offset="100%" stopColor="rgba(255,255,255,0.2)" />
+          </linearGradient>
+        </defs>
+
+        {/* Ambient warm radial glow */}
+        <ellipse cx="80" cy="56" rx="55" ry="38" fill="url(#lunchGlow)" />
+
+        {/* Animated Rising Steam Wisps */}
+        <g className={styles.steamGroup}>
+          <path
+            className={`${styles.steamPath} ${styles.steam1}`}
+            d="M66 42 C 63 35, 69 29, 65 20 C 62 13, 67 8, 64 3"
+            stroke="#ffc977"
+            strokeWidth="2.2"
+            strokeLinecap="round"
+          />
+          <path
+            className={`${styles.steamPath} ${styles.steam2}`}
+            d="M80 38 C 77 30, 83 23, 79 14 C 76 7, 81 3, 78 1"
+            stroke="#ffdda8"
+            strokeWidth="2.6"
+            strokeLinecap="round"
+          />
+          <path
+            className={`${styles.steamPath} ${styles.steam3}`}
+            d="M94 42 C 97 35, 91 29, 95 20 C 98 13, 93 8, 96 3"
+            stroke="#ffc977"
+            strokeWidth="2.2"
+            strokeLinecap="round"
+          />
+        </g>
+
+        {/* Serving Dome Handle Knob */}
+        <circle cx="80" cy="46" r="4.2" fill="url(#clocheGrad)" />
+        <ellipse cx="80" cy="49.5" rx="3" ry="1.2" fill="#b85a00" />
+
+        {/* Cloche Dome */}
+        <path
+          d="M52 75 C 52 56, 63 48, 80 48 C 97 48, 108 56, 108 75 Z"
+          fill="url(#clocheGrad)"
+          opacity="0.95"
+        />
+        {/* Dome light sheen */}
+        <path
+          d="M57 73 C 59 60, 68 53, 80 52 C 73 55, 65 62, 63 73 Z"
+          fill="white"
+          opacity="0.32"
+        />
+
+        {/* Base rim */}
+        <rect x="48" y="74" width="64" height="3" rx="1.5" fill="#ffe0a3" />
+
+        {/* Base Platter */}
+        <ellipse cx="80" cy="80.5" rx="44" ry="5.5" fill="#1b2a3a" stroke="url(#plateGrad)" strokeWidth="1.2" />
+        <ellipse cx="80" cy="80" rx="36" ry="3" fill="none" stroke="rgba(255, 184, 77, 0.4)" strokeWidth="0.8" />
+      </svg>
+    </div>
+  );
+}
+
+/* ── Tea & Refreshments Animated Tech Vector Illustration ─────────── */
+function TeaSteamVector() {
+  return (
+    <div className={styles.breakVectorWrap} aria-hidden="true">
+      <svg
+        viewBox="0 0 160 100"
+        className={styles.breakVectorSvg}
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <defs>
+          <radialGradient id="teaGlow" cx="50%" cy="55%" r="60%">
+            <stop offset="0%" stopColor="#ffb84d" stopOpacity="0.4" />
+            <stop offset="60%" stopColor="#ff9800" stopOpacity="0.12" />
+            <stop offset="100%" stopColor="#ff9800" stopOpacity="0" />
+          </radialGradient>
+          <linearGradient id="cupGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stopColor="#ffc977" />
+            <stop offset="45%" stopColor="#ff9f2e" />
+            <stop offset="100%" stopColor="#d97106" />
+          </linearGradient>
+          <linearGradient id="teaSurfaceGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stopColor="#8d4004" />
+            <stop offset="100%" stopColor="#602900" />
+          </linearGradient>
+          <linearGradient id="saucerGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stopColor="rgba(255,255,255,0.2)" />
+            <stop offset="50%" stopColor="rgba(255,255,255,0.75)" />
+            <stop offset="100%" stopColor="rgba(255,255,255,0.2)" />
+          </linearGradient>
+        </defs>
+
+        {/* Ambient warm radial glow */}
+        <ellipse cx="80" cy="56" rx="55" ry="38" fill="url(#teaGlow)" />
+
+        {/* Animated Rising Steam Wisps */}
+        <g className={styles.steamGroup}>
+          <path
+            className={`${styles.steamPath} ${styles.steam1}`}
+            d="M68 40 C 65 32, 71 26, 67 17 C 64 10, 69 5, 66 1"
+            stroke="#ffc977"
+            strokeWidth="2.2"
+            strokeLinecap="round"
+          />
+          <path
+            className={`${styles.steamPath} ${styles.steam2}`}
+            d="M80 36 C 77 28, 83 21, 79 12 C 76 5, 81 2, 78 0"
+            stroke="#ffdda8"
+            strokeWidth="2.6"
+            strokeLinecap="round"
+          />
+          <path
+            className={`${styles.steamPath} ${styles.steam3}`}
+            d="M92 40 C 95 32, 89 26, 93 17 C 96 10, 91 5, 94 1"
+            stroke="#ffc977"
+            strokeWidth="2.2"
+            strokeLinecap="round"
+          />
+        </g>
+
+        {/* Cup Body */}
+        <path
+          d="M58 48 C 58 72, 67 78, 80 78 C 93 78, 102 72, 102 48 Z"
+          fill="url(#cupGrad)"
+          opacity="0.95"
+        />
+        {/* Cup sheen */}
+        <path
+          d="M62 48 C 62 67, 69 73, 76 75 C 72 73, 67 67, 67 48 Z"
+          fill="white"
+          opacity="0.32"
+        />
+
+        {/* Cup Rim & Tea Liquid */}
+        <ellipse cx="80" cy="48" rx="22" ry="4" fill="url(#cupGrad)" />
+        <ellipse cx="80" cy="48.5" rx="19.5" ry="3" fill="url(#teaSurfaceGrad)" />
+        <ellipse cx="78" cy="48.2" rx="14" ry="1.6" fill="#a0520a" opacity="0.6" />
+
+        {/* Cup Handle */}
+        <path
+          d="M101 52 C 114 52, 114 69, 100 70"
+          stroke="url(#cupGrad)"
+          strokeWidth="3.5"
+          strokeLinecap="round"
+          fill="none"
+        />
+
+        {/* Saucer Base */}
+        <ellipse cx="80" cy="80.5" rx="42" ry="5.5" fill="#1b2a3a" stroke="url(#saucerGrad)" strokeWidth="1.2" />
+        <ellipse cx="80" cy="80" rx="34" ry="3" fill="none" stroke="rgba(255, 184, 77, 0.4)" strokeWidth="0.8" />
+      </svg>
     </div>
   );
 }
@@ -233,7 +431,7 @@ export default function AgendaSection() {
                       <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" />
                       <circle cx="12" cy="10" r="3" />
                     </svg>
-                    <span className={styles.venueHallName}>Main Hall</span>
+                    <span className={styles.venueHallName}>Geetham Hall</span>
                   </div>
                 </div>
 
@@ -259,7 +457,7 @@ export default function AgendaSection() {
                       <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" />
                       <circle cx="12" cy="10" r="3" />
                     </svg>
-                    <span className={styles.venueHallName}>Workshop Room</span>
+                    <span className={styles.venueHallName}>Gallery Hall</span>
                   </div>
                 </div>
               </div>
@@ -288,7 +486,7 @@ export default function AgendaSection() {
                         <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" />
                         <circle cx="12" cy="10" r="3" />
                       </svg>
-                      <span className={styles.venueHallName}>Main Hall</span>
+                      <span className={styles.venueHallName}>Geetham Hall</span>
                     </div>
                   </div>
                 ) : (
@@ -314,7 +512,7 @@ export default function AgendaSection() {
                         <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" />
                         <circle cx="12" cy="10" r="3" />
                       </svg>
-                      <span className={styles.venueHallName}>Workshop Room</span>
+                      <span className={styles.venueHallName}>Gallery Hall</span>
                     </div>
                   </div>
                 )}

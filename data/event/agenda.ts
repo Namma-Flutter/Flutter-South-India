@@ -18,6 +18,9 @@ export type AgendaSession = {
   company?: string;
   type: AgendaSessionType;
   speakers?: SpeakerInfo[];
+  highlight?: string;
+  description?: string;
+  illustration?: "lunch" | "tea";
 };
 
 export type AgendaSlot = {
@@ -136,6 +139,9 @@ export const agendaSlots: AgendaSlot[] = [
     track1: {
       title: "Lunch Break",
       type: "break",
+      highlight: "Lunch Provided",
+      description: "Complimentary hot lunch & networking",
+      illustration: "lunch",
     },
   },
   {
@@ -217,6 +223,9 @@ export const agendaSlots: AgendaSlot[] = [
     track1: {
       title: "Tea Break",
       type: "break",
+      highlight: "Tea & Snacks Provided",
+      description: "Complimentary tea, coffee & snacks",
+      illustration: "tea",
     },
   },
   {

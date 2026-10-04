@@ -497,6 +497,24 @@
   border: 1px solid rgba(255, 180, 68, 0.25);
 }
 
+.badgeProvided {
+  background: rgba(255, 180, 68, 0.16);
+  color: #ffb84d;
+  border: 1px solid rgba(255, 180, 68, 0.45);
+  box-shadow: 0 0 10px rgba(255, 180, 68, 0.2);
+  gap: 0.35rem;
+}
+
+.badgeProvidedDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #ffb84d;
+  box-shadow: 0 0 8px rgba(255, 184, 77, 0.85);
+  display: inline-block;
+  flex-shrink: 0;
+}
+
 .badgeDevRoom {
   background: rgba(147, 98, 255, 0.12);
   color: #c4a7ff;
@@ -580,6 +598,20 @@
   line-height: 1.3;
 }
 
+.sessionDescription {
+  margin-top: 0.45rem;
+  font-size: 0.84rem;
+  font-weight: 500;
+  color: #ffdda8;
+  line-height: 1.45;
+  max-width: 44rem;
+  opacity: 0.9;
+}
+
+.cardCentered .sessionDescription {
+  margin-inline: auto;
+}
+
 /* ── Special session types ───────────────────────────────────────── */
 .type_registration,
 .type_ceremony {
@@ -597,15 +629,22 @@
 
 .type_break {
   background:
-    linear-gradient(135deg, rgba(255, 180, 68, 0.08), rgba(255, 180, 68, 0.03));
-  border-color: rgba(255, 180, 68, 0.2);
+    radial-gradient(ellipse 65% 85% at 50% 0%, rgba(255, 180, 68, 0.14), transparent 75%),
+    rgba(255, 180, 68, 0.04);
+  border-color: rgba(255, 180, 68, 0.3);
+  box-shadow: 0 4px 20px rgba(255, 180, 68, 0.06);
+}
+
+.type_break:hover {
+  border-color: rgba(255, 180, 68, 0.52);
+  box-shadow: 0 8px 30px rgba(255, 180, 68, 0.14);
 }
 
 .type_break .sessionTitle {
-  color: var(--color-sun);
-  font-size: 0.94rem;
-  font-weight: 700;
-  letter-spacing: 0.04em;
+  color: #fff4d1;
+  font-size: 1.05rem;
+  font-weight: 750;
+  letter-spacing: 0.01em;
 }
 
 .type_panel {
@@ -634,6 +673,72 @@
   color: var(--color-white);
   font-size: 0.92rem;
   letter-spacing: 0.01em;
+}
+
+/* ── Break Vector Illustrations (Lunch & Tea) ────────────────────── */
+.breakIllustrationBox {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-block: 0.45rem 0.65rem;
+}
+
+.breakVectorWrap {
+  width: 140px;
+  height: 90px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.breakVectorSvg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  filter: drop-shadow(0 4px 14px rgba(255, 180, 68, 0.28));
+  transition: transform var(--duration-base) var(--ease-out);
+}
+
+.sessionCard:hover .breakVectorSvg {
+  transform: translateY(-2px) scale(1.04);
+}
+
+.steamPath {
+  stroke-dasharray: 45;
+  stroke-dashoffset: 45;
+  animation: steamRiseAnim 2.6s ease-in-out infinite;
+}
+
+.steam1 {
+  animation-delay: 0s;
+}
+
+.steam2 {
+  animation-delay: 0.7s;
+}
+
+.steam3 {
+  animation-delay: 1.4s;
+}
+
+@keyframes steamRiseAnim {
+  0% {
+    stroke-dashoffset: 45;
+    opacity: 0;
+    transform: translateY(2px);
+  }
+  30% {
+    opacity: 0.9;
+  }
+  75% {
+    opacity: 0.45;
+  }
+  100% {
+    stroke-dashoffset: 0;
+    opacity: 0;
+    transform: translateY(-7px);
+  }
 }
 
 /* ── Footer note ─────────────────────────────────────────────────── */
