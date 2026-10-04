@@ -1,5 +1,7 @@
 import type { NextConfig } from "next";
 
+const tunnelHost = process.env.CLOUDFLARE_TUNNEL_HOST?.trim();
+
 const nextConfig: NextConfig = {
   output: "export",
   trailingSlash: true,
@@ -14,7 +16,10 @@ const nextConfig: NextConfig = {
       ),
     ],
   },
-  allowedDevOrigins: ["*.trycloudflare.com", "localhost:3000"],
+  allowedDevOrigins: [
+    "localhost:3000",
+    ...(tunnelHost ? [tunnelHost] : []),
+  ],
 };
 
 export default nextConfig;
