@@ -86,6 +86,51 @@ function SessionCard({
     trackNumber === 2 ? styles.cardTrack2 : "",
   ].filter(Boolean).join(" ");
 
+  const renderSpeaker = () => {
+    if (session.speakers && session.speakers.length > 0) {
+      return (
+        <p className={styles.sessionSpeaker}>
+          {session.speakers.map((sp, idx) => (
+            <span key={sp.name}>
+              {idx > 0 && <span className={styles.speakerAmp}>&</span>}
+              {sp.profileUrl ? (
+                <a
+                  href={sp.profileUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  className={styles.speakerLink}
+                  title={`${sp.name} on LinkedIn`}
+                >
+                  <span>{sp.name}</span>
+                  <svg
+                    className={styles.speakerLinkIcon}
+                    width="11"
+                    height="11"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2.4"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    aria-hidden="true"
+                  >
+                    <path d="M7 17L17 7M17 7H7M17 7V17" />
+                  </svg>
+                </a>
+              ) : (
+                <span>{sp.name}</span>
+              )}
+            </span>
+          ))}
+        </p>
+      );
+    }
+
+    if (!session.speaker) return null;
+
+    return <p className={styles.sessionSpeaker}>{session.speaker}</p>;
+  };
+
   return (
     <div
       className={cardClasses}
@@ -98,9 +143,7 @@ function SessionCard({
         {renderBadge()}
       </div>
       <h4 className={styles.sessionTitle}>{session.title}</h4>
-      {session.speaker && (
-        <p className={styles.sessionSpeaker}>{session.speaker}</p>
-      )}
+      {renderSpeaker()}
       {session.company && (
         <p className={styles.sessionCompany}>{session.company}</p>
       )}
