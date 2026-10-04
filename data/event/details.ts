@@ -22,7 +22,7 @@ export const eventDetails = {
 export const eventNav = [
   { label: "About", href: "#about" },
   { label: "Tickets", href: "#tickets" },
-  { label: "Programme", href: "#programme" },
+  { label: "Agenda", href: "#agenda" },
   { label: "Speakers", href: "#speakers" },
   { label: "Partners", href: "#community-partners" },
   { label: "Past events", href: "#past-events" },

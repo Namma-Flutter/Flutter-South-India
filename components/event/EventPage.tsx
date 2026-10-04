@@ -31,6 +31,7 @@ import {
   trackVenueMapClick,
   trackVolunteerInquiry,
 } from "@/lib/analytics";
+import AgendaSection from "./AgendaSection";
 import CommunityStorySection from "./CommunityStorySection";
 import Countdown from "./Countdown";
 import EventHeader from "./EventHeader";
@@ -92,7 +93,7 @@ export default function EventPage() {
                   {eventDetails.ticketLabel}
                   <ArrowUpRight aria-hidden="true" size={17} />
                 </a>
-                <a className={styles.programLink} href="#programme">
+                <a className={styles.programLink} href="#agenda">
                   See the day
                   <ArrowDown aria-hidden="true" size={16} />
                 </a>
@@ -206,17 +207,7 @@ export default function EventPage() {
 
         <TicketsSection />
 
-        <section className={styles.programme} id="programme">
-          <div className={`container ${styles.agendaAnnouncement}`}>
-            <p className={styles.agendaBadge} data-reveal>Agenda · TBA</p>
-            <SectionIntro
-              eyebrow="Something worth gathering for"
-              title="Great conversations are on the way."
-              copy="We’re putting together a day of Flutter, fresh ideas, and community connections in Chennai. The full agenda will be announced soon."
-              inverse
-            />
-          </div>
-        </section>
+        <AgendaSection />
 
         <SpeakersSection />
 
