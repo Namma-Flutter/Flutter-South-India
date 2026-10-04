@@ -1,0 +1,320 @@
+/* ═══════════════════════════════════════════════════════════════════
+   SponsorsSection — Sponsor Showcase by Tier Hierarchy
+   Tier 1: Community Sponsor > Tier 2: Super Dash > Tier 3: Dashling
+   ═══════════════════════════════════════════════════════════════════ */
+
+.sponsors {
+  position: relative;
+  padding-block: var(--space-8);
+  background: var(--color-paper);
+  color: var(--color-ink);
+  overflow: hidden;
+  border-top: 1px solid var(--color-line);
+}
+
+.introRow {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: end;
+  gap: 2rem;
+  margin-bottom: var(--space-7);
+}
+
+.tierList {
+  display: flex;
+  flex-direction: column;
+}
+
+.tierGroup {
+  margin-bottom: var(--space-7);
+}
+
+.tierGroup:last-child {
+  margin-bottom: 0;
+}
+
+/* ── Tier Section Header ─────────────────────────────────────────── */
+.tierHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.75rem 1.5rem;
+  padding-bottom: 0.85rem;
+  margin-bottom: 1.25rem;
+  border-bottom: 1px solid var(--color-line);
+}
+
+.tierBadgeWrapper {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.tierPill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.35rem 0.85rem;
+  border-radius: var(--radius-pill);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.tierDot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+/* Community Sponsor Pill */
+.tierPillCommunity {
+  background: rgba(255, 140, 0, 0.1);
+  color: #d96600;
+  border: 1px solid rgba(255, 140, 0, 0.28);
+}
+
+.tierPillCommunity .tierDot {
+  background: #ff8c00;
+  box-shadow: 0 0 8px rgba(255, 140, 0, 0.6);
+}
+
+/* Super Dash Sponsor Pill */
+.tierPillSuperDash {
+  background: rgba(2, 125, 253, 0.1);
+  color: var(--color-blue);
+  border: 1px solid rgba(2, 125, 253, 0.28);
+}
+
+.tierPillSuperDash .tierDot {
+  background: var(--color-blue);
+  box-shadow: 0 0 8px rgba(2, 125, 253, 0.6);
+}
+
+/* Dashling Sponsor Pill */
+.tierPillDashling {
+  background: rgba(147, 98, 255, 0.1);
+  color: #7c3aed;
+  border: 1px solid rgba(147, 98, 255, 0.28);
+}
+
+.tierPillDashling .tierDot {
+  background: #9362ff;
+  box-shadow: 0 0 8px rgba(147, 98, 255, 0.6);
+}
+
+
+/* ── Sponsor Grids ───────────────────────────────────────────────── */
+.sponsorGridCommunity {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.25rem;
+}
+
+.sponsorGridTwoCol {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.25rem;
+}
+
+/* ── Sponsor Card ────────────────────────────────────────────────── */
+.sponsorCard {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-m);
+  background: var(--color-paper-raised);
+  padding: 1.5rem;
+  text-decoration: none;
+  color: var(--color-ink);
+  overflow: hidden;
+  transition:
+    transform var(--duration-fast) var(--ease-out),
+    border-color var(--duration-fast) var(--ease-soft),
+    box-shadow var(--duration-fast) var(--ease-soft);
+}
+
+.sponsorCard:hover,
+.sponsorCard:focus-visible {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 36px rgba(6, 29, 41, 0.08);
+}
+
+/* Community Sponsor Card Hover */
+.sponsorCardCommunity:hover,
+.sponsorCardCommunity:focus-visible {
+  border-color: rgba(255, 140, 0, 0.5);
+}
+
+/* Super Dash Sponsor Card Hover */
+.sponsorCardSuperDash:hover,
+.sponsorCardSuperDash:focus-visible {
+  border-color: rgba(2, 125, 253, 0.5);
+}
+
+/* Dashling Sponsor Card Hover */
+.sponsorCardDashling:hover,
+.sponsorCardDashling:focus-visible {
+  border-color: rgba(147, 98, 255, 0.5);
+}
+
+/* ── Logo Container ──────────────────────────────────────────────── */
+.logoWrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 6.5rem;
+  padding: 0.85rem 1.5rem;
+  border-radius: var(--radius-s);
+  background: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.07);
+  margin-bottom: 1.25rem;
+  overflow: hidden;
+  transition: transform var(--duration-base) var(--ease-out);
+}
+
+.logoWrapperDark {
+  background: #09090b;
+  border: 1px solid rgba(255, 140, 0, 0.28);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.18);
+}
+
+.sponsorLogo {
+  width: auto;
+  height: auto;
+  max-width: 88%;
+  max-height: 86%;
+  object-fit: contain;
+  transition: transform var(--duration-base) var(--ease-out);
+}
+
+.sponsorCard:hover .sponsorLogo,
+.sponsorCard:focus-visible .sponsorLogo {
+  transform: scale(1.05);
+}
+
+/* ── Card Content ────────────────────────────────────────────────── */
+.cardContent {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.sponsorName {
+  font-family: var(--font-display), sans-serif;
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  color: var(--color-ink);
+  margin: 0;
+  line-height: 1.2;
+}
+
+.sponsorTagline {
+  margin-top: 0.35rem;
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--color-blue);
+}
+
+.sponsorCardCommunity .sponsorTagline {
+  color: #d96600;
+}
+
+.sponsorCardDashling .sponsorTagline {
+  color: #7c3aed;
+}
+
+.sponsorDescription {
+  margin-top: 0.65rem;
+  margin-bottom: 1.25rem;
+  font-size: 0.86rem;
+  line-height: 1.55;
+  color: var(--color-ink-soft);
+}
+
+/* ── Card Footer Link ────────────────────────────────────────────── */
+.cardFooter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: auto;
+  padding-top: 0.85rem;
+  border-top: 1px solid var(--color-line);
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--color-blue);
+}
+
+.sponsorCardCommunity .cardFooter {
+  color: #d96600;
+}
+
+.sponsorCardDashling .cardFooter {
+  color: #7c3aed;
+}
+
+.linkIcon {
+  flex-shrink: 0;
+  transition: transform var(--duration-fast) var(--ease-out);
+}
+
+.sponsorCard:hover .linkIcon,
+.sponsorCard:focus-visible .linkIcon {
+  transform: translate(2px, -2px);
+}
+
+/* ── Responsive Breakpoints ──────────────────────────────────────── */
+@media (max-width: 64rem) {
+  .introRow {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+}
+
+@media (max-width: 48rem) {
+  .sponsorGridCommunity,
+  .sponsorGridTwoCol {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .tierHeader {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.4rem;
+  }
+
+  .sponsorCard {
+    padding: 1.25rem;
+  }
+
+  .logoWrapper {
+    height: 5rem;
+    padding: 0.75rem 1.25rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sponsorCard,
+  .sponsorLogo,
+  .linkIcon {
+    transition: none;
+  }
+
+  .sponsorCard:hover,
+  .sponsorCard:focus-visible,
+  .sponsorCard:hover .sponsorLogo,
+  .sponsorCard:focus-visible .sponsorLogo,
+  .sponsorCard:hover .linkIcon,
+  .sponsorCard:focus-visible .linkIcon {
+    transform: none;
+  }
+}
