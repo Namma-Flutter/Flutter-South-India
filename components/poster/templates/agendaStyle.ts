@@ -76,15 +76,18 @@ export function drawAgendaStyle(
 
   const firstName = fields.firstName.trim();
   const lastName = fields.lastName.trim();
+  const hasAnyName = Boolean(firstName || lastName);
+  const showNamePlaceholders = !hasAnyName && showPlaceholders;
+
   const firstLines = wrapName(
     ctx,
-    firstName || (showPlaceholders ? "Your First Name" : ""),
+    firstName || (showNamePlaceholders ? "Your First Name" : ""),
     540,
     fontFamily,
   );
   const lastLines = wrapName(
     ctx,
-    lastName || (showPlaceholders ? "Last Name" : ""),
+    lastName || (showNamePlaceholders ? "Last Name" : ""),
     540,
     fontFamily,
   );

@@ -53,22 +53,31 @@ export function drawSwissMinimal(
   drawTemplateBackground(ctx, assets.templateImage, WIDTH, HEIGHT, scale);
   if (photo) drawPhotoInSlot(ctx, photo, crop, SWISS_PHOTO_SLOT);
 
+  const trimmedFirst = fields.firstName.trim();
+  const trimmedLast = fields.lastName.trim();
+  const hasAnyName = Boolean(trimmedFirst || trimmedLast);
+  const showNamePlaceholders = !hasAnyName && showPlaceholders;
+
   const firstName =
-    fields.firstName.trim() || (showPlaceholders ? "Your First Name" : "");
+    trimmedFirst || (showNamePlaceholders ? "Your First Name" : "");
   const lastName =
-    fields.lastName.trim() || (showPlaceholders ? "Last Name" : "");
+    trimmedLast || (showNamePlaceholders ? "Last Name" : "");
+  const singleName = Boolean(trimmedFirst) !== Boolean(trimmedLast);
+  // When only one name is given it sits centred in the space of both lines.
+  const SINGLE_NAME_Y = 1276;
+
   ctx.fillStyle = "#10212b";
   ctx.textAlign = "left";
   ctx.textBaseline = "middle";
   if (firstName) {
     const fitted = fitText(ctx, firstName, 700, fontFamily, 700, 76);
     ctx.font = `700 ${fitted.size}px ${fontFamily}`;
-    ctx.fillText(fitted.text, 2320, 1232);
+    ctx.fillText(fitted.text, 2320, singleName ? SINGLE_NAME_Y : 1232);
   }
   if (lastName) {
     const fitted = fitText(ctx, lastName, 700, fontFamily, 700, 76);
     ctx.font = `700 ${fitted.size}px ${fontFamily}`;
-    ctx.fillText(fitted.text, 2320, 1320);
+    ctx.fillText(fitted.text, 2320, singleName ? SINGLE_NAME_Y : 1320);
   }
 
   const designation =
