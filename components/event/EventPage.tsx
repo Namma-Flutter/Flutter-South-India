@@ -337,7 +337,11 @@ export default function EventPage() {
               <div className={styles.venueAddress} data-reveal>
                 <MapPin aria-hidden="true" size={19} />
                 <p>
-                  <strong>{eventDetails.venue}</strong>
+                  <strong>
+                    {eventDetails.hall
+                      ? `${eventDetails.hall}, ${eventDetails.venue}`
+                      : eventDetails.venue}
+                  </strong>
                   <span>{eventDetails.address}</span>
                 </p>
                 <a
