@@ -546,6 +546,12 @@
   color: var(--color-cyan);
 }
 
+.copyFailed {
+  background: rgba(255, 107, 107, 0.2);
+  border-color: #ff6b6b;
+  color: #ff6b6b;
+}
+
 .anonymousBadge {
   display: inline-flex;
   align-items: center;

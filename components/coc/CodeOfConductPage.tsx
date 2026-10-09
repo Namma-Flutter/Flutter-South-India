@@ -72,14 +72,25 @@ const PROHIBITED_BEHAVIORS = [
 ];
 
 export default function CodeOfConductPage() {
-  const [copiedEmail, setCopiedEmail] = useState<string | null>(null);
+  const [copyStatus, setCopyStatus] = useState<{
+    email: string;
+    status: "success" | "error";
+  } | null>(null);
 
-  const handleCopy = (email: string) => {
-    navigator.clipboard.writeText(email);
-    setCopiedEmail(email);
-    setTimeout(() => {
-      setCopiedEmail((curr) => (curr === email ? null : curr));
-    }, 2400);
+  const handleCopy = async (email: string) => {
+    try {
+      if (!navigator?.clipboard?.writeText) {
+        throw new Error("Clipboard API unavailable");
+      }
+      await navigator.clipboard.writeText(email);
+      setCopyStatus({ email, status: "success" });
+    } catch {
+      setCopyStatus({ email, status: "error" });
+    } finally {
+      setTimeout(() => {
+        setCopyStatus((curr) => (curr?.email === email ? null : curr));
+      }, 2400);
+    }
   };
 
   return (
@@ -389,15 +400,27 @@ export default function CodeOfConductPage() {
               <div className={styles.emailButtonActions}>
                 <button
                   type="button"
-                  className={`${styles.copyButton} ${copiedEmail === "nammaflutter@gmail.com" ? styles.copiedActive : ""}`}
+                  className={`${styles.copyButton} ${
+                    copyStatus?.email === "nammaflutter@gmail.com" &&
+                    copyStatus.status === "success"
+                      ? styles.copiedActive
+                      : copyStatus?.email === "nammaflutter@gmail.com" &&
+                          copyStatus.status === "error"
+                        ? styles.copyFailed
+                        : ""
+                  }`}
                   onClick={() => handleCopy("nammaflutter@gmail.com")}
                   aria-label="Copy reporting email address"
                 >
-                  {copiedEmail === "nammaflutter@gmail.com" ? (
+                  {copyStatus?.email === "nammaflutter@gmail.com" &&
+                  copyStatus.status === "success" ? (
                     <>
                       <Check aria-hidden="true" size={14} />
                       <span>Copied!</span>
                     </>
+                  ) : copyStatus?.email === "nammaflutter@gmail.com" &&
+                    copyStatus.status === "error" ? (
+                    <span>Failed to copy</span>
                   ) : (
                     <>
                       <Copy aria-hidden="true" size={14} />
@@ -465,15 +488,27 @@ export default function CodeOfConductPage() {
 
                   <button
                     type="button"
-                    className={`${styles.copyButton} ${copiedEmail === contact.email ? styles.copiedActive : ""}`}
+                    className={`${styles.copyButton} ${
+                      copyStatus?.email === contact.email &&
+                      copyStatus.status === "success"
+                        ? styles.copiedActive
+                        : copyStatus?.email === contact.email &&
+                            copyStatus.status === "error"
+                          ? styles.copyFailed
+                          : ""
+                    }`}
                     onClick={() => handleCopy(contact.email)}
                     aria-label={`Copy email address for ${contact.name}`}
                   >
-                    {copiedEmail === contact.email ? (
+                    {copyStatus?.email === contact.email &&
+                    copyStatus.status === "success" ? (
                       <>
                         <Check aria-hidden="true" size={13} />
                         <span>Copied</span>
                       </>
+                    ) : copyStatus?.email === contact.email &&
+                      copyStatus.status === "error" ? (
+                      <span>Failed</span>
                     ) : (
                       <>
                         <Copy aria-hidden="true" size={13} />
