@@ -255,6 +255,7 @@
   border-radius: var(--radius-l);
   padding: clamp(1.75rem, 4vw, 2.5rem);
   box-shadow: 0 16px 40px rgba(6, 29, 41, 0.35);
+  scroll-margin-top: 9rem;
 }
 
 .organizersMessageCard::before {
@@ -664,6 +665,7 @@
   font-size: 0.85rem;
   line-height: 1.6;
   color: var(--color-on-dark-subtle);
+  scroll-margin-top: 9rem;
 }
 
 .creditBox h4 {
