@@ -162,7 +162,7 @@ export default function CodeOfConductPage() {
             </div>
             <div className={styles.highlightPill}>
               <Lock aria-hidden="true" size={15} />
-              <span>100% Anonymous reporting</span>
+              <span>Strictly confidential reporting</span>
             </div>
           </div>
         </div>
@@ -441,7 +441,7 @@ export default function CodeOfConductPage() {
 
             <div className={styles.anonymousBadge}>
               <Lock aria-hidden="true" size={16} />
-              <span>All reporters will remain strictly anonymous.</span>
+              <span>All reports and reporter identities will remain strictly confidential.</span>
             </div>
           </div>
         </section>

@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Code of Conduct | Namma Flutter Community",
     description:
-      "Our community guidelines, safety values, and anonymous reporting procedures for Flutter South India 2026.",
+      "Our community guidelines, safety values, and confidential incident reporting procedures for Flutter South India 2026.",
     type: "website",
     locale: "en_IN",
   },
