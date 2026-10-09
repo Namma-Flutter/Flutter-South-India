@@ -8,6 +8,7 @@ export const eventDetails = {
   dateLabel: "10 October 2026",
   dayLabel: "Saturday",
   venue: "SRM IST Ramapuram",
+  hall: "Geetham Hall",
   city: "Chennai",
   address: "Bharathi Salai, Ramapuram, Chennai, Tamil Nadu 600089",
   venueWebsite: "https://srmrmp.edu.in/",

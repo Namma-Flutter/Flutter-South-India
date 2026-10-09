@@ -2059,6 +2059,18 @@
 
 .footerBottom a {
   color: inherit;
+  transition: color var(--duration-fast) var(--ease-soft);
+}
+
+.footerBottom a:hover {
+  color: var(--color-cyan);
+}
+
+.footerLegal {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.65rem;
 }
 
 .footerBottom span:last-child {

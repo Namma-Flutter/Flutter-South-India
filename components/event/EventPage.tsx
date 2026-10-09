@@ -337,7 +337,11 @@ export default function EventPage() {
               <div className={styles.venueAddress} data-reveal>
                 <MapPin aria-hidden="true" size={19} />
                 <p>
-                  <strong>{eventDetails.venue}</strong>
+                  <strong>
+                    {eventDetails.hall
+                      ? `${eventDetails.hall}, ${eventDetails.venue}`
+                      : eventDetails.venue}
+                  </strong>
                   <span>{eventDetails.address}</span>
                 </p>
                 <a
@@ -438,7 +442,11 @@ export default function EventPage() {
         </div>
         <div className={`container ${styles.footerBottom}`}>
           <span>© 2026 Flutter South India</span>
-          <a href={`mailto:${eventDetails.contact}`}>{eventDetails.contact}</a>
+          <div className={styles.footerLegal}>
+            <Link href="/code-of-conduct/">Code of Conduct</Link>
+            <span aria-hidden="true">·</span>
+            <a href={`mailto:${eventDetails.contact}`}>{eventDetails.contact}</a>
+          </div>
           <span>Made with care for the community.</span>
         </div>
       </footer>
