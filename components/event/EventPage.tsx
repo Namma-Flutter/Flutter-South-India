@@ -3,13 +3,11 @@
 import Image from "next/image";
 import Link from "next/link";
 import {
-  ArrowDown,
   ArrowRight,
   ArrowUpRight,
   CalendarDays,
   FileText,
   MapPin,
-  PartyPopper,
 } from "lucide-react";
 import {
   eventDetails,
@@ -17,7 +15,6 @@ import {
   eventNav,
   eventPrinciples,
   faqItems,
-  isKonfhubExternal,
   participationPaths,
   socialLinks,
   venueNotes,
@@ -27,26 +24,19 @@ import {
   trackBrochureDownload,
   trackPartnerInquiry,
   trackSpeakerInquiry,
-  trackTicketIntentClick,
   trackVenueMapClick,
   trackVolunteerInquiry,
 } from "@/lib/analytics";
-import AgendaSection from "./AgendaSection";
 import CommunityStorySection from "./CommunityStorySection";
-import Countdown from "./Countdown";
 import EventHeader from "./EventHeader";
+import GallerySection from "./GallerySection";
 import MotionEnhancer from "./MotionEnhancer";
 import PartnersSection from "./PartnersSection";
 import OrganizerRow from "./OrganizerRow";
 import SpeakersSection from "./SpeakersSection";
-import TicketsSection from "./TicketsSection";
 import styles from "./EventPage.module.css";
 
 const mapLink = eventDetails.venueMapLink;
-
-const ticketLinkProps = isKonfhubExternal
-  ? ({ target: "_blank", rel: "noopener noreferrer" } as const)
-  : {};
 
 export default function EventPage() {
   return (
@@ -63,6 +53,21 @@ export default function EventPage() {
 
       <main id="main-content">
         <section className={styles.hero} id="top">
+          <div
+            className={styles.heroBgWrapper}
+            aria-hidden="true"
+            style={{ position: "absolute" }}
+          >
+            <Image
+              src="/assets/events-photos/dsc-6679.webp"
+              alt="The South India Flutter Community Gathering"
+              fill
+              priority
+              className={styles.heroBgImage}
+              sizes="100vw"
+            />
+            <div className={styles.heroBgOverlay} />
+          </div>
           <div className={styles.heroLines} aria-hidden="true" />
           <div className={`container ${styles.heroGrid}`}>
             <div className={styles.heroCopy}>
@@ -78,41 +83,16 @@ export default function EventPage() {
                 care about Flutter and Dart.
               </p>
               <div className={styles.heroActions} data-reveal>
-                <a
-                  className="button button-light"
-                  href={eventDetails.ticketLink}
-                  onClick={() =>
-                    trackTicketIntentClick({
-                      cta_location: "hero",
-                      ticket_tier: "unspecified",
-                      link_url: eventDetails.ticketLink,
-                    })
-                  }
-                  {...ticketLinkProps}
-                >
-                  {eventDetails.ticketLabel}
-                  <ArrowUpRight aria-hidden="true" size={17} />
+                <a className="button button-light" href="#gallery">
+                  Explore Gallery
+                  <ArrowRight aria-hidden="true" size={17} />
                 </a>
-                <a className={styles.programLink} href="#agenda">
-                  See the day
-                  <ArrowDown aria-hidden="true" size={16} />
-                </a>
-                <Link className={styles.posterCta} href="/i-am-attending/">
-                  <span className={styles.confetti} aria-hidden="true">
-                    {Array.from({ length: 14 }, (_, index) => (
-                      <i key={index} />
-                    ))}
-                  </span>
-                  <PartyPopper aria-hidden="true" size={18} />
-                  Make your attendee poster
-                  <ArrowRight aria-hidden="true" size={16} />
-                </Link>
               </div>
             </div>
 
             <aside className={styles.eventPass} data-reveal>
               <div className={styles.passTopline}>
-                <span>Community pass</span>
+                <span>Souvenir pass</span>
                 <span>FSI / 26</span>
               </div>
               <div className={styles.passBrand}>
@@ -151,7 +131,6 @@ export default function EventPage() {
                   {eventDetails.venue}, {eventDetails.city}
                 </a>
               </div>
-              <Countdown targetDate={eventDetails.dateISO} />
             </aside>
           </div>
 
@@ -205,9 +184,7 @@ export default function EventPage() {
           </div>
         </section>
 
-        <TicketsSection />
-
-        <AgendaSection />
+        <GallerySection />
 
         <SpeakersSection />
 
@@ -398,21 +375,13 @@ export default function EventPage() {
           <div className={`container ${styles.finalCtaInner}`} data-reveal>
             <div>
               <p className="eyebrow">10 October · Chennai</p>
-              <h2>Be there when South India meets around Flutter.</h2>
+              <h2>Relive the memories. Built by the community.</h2>
             </div>
             <a
               className="button button-light"
-              href={eventDetails.ticketLink}
-              onClick={() =>
-                trackTicketIntentClick({
-                  cta_location: "final_cta",
-                  ticket_tier: "unspecified",
-                  link_url: eventDetails.ticketLink,
-                })
-              }
-              {...ticketLinkProps}
+              href="#gallery"
             >
-              {eventDetails.ticketLabel}
+              Explore Photo Gallery
               <ArrowRight aria-hidden="true" size={18} />
             </a>
           </div>

@@ -19,3 +19,5 @@ export {
   ticketTiers,
   ticketingMode,
 } from "./tickets";
+export { galleryCategories, galleryPhotos } from "./gallery";
+export type { GalleryCategory, GalleryPhoto } from "./gallery";

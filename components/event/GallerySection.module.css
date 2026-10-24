@@ -1,0 +1,327 @@
+.gallery {
+  position: relative;
+  padding: 6rem 0;
+  background: radial-gradient(circle at 50% 0%, rgba(2, 86, 155, 0.12) 0%, transparent 60%),
+              radial-gradient(circle at 90% 70%, rgba(19, 185, 253, 0.08) 0%, transparent 50%),
+              #080c14;
+  overflow: hidden;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.gallery::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(19, 185, 253, 0.4), transparent);
+}
+
+.intro {
+  margin-bottom: 1.75rem;
+}
+
+.filterBar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.625rem;
+  margin-top: 1.5rem;
+  padding-bottom: 0.25rem;
+}
+
+.filterPill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.55rem 1.15rem;
+  border-radius: 9999px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #94a3b8;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  backdrop-filter: blur(8px);
+}
+
+.filterPill:hover {
+  color: #f8fafc;
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.18);
+  transform: translateY(-1px);
+}
+
+.filterPillActive {
+  color: #ffffff;
+  background: linear-gradient(135deg, rgba(2, 86, 155, 0.8), rgba(1, 117, 194, 0.8));
+  border-color: rgba(19, 185, 253, 0.5);
+  box-shadow: 0 4px 16px rgba(2, 86, 155, 0.4);
+}
+
+/* Photo Grid */
+.photoGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 1.5rem;
+  margin-top: 1.75rem;
+}
+
+@media (max-width: 640px) {
+  .photoGrid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+}
+
+.photoCard {
+  position: relative;
+  border-radius: 1rem;
+  overflow: hidden;
+  background: rgba(15, 23, 42, 0.45);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 10px 25px -10px rgba(0, 0, 0, 0.4);
+}
+
+.photoCard:hover {
+  transform: translateY(-4px);
+  border-color: rgba(56, 189, 248, 0.4);
+  box-shadow: 0 20px 35px -12px rgba(2, 86, 155, 0.35);
+}
+
+.cardImageWrapper {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 3 / 2;
+  overflow: hidden;
+}
+
+.cardImage {
+  object-fit: cover;
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.photoCard:hover .cardImage {
+  transform: scale(1.05);
+}
+
+.cardMeta {
+  padding: 1rem 1.15rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.cardCategory {
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: #38bdf8;
+}
+
+.cardTitle {
+  font-size: 0.975rem;
+  font-weight: 600;
+  color: #f1f5f9;
+  margin: 0;
+  line-height: 1.35;
+}
+
+.cardCaption {
+  font-size: 0.825rem;
+  color: #94a3b8;
+  margin: 0;
+  line-height: 1.45;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Lightbox Modal */
+.lightboxBackdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(4, 7, 13, 0.94);
+  backdrop-filter: blur(14px);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+}
+
+.lightboxContent {
+  position: relative;
+  max-width: 1100px;
+  width: 100%;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.lightboxImageWrapper {
+  position: relative;
+  width: 100%;
+  max-height: 72vh;
+  aspect-ratio: 3 / 2;
+  border-radius: 0.75rem;
+  overflow: hidden;
+  box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.9);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.lightboxImage {
+  object-fit: contain;
+}
+
+.lightboxDetails {
+  width: 100%;
+  margin-top: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1.5rem;
+  color: #f8fafc;
+}
+
+.lightboxText {
+  flex: 1;
+}
+
+.lightboxTitle {
+  font-size: 1.15rem;
+  font-weight: 700;
+  margin: 0 0 0.25rem;
+}
+
+.lightboxCaption {
+  font-size: 0.9rem;
+  color: #94a3b8;
+  margin: 0;
+  line-height: 1.4;
+}
+
+.lightboxCounter {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #38bdf8;
+  background: rgba(56, 189, 248, 0.1);
+  padding: 0.35rem 0.85rem;
+  border-radius: 9999px;
+  border: 1px solid rgba(56, 189, 248, 0.25);
+  white-space: nowrap;
+}
+
+.lightboxClose {
+  position: absolute;
+  top: -3rem;
+  right: 0;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 9999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.lightboxClose:hover {
+  background: rgba(255, 255, 255, 0.25);
+  transform: scale(1.08);
+}
+
+.lightboxNavButton {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(15, 23, 42, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #ffffff;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 9999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s;
+  backdrop-filter: blur(8px);
+}
+
+.lightboxNavButton:hover {
+  background: rgba(2, 86, 155, 0.9);
+  border-color: rgba(56, 189, 248, 0.5);
+  transform: translateY(-50%) scale(1.1);
+}
+
+.lightboxPrev {
+  left: -4rem;
+}
+
+.lightboxNext {
+  right: -4rem;
+}
+
+@media (max-width: 900px) {
+  .lightboxNavButton {
+    width: 2.5rem;
+    height: 2.5rem;
+  }
+  .lightboxPrev {
+    left: 0.5rem;
+  }
+  .lightboxNext {
+    right: 0.5rem;
+  }
+  .lightboxClose {
+    top: -2.75rem;
+    right: 0;
+  }
+}
+
+/* Community Tagging Callout */
+.galleryFootnote {
+  margin-top: 3.5rem;
+  padding: 2rem;
+  border-radius: 1.25rem;
+  background: linear-gradient(135deg, rgba(2, 86, 155, 0.2), rgba(15, 23, 42, 0.6));
+  border: 1px solid rgba(56, 189, 248, 0.25);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+}
+
+.footnoteContent h3 {
+  font-size: 1.15rem;
+  color: #ffffff;
+  margin: 0 0 0.35rem;
+}
+
+.footnoteContent p {
+  font-size: 0.9rem;
+  color: #94a3b8;
+  margin: 0;
+}
+
+.tagPill {
+  display: inline-block;
+  padding: 0.15rem 0.5rem;
+  background: rgba(56, 189, 248, 0.15);
+  color: #38bdf8;
+  border-radius: 0.35rem;
+  font-weight: 600;
+  font-size: 0.85rem;
+}

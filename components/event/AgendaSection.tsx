@@ -373,30 +373,30 @@ export default function AgendaSection() {
   };
 
   return (
-    <section className={styles.agenda} id="agenda">
+    <section className={styles.agenda} id="memory-lane">
       <div className={`container ${styles.agendaInner}`}>
         {/* header */}
         <div className={styles.agendaHeader}>
           <SectionIntro
-            eyebrow="Event Agenda"
-            title="A full day of Flutter, Dart, and community."
-            copy="Saturday, 10 October 2026 · SRM IST Ramapuram, Chennai. Two parallel tracks of talks, panels, and discussions."
+            eyebrow="Memory Lane"
+            title="Moments that shaped Flutter South India 2026."
+            copy="Saturday, 10 October 2026 · Geetham Hall & Dev Room, SRM IST Ramapuram. A walk down memory lane through two packed technical tracks, keynotes, lively discussions, and community connections."
             inverse
           />
           <div className={styles.filterBar} data-reveal>
             <TrackPill
               active={filter === "all"}
-              label="All sessions"
+              label="All moments"
               onClick={() => setFilter("all")}
             />
             <TrackPill
               active={filter === "track1"}
-              label="Track 1"
+              label="Track 1 (Geetham Hall)"
               onClick={() => setFilter("track1")}
             />
             <TrackPill
               active={filter === "track2"}
-              label="Track 2"
+              label="Track 2 (Dev Room)"
               onClick={() => setFilter("track2")}
             />
           </div>

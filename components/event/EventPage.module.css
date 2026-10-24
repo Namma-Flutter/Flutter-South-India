@@ -181,10 +181,44 @@
   color: var(--color-white);
 }
 
+.heroBgWrapper {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.heroBgImage {
+  object-fit: cover;
+  object-position: center 50%;
+  transform: scale(1.04);
+  filter: brightness(0.96) saturate(1.12);
+  opacity: 0.95;
+}
+
+.heroBgOverlay {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+      ellipse 95% 85% at 25% 35%,
+      rgba(6, 29, 41, 0.45) 0%,
+      rgba(6, 29, 41, 0.78) 55%,
+      rgba(4, 18, 27, 0.96) 100%
+    ),
+    linear-gradient(
+      180deg,
+      rgba(6, 29, 41, 0.8) 0%,
+      rgba(6, 29, 41, 0.5) 40%,
+      rgba(4, 18, 27, 0.95) 100%
+    );
+}
+
 .heroLines {
   position: absolute;
   inset: 0;
   pointer-events: none;
+  z-index: 1;
 }
 
 .heroLines::before,
@@ -214,7 +248,7 @@
 
 .heroGrid {
   position: relative;
-  z-index: 1;
+  z-index: 2;
   display: grid;
   min-height: calc(100svh - 4.5rem);
   grid-template-columns: minmax(0, 1.25fr) minmax(19rem, 0.58fr);
@@ -514,7 +548,7 @@
 .passMeta {
   display: grid;
   gap: 0.6rem;
-  padding: 1rem 1.25rem 1.25rem;
+  padding: 1.15rem 1.25rem 1.45rem;
   border-top: 1px dashed rgba(255, 255, 255, 0.2);
 }
 
@@ -538,6 +572,29 @@
 
 .passMeta svg {
   color: var(--color-cyan);
+}
+
+.passConcluded {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.85rem 1rem;
+  background: rgba(19, 185, 253, 0.12);
+  border-top: 1px solid rgba(19, 185, 253, 0.25);
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #38bdf8;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.passStatusDot {
+  width: 7px;
+  height: 7px;
+  border-radius: 9999px;
+  background: #38bdf8;
+  box-shadow: 0 0 8px #38bdf8;
 }
 
 .heroRail {

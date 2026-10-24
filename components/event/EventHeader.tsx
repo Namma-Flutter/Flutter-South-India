@@ -1,9 +1,8 @@
 "use client";
 
 import Image from "next/image";
-import { ArrowUpRight, Menu, X } from "lucide-react";
+import { ArrowRight, Menu, X } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
-import { trackTicketIntentClick } from "@/lib/analytics";
 import styles from "./EventPage.module.css";
 
 type EventHeaderProps = {
@@ -125,17 +124,10 @@ export default function EventHeader({
         <a
           className={`button button-primary ${styles.headerCta}`}
           href={ticketLink}
-          onClick={() =>
-            trackTicketIntentClick({
-              cta_location: "header",
-              ticket_tier: "unspecified",
-              link_url: ticketLink,
-            })
-          }
           {...ticketLinkProps}
         >
           {ticketLabel}
-          <ArrowUpRight aria-hidden="true" size={16} strokeWidth={2.2} />
+          <ArrowRight aria-hidden="true" size={16} strokeWidth={2.2} />
         </a>
 
         <button
@@ -170,18 +162,11 @@ export default function EventHeader({
           <a
             className={`button button-primary ${styles.mobileCta}`}
             href={ticketLink}
-            onClick={() => {
-              setOpen(false);
-              trackTicketIntentClick({
-                cta_location: "mobile_nav",
-                ticket_tier: "unspecified",
-                link_url: ticketLink,
-              });
-            }}
+            onClick={() => setOpen(false)}
             {...ticketLinkProps}
           >
             {ticketLabel}
-            <ArrowUpRight aria-hidden="true" size={17} />
+            <ArrowRight aria-hidden="true" size={17} />
           </a>
         </nav>
       </div>
