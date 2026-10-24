@@ -1,5 +1,4 @@
 import { contact } from "./shared";
-import { ticketCtaHref } from "./tickets";
 
 export const eventDetails = {
   name: "Flutter South India 2026",
@@ -16,17 +15,15 @@ export const eventDetails = {
   venuePartnerLogo:
     "https://i0.wp.com/srmrmp.edu.in/wp-content/uploads/2025/02/New-Logo-SRM-02-1-1024x446.png",
   contact,
-  ticketLink: ticketCtaHref,
-  ticketLabel: "Get tickets",
+  ticketLink: "#gallery",
+  ticketLabel: "View Gallery",
 } as const;
 
 export const eventNav = [
   { label: "About", href: "#about" },
-  { label: "Tickets", href: "#tickets" },
-  { label: "Agenda", href: "#agenda" },
+  { label: "Gallery", href: "#gallery" },
   { label: "Speakers", href: "#speakers" },
   { label: "Partners", href: "#community-partners" },
-  { label: "Past events", href: "#past-events" },
   { label: "Venue", href: "#venue" },
 ] as const;
 
